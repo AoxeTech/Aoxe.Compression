@@ -8,8 +8,8 @@
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
         <PackageTags>Zaabee;SharpZipLib;Compression</PackageTags>
-        <Description>Common classes and tools for Zaaby.</Description>
-        <PackageProjectUrl>https://github.com/Mutuduxf/Zaabee.Compression</PackageProjectUrl>
+        <Description>Extensions for SharpZipLib.</Description>
+        <PackageProjectUrl>https://github.com/PicoHex/Zaabee.Compression</PackageProjectUrl>
         <LicenseExpression>MIT</LicenseExpression>
         <LangVersion>latest</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
