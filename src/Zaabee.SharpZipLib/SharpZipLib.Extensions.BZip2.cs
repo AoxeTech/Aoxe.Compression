@@ -7,7 +7,7 @@ public static partial class SharpZipLibExtensions
         return CompressBZip2ToStream(rawData).ToArray();
     }
 
-    public static byte[] UnBZip2(byte[] bytes)
+    public static byte[] UnBZip2(this byte[] bytes)
     {
         return UnBZip2FromStream(new MemoryStream(bytes)).ToArray();
     }
