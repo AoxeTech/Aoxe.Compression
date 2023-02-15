@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "perf", "perf", "{2C29EC4D-3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.SharpZipLib", "src\Zaabee.SharpZipLib\Zaabee.SharpZipLib.csproj", "{F9369C2B-0732-46F2-B95A-8F109BFE59A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.SharpZipLib.UnitTest", "tests\Zaabee.SharpZipLib.UnitTest\Zaabee.SharpZipLib.UnitTest.csproj", "{9314456D-81B7-4938-9A4D-09166587B8A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,11 +17,16 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F9369C2B-0732-46F2-B95A-8F109BFE59A6} = {158FA242-DD0C-4482-BD54-4E7EDA9C44CA}
+		{9314456D-81B7-4938-9A4D-09166587B8A5} = {5BE4F706-456E-4DF8-A606-69F992835B47}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F9369C2B-0732-46F2-B95A-8F109BFE59A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9369C2B-0732-46F2-B95A-8F109BFE59A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9369C2B-0732-46F2-B95A-8F109BFE59A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9369C2B-0732-46F2-B95A-8F109BFE59A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9314456D-81B7-4938-9A4D-09166587B8A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9314456D-81B7-4938-9A4D-09166587B8A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9314456D-81B7-4938-9A4D-09166587B8A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9314456D-81B7-4938-9A4D-09166587B8A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
