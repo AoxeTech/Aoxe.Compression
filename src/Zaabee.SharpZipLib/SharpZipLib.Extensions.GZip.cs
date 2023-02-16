@@ -2,47 +2,53 @@
 
 public static partial class SharpZipLibExtensions
 {
-    public static byte[] CompressGZip(this byte[] rawData)
-    {
-        return CompressGZipToStream(rawData).ToArray();
-    }
+    public static byte[] ToGZip(this byte[] rawData) =>
+        ToGZipStream<MemoryStream>(rawData).ToArray();
 
-    public static byte[] UnGZip(this byte[] bytes)
-    {
-        return UnGZipFromStream(new MemoryStream(bytes)).ToArray();
-    }
+    public static byte[] UnGZip(this byte[] bytes) =>
+        UnGZipStream<MemoryStream>(new MemoryStream(bytes)).ToArray();
 
-    public static MemoryStream CompressGZipToStream(this byte[] rawData)
+    public static TStream ToGZipStream<TStream>(this byte[] rawData)
+        where TStream : Stream, new()
     {
-        var ms = new MemoryStream();
-        var outputStream = new GZipOutputStream(ms);
+        var stream = new TStream();
+        using var outputStream = new GZipOutputStream(stream);
         CompressToStream(outputStream, rawData);
-        outputStream.Close();
-        return ms;
+        return stream;
     }
 
-    public static MemoryStream UnGZipFromStream(this Stream rawStream)
+    public static TStream UnGZipStream<TStream>(this Stream rawStream)
+        where TStream : Stream, new()
     {
-        var inputStream = new GZipInputStream(rawStream);
-        var ms = DecompressFromStream(inputStream);
-        inputStream.Close();
-        return ms;
+        var stream = new TStream();
+        using var inputStream = new GZipInputStream(rawStream);
+        DecompressFromStream(inputStream, stream);
+        return stream;
     }
 
-    public static async Task<MemoryStream> CompressGZipToStreamAsync(this byte[] rawData)
+    public static async Task<TStream> ToGZipStreamAsync<TStream>(this byte[] rawData)
+        where TStream : Stream, new()
     {
-        var ms = new MemoryStream();
-        var outputStream = new GZipOutputStream(ms);
+        var ms = new TStream();
+#if NETSTANDARD2_0
+        using var outputStream = new GZipOutputStream(ms);
+#else
+        await using var outputStream = new GZipOutputStream(ms);
+#endif
         await CompressToStreamAsync(outputStream, rawData);
-        outputStream.Close();
         return ms;
     }
 
-    public static async Task<MemoryStream> UnGZipFromStreamAsync(this Stream rawStream)
+    public static async Task<TStream> UnGZipStreamAsync<TStream>(this Stream rawStream)
+        where TStream : Stream, new()
     {
-        var inputStream = new GZipInputStream(rawStream);
-        var ms = await DecompressFromStreamAsync(inputStream);
-        inputStream.Close();
-        return ms;
+        var stream = new TStream();
+#if NETSTANDARD2_0
+        using var inputStream = new GZipInputStream(rawStream);
+#else
+        await using var inputStream = new GZipInputStream(rawStream);
+#endif
+        await DecompressFromStreamAsync(inputStream, stream);
+        return stream;
     }
 }

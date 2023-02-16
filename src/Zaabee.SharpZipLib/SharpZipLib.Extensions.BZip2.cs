@@ -2,47 +2,53 @@
 
 public static partial class SharpZipLibExtensions
 {
-    public static byte[] CompressBZip2(this byte[] rawData)
-    {
-        return CompressBZip2ToStream(rawData).ToArray();
-    }
+    public static byte[] ToBZip2(this byte[] rawData) =>
+        ToBZip2Stream<MemoryStream>(rawData).ToArray();
 
-    public static byte[] UnBZip2(this byte[] bytes)
-    {
-        return UnBZip2FromStream(new MemoryStream(bytes)).ToArray();
-    }
+    public static byte[] UnBZip2(this byte[] bytes) =>
+        UnBZip2Stream<MemoryStream>(new MemoryStream(bytes)).ToArray();
 
-    public static MemoryStream CompressBZip2ToStream(this byte[] rawData)
+    public static TStream ToBZip2Stream<TStream>(this byte[] rawData)
+        where TStream : Stream, new()
     {
-        var ms = new MemoryStream();
-        var outputStream = new BZip2OutputStream(ms);
+        var stream = new TStream();
+        using var outputStream = new BZip2OutputStream(stream);
         CompressToStream(outputStream, rawData);
-        outputStream.Close();
-        return ms;
+        return stream;
     }
 
-    public static MemoryStream UnBZip2FromStream(this Stream rawStream)
+    public static TStream UnBZip2Stream<TStream>(this Stream rawStream)
+        where TStream : Stream, new()
     {
-        var inputStream = new BZip2InputStream(rawStream);
-        var ms = DecompressFromStream(inputStream);
-        inputStream.Close();
-        return ms;
+        var stream = new TStream();
+        using var inputStream = new BZip2InputStream(rawStream);
+        DecompressFromStream(inputStream, stream);
+        return stream;
     }
 
-    public static async Task<MemoryStream> CompressBZip2ToStreamAsync(this byte[] rawData)
+    public static async Task<TStream> ToBZip2StreamAsync<TStream>(this byte[] rawData)
+        where TStream : Stream, new()
     {
-        var ms = new MemoryStream();
-        var outputStream = new BZip2OutputStream(ms);
+        var ms = new TStream();
+#if NETSTANDARD2_0
+        using var outputStream = new BZip2OutputStream(ms);
+#else
+        await using var outputStream = new BZip2OutputStream(ms);
+#endif
         await CompressToStreamAsync(outputStream, rawData);
-        outputStream.Close();
         return ms;
     }
 
-    public static async Task<MemoryStream> UnBZip2FromStreamAsync(this Stream rawStream)
+    public static async Task<TStream> UnBZip2StreamAsync<TStream>(this Stream rawStream)
+        where TStream : Stream, new()
     {
-        var inputStream = new BZip2InputStream(rawStream);
-        var ms = await DecompressFromStreamAsync(inputStream);
-        inputStream.Close();
-        return ms;
+        var stream = new TStream();
+#if NETSTANDARD2_0
+        using var inputStream = new BZip2InputStream(rawStream);
+#else
+        await using var inputStream = new BZip2InputStream(rawStream);
+#endif
+        await DecompressFromStreamAsync(inputStream, stream);
+        return stream;
     }
 }

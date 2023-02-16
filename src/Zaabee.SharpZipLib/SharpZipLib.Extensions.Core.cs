@@ -11,19 +11,17 @@ public static partial class SharpZipLibExtensions
 #endif
     }
 
-    internal static MemoryStream DecompressFromStream(Stream inputStream)
+    internal static void DecompressFromStream(Stream inputStream, Stream resultStream)
     {
-        var ms = new MemoryStream();
         var data = new byte[4096];
 #if NETSTANDARD2_0
         int count;
         while ((count = inputStream.Read(data, 0, data.Length)) != 0)
-            ms.Write(data, 0, count);
+            resultStream.Write(data, 0, count);
 #else
         while (inputStream.Read(data) != 0)
-            ms.Write(data);
+            resultStream.Write(data);
 #endif
-        return ms;
     }
 
     internal static async Task CompressToStreamAsync(Stream outputStream, byte[] rawData)
@@ -35,18 +33,16 @@ public static partial class SharpZipLibExtensions
 #endif
     }
 
-    internal static async Task<MemoryStream> DecompressFromStreamAsync(Stream inputStream)
+    internal static async Task DecompressFromStreamAsync(Stream inputStream, Stream resultStream)
     {
-        var ms = new MemoryStream();
         var data = new byte[4096];
         int count;
 #if NETSTANDARD2_0
         while ((count = await inputStream.ReadAsync(data, 0, data.Length)) != 0)
-            await ms.WriteAsync(data, 0, count);
+            await resultStream.WriteAsync(data, 0, count);
 #else
         while ((count = await inputStream.ReadAsync(data)) != 0)
-            await ms.WriteAsync(data.AsMemory(0, count));
+            await resultStream.WriteAsync(data.AsMemory(0, count));
 #endif
-        return ms;
     }
 }
