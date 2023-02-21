@@ -12,9 +12,12 @@ public static partial class SharpZipLibExtensions
         where TStream : Stream, new()
     {
         var stream = new TStream();
-        using var outputStream = new BZip2OutputStream(stream);
-        outputStream.IsStreamOwner = false;
-        CompressToStream(outputStream, rawData);
+        using (var outputStream = new BZip2OutputStream(stream))
+        {
+            outputStream.IsStreamOwner = false;
+            CompressToStream(outputStream, rawData);
+        }
+        stream.TrySeek(0, SeekOrigin.Begin);
         return stream;
     }
 
@@ -22,24 +25,30 @@ public static partial class SharpZipLibExtensions
         where TStream : Stream, new()
     {
         var stream = new TStream();
-        using var inputStream = new BZip2InputStream(rawStream);
-        inputStream.IsStreamOwner = false;
-        DecompressFromStream(inputStream, stream);
+        using (var inputStream = new BZip2InputStream(rawStream))
+        {
+            inputStream.IsStreamOwner = false;
+            DecompressFromStream(inputStream, stream);
+        }
+        stream.TrySeek(0, SeekOrigin.Begin);
         return stream;
     }
 
     public static async Task<TStream> ToBZip2StreamAsync<TStream>(this byte[] rawData)
         where TStream : Stream, new()
     {
-        var ms = new TStream();
+        var stream = new TStream();
 #if NETSTANDARD2_0
-        using var outputStream = new BZip2OutputStream(ms);
+        using (var outputStream = new BZip2OutputStream(stream))
 #else
-        await using var outputStream = new BZip2OutputStream(ms);
+        await using (var outputStream = new BZip2OutputStream(stream))
 #endif
-        outputStream.IsStreamOwner = false;
-        await CompressToStreamAsync(outputStream, rawData);
-        return ms;
+        {
+            outputStream.IsStreamOwner = false;
+            await CompressToStreamAsync(outputStream, rawData);
+        }
+        stream.TrySeek(0, SeekOrigin.Begin);
+        return stream;
     }
 
     public static async Task<TStream> UnBZip2StreamAsync<TStream>(this Stream rawStream)
@@ -47,12 +56,15 @@ public static partial class SharpZipLibExtensions
     {
         var stream = new TStream();
 #if NETSTANDARD2_0
-        using var inputStream = new BZip2InputStream(rawStream);
+        using (var inputStream = new BZip2InputStream(rawStream))
 #else
-        await using var inputStream = new BZip2InputStream(rawStream);
+        await using (var inputStream = new BZip2InputStream(rawStream))
 #endif
-        inputStream.IsStreamOwner = false;
-        await DecompressFromStreamAsync(inputStream, stream);
+        {
+            inputStream.IsStreamOwner = false;
+            await DecompressFromStreamAsync(inputStream, stream);
+        }
+        stream.TrySeek(0, SeekOrigin.Begin);
         return stream;
     }
 }
