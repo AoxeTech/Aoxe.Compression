@@ -13,7 +13,7 @@ public static partial class SharpZipLibExtensions
 
     internal static void DecompressFromStream(Stream inputStream, Stream resultStream)
     {
-        var data = new byte[4096];
+        var data = new byte[128];
 #if NETSTANDARD2_0
         int count;
         while ((count = inputStream.Read(data, 0, data.Length)) != 0)
@@ -35,7 +35,7 @@ public static partial class SharpZipLibExtensions
 
     internal static async Task DecompressFromStreamAsync(Stream inputStream, Stream resultStream)
     {
-        var data = new byte[4096];
+        var data = new byte[128];
         int count;
 #if NETSTANDARD2_0
         while ((count = await inputStream.ReadAsync(data, 0, data.Length)) != 0)
