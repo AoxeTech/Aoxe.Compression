@@ -13,6 +13,7 @@ public static partial class SharpZipLibExtensions
     {
         var stream = new TStream();
         using var outputStream = new BZip2OutputStream(stream);
+        outputStream.IsStreamOwner = false;
         CompressToStream(outputStream, rawData);
         return stream;
     }
@@ -22,6 +23,7 @@ public static partial class SharpZipLibExtensions
     {
         var stream = new TStream();
         using var inputStream = new BZip2InputStream(rawStream);
+        inputStream.IsStreamOwner = false;
         DecompressFromStream(inputStream, stream);
         return stream;
     }
@@ -35,6 +37,7 @@ public static partial class SharpZipLibExtensions
 #else
         await using var outputStream = new BZip2OutputStream(ms);
 #endif
+        outputStream.IsStreamOwner = false;
         await CompressToStreamAsync(outputStream, rawData);
         return ms;
     }
@@ -48,6 +51,7 @@ public static partial class SharpZipLibExtensions
 #else
         await using var inputStream = new BZip2InputStream(rawStream);
 #endif
+        inputStream.IsStreamOwner = false;
         await DecompressFromStreamAsync(inputStream, stream);
         return stream;
     }
