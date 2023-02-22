@@ -14,8 +14,12 @@ public static partial class SharpZipLibExtensions
         var stream = new TStream();
         using (var outputStream = new BZip2OutputStream(stream))
         {
+#if NETSTANDARD2_0
+            outputStream.Write(rawData, 0, rawData.Length);
+#else
+            outputStream.Write(rawData);
+#endif
             outputStream.IsStreamOwner = false;
-            CompressToStream(outputStream, rawData);
         }
         stream.TrySeek(0, SeekOrigin.Begin);
         return stream;
@@ -27,8 +31,8 @@ public static partial class SharpZipLibExtensions
         var stream = new TStream();
         using (var inputStream = new BZip2InputStream(rawStream))
         {
+            inputStream.CopyTo(stream);
             inputStream.IsStreamOwner = false;
-            DecompressFromStream(inputStream, stream);
         }
         stream.TrySeek(0, SeekOrigin.Begin);
         return stream;
@@ -40,12 +44,14 @@ public static partial class SharpZipLibExtensions
         var stream = new TStream();
 #if NETSTANDARD2_0
         using (var outputStream = new BZip2OutputStream(stream))
+        {
+            await outputStream.WriteAsync(rawData, 0, rawData.Length);
 #else
         await using (var outputStream = new BZip2OutputStream(stream))
-#endif
         {
+            await outputStream.WriteAsync(rawData);
+#endif
             outputStream.IsStreamOwner = false;
-            await CompressToStreamAsync(outputStream, rawData);
         }
         stream.TrySeek(0, SeekOrigin.Begin);
         return stream;
@@ -61,8 +67,8 @@ public static partial class SharpZipLibExtensions
         await using (var inputStream = new BZip2InputStream(rawStream))
 #endif
         {
+            await inputStream.CopyToAsync(stream);
             inputStream.IsStreamOwner = false;
-            await DecompressFromStreamAsync(inputStream, stream);
         }
         stream.TrySeek(0, SeekOrigin.Begin);
         return stream;
