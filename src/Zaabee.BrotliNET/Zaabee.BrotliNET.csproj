@@ -3,12 +3,12 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net6.0;net7.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>2023.1.6</PackageVersion>
-        <Version>2023.1.6</Version>
+        <PackageVersion>2023.1.0</PackageVersion>
+        <Version>2023.1.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
-        <PackageTags>Zaabee;SharpZipLib;Compression</PackageTags>
-        <Description>Helper and Extensions for SharpZipLib.</Description>
+        <PackageTags>Zaabee;BrotliNET;Compression</PackageTags>
+        <Description>Helper and Extensions for BrotliNET.</Description>
         <PackageProjectUrl>https://github.com/PicoHex/Zaabee.Compression</PackageProjectUrl>
         <LicenseExpression>MIT</LicenseExpression>
         <LangVersion>latest</LangVersion>
@@ -17,8 +17,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="SharpZipLib" Version="1.4.2" />
-      <PackageReference Include="Zaabee.Extensions" Version="2023.1.0" />
+      <PackageReference Include="Brotli.NET" Version="2.1.1" />
     </ItemGroup>
 
 </Project>
