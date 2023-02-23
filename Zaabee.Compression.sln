@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmark", "perf\Benchmark
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.BrotliNET.UnitTest", "tests\Zaabee.BrotliNET.UnitTest\Zaabee.BrotliNET.UnitTest.csproj", "{3BBB8D2D-24DF-4EDE-8375-32DDB4BC5B2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.Compressor.Abstractions", "src\Zaabee.Compressor.Abstractions\Zaabee.Compressor.Abstractions.csproj", "{AD4949B0-2C26-4D98-B04F-9ACC021C6305}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,7 @@ Global
 		{B374664E-6312-4249-9684-5FD8AA17B5E3} = {5BE4F706-456E-4DF8-A606-69F992835B47}
 		{449CC10A-8E9C-4DD9-BFC4-F48073FA8A88} = {2C29EC4D-3A9E-4614-936A-480B11722B44}
 		{3BBB8D2D-24DF-4EDE-8375-32DDB4BC5B2B} = {5BE4F706-456E-4DF8-A606-69F992835B47}
+		{AD4949B0-2C26-4D98-B04F-9ACC021C6305} = {158FA242-DD0C-4482-BD54-4E7EDA9C44CA}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F9369C2B-0732-46F2-B95A-8F109BFE59A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -77,5 +80,9 @@ Global
 		{3BBB8D2D-24DF-4EDE-8375-32DDB4BC5B2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BBB8D2D-24DF-4EDE-8375-32DDB4BC5B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BBB8D2D-24DF-4EDE-8375-32DDB4BC5B2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD4949B0-2C26-4D98-B04F-9ACC021C6305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD4949B0-2C26-4D98-B04F-9ACC021C6305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD4949B0-2C26-4D98-B04F-9ACC021C6305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD4949B0-2C26-4D98-B04F-9ACC021C6305}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
