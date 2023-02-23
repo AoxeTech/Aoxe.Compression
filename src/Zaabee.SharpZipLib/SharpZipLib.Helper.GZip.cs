@@ -6,14 +6,11 @@ public static partial class SharpZipLibHelper
     {
         var compressStream = new MemoryStream();
         using (var outputStream = new GZipOutputStream(compressStream))
-        {
 #if NETSTANDARD2_0
             outputStream.Write(rawBytes, 0, rawBytes.Length);
 #else
             outputStream.Write(rawBytes);
 #endif
-            outputStream.IsStreamOwner = false;
-        }
         return compressStream.ToArray();
     }
 
@@ -21,70 +18,55 @@ public static partial class SharpZipLibHelper
     {
         var decompressStream = new MemoryStream();
         using (var inputStream = new GZipInputStream(new MemoryStream(compressBytes)))
-        {
             inputStream.CopyTo(decompressStream);
-            inputStream.IsStreamOwner = false;
-        }
         return decompressStream.ToArray();
     }
 
-    public static TStream ToGZip<TStream>(Stream rawStream)
-        where TStream : Stream, new()
+    public static void ToGZip(
+        Stream rawStream,
+        Stream compressStream,
+        bool isStreamOwner = false)
     {
-        var compressStream = new TStream();
-        using (var outputStream = new GZipOutputStream(compressStream))
-        {
-            rawStream.CopyTo(outputStream);
-            outputStream.IsStreamOwner = false;
-        }
-        compressStream.TrySeek(0, SeekOrigin.Begin);
-        return compressStream;
+        using var outputStream = new GZipOutputStream(compressStream);
+        rawStream.CopyTo(outputStream);
+        outputStream.IsStreamOwner = isStreamOwner;
     }
 
-    public static TStream UnGZip<TStream>(Stream compressStream)
-        where TStream : Stream, new()
+    public static void UnGZip(
+        Stream compressStream,
+        Stream decompressStream,
+        bool isStreamOwner = false)
     {
-        var decompressStream = new TStream();
-        using (var inputStream = new GZipInputStream(compressStream))
-        {
-            inputStream.CopyTo(decompressStream);
-            inputStream.IsStreamOwner = false;
-        }
-        decompressStream.TrySeek(0, SeekOrigin.Begin);
-        return decompressStream;
+        using var inputStream = new GZipInputStream(compressStream);
+        inputStream.CopyTo(decompressStream);
+        inputStream.IsStreamOwner = isStreamOwner;
     }
 
-    public static async Task<TStream> ToGZipAsync<TStream>(Stream rawStream)
-        where TStream : Stream, new()
+    public static async Task ToGZipAsync(
+        Stream rawStream,
+        Stream compressStream,
+        bool isStreamOwner = false)
     {
-        var compressStream = new TStream();
 #if NETSTANDARD2_0
-        using (var outputStream = new GZipOutputStream(compressStream))
+        using var outputStream = new GZipOutputStream(compressStream);
 #else
-        await using (var outputStream = new GZipOutputStream(compressStream))
+        await using var outputStream = new GZipOutputStream(compressStream);
 #endif
-        {
-            await rawStream.CopyToAsync(outputStream);
-            outputStream.IsStreamOwner = false;
-        }
-        compressStream.TrySeek(0, SeekOrigin.Begin);
-        return compressStream;
+        await rawStream.CopyToAsync(outputStream);
+        outputStream.IsStreamOwner = isStreamOwner;
     }
 
-    public static async Task<TStream> UnGZipAsync<TStream>(Stream compressStream)
-        where TStream : Stream, new()
+    public static async Task UnGZipAsync(
+        Stream compressStream,
+        Stream decompressStream,
+        bool isStreamOwner = false)
     {
-        var decompressStream = new TStream();
 #if NETSTANDARD2_0
-        using (var inputStream = new GZipInputStream(compressStream))
+        using var inputStream = new GZipInputStream(compressStream);
 #else
-        await using (var inputStream = new GZipInputStream(compressStream))
+        await using var inputStream = new GZipInputStream(compressStream);
 #endif
-        {
-            await inputStream.CopyToAsync(decompressStream);
-            inputStream.IsStreamOwner = false;
-        }
-        decompressStream.TrySeek(0, SeekOrigin.Begin);
-        return decompressStream;
+        await inputStream.CopyToAsync(decompressStream);
+        inputStream.IsStreamOwner = isStreamOwner;
     }
 }

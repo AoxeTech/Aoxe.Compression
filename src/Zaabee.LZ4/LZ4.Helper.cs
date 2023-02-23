@@ -2,22 +2,84 @@
 
 public class Lz4Helper
 {
-    public static byte[] ToLz4(byte[] bytes, LZ4Level level = LZ4Level.L00_FAST)
+    public static byte[] ToLz4(
+        byte[] bytes,
+        LZ4Level level = LZ4Level.L00_FAST)
     {
-        var target = new byte[LZ4Codec.MaximumOutputSize(bytes.Length) + 4].AsSpan();
-        var size = BitConverter.GetBytes(bytes.Length).AsSpan();
-        size.CopyTo(target);
-        var compressedBytesSize = LZ4Codec.Encode(bytes, target.Slice(4), level);
-        return target.Slice(0, compressedBytesSize + 4).ToArray();
+        var compressStream = new MemoryStream();
+        ToLz4(new MemoryStream(bytes), compressStream, level);
+        return compressStream.ToArray();
     }
 
     public static byte[] UnLz4(byte[] bytes)
     {
-        var source = bytes.AsSpan();
-        var size = source.Slice(0, 4).ToArray();
-        var length = BitConverter.ToInt32(size, 0);
-        var target = new byte[length].AsSpan();
-        var decoded = LZ4Codec.Decode(source.Slice(4), target);
-        return target.Slice(0, decoded).ToArray();
+        var decompressStream = new MemoryStream();
+        UnLz4(new MemoryStream(bytes), decompressStream);
+        return decompressStream.ToArray();
+    }
+
+    public static void ToLz4(
+        Stream rawStream,
+        Stream compressStream,
+        LZ4Level level = LZ4Level.L00_FAST,
+        int extraMemory = 0,
+        bool leaveOpen = true)
+    {
+        using var lz4Stream = LZ4Stream.Encode(compressStream, level, extraMemory, leaveOpen);
+        rawStream.CopyTo(lz4Stream);
+
+        rawStream.Flush();
+        lz4Stream.Flush();
+    }
+
+    public static void UnLz4(
+        Stream compressStream,
+        Stream decompressStream,
+        LZ4DecoderSettings? settings = null,
+        bool leaveOpen = true,
+        bool interactive = false)
+    {
+        using var lz4Stream = LZ4Stream.Decode(compressStream, settings, leaveOpen, interactive);
+        lz4Stream.CopyTo(decompressStream);
+
+        compressStream.Flush();
+        lz4Stream.Flush();
+    }
+
+    public static async Task ToLz4Async(
+        Stream rawStream,
+        Stream compressStream,
+        LZ4Level level = LZ4Level.L00_FAST,
+        int extraMemory = 0,
+        bool leaveOpen = true)
+    {
+
+#if NETSTANDARD2_0
+        using var lz4Stream = LZ4Stream.Encode(compressStream, level, extraMemory, leaveOpen);
+#else
+        await using var lz4Stream = LZ4Stream.Encode(compressStream, level, extraMemory, leaveOpen);
+#endif
+        await rawStream.CopyToAsync(lz4Stream);
+
+        await rawStream.FlushAsync();
+        lz4Stream.Flush();
+    }
+
+    public static async Task UnLz4Async(
+        Stream compressStream,
+        Stream decompressStream,
+        LZ4DecoderSettings? settings = null,
+        bool leaveOpen = true,
+        bool interactive = false)
+    {
+#if NETSTANDARD2_0
+        using var lz4Stream = LZ4Stream.Decode(compressStream, settings, leaveOpen, interactive);
+#else
+        await using var lz4Stream = LZ4Stream.Decode(compressStream, settings, leaveOpen, interactive);
+#endif
+        await lz4Stream.CopyToAsync(decompressStream);
+
+        await compressStream.FlushAsync();
+        lz4Stream.Flush();
     }
 }
