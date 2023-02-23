@@ -6,6 +6,9 @@
 public class CompressToBytes
 {
     [Benchmark]
+    public void BrotliToBytes() => BrotliHelper.ToBrotli(Consts.RawBytes);
+
+    [Benchmark]
     public void Bzip2ToBytes() => SharpZipLibHelper.ToBZip2(Consts.RawBytes);
 
     [Benchmark]

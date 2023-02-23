@@ -3,18 +3,22 @@
 public class Lz4Helper
 {
     public static byte[] ToLz4(
-        byte[] bytes,
-        LZ4Level level = LZ4Level.L00_FAST)
+        byte[] rawBytes,
+        LZ4Level level = LZ4Level.L00_FAST,
+        int extraMemory = 0)
     {
         var compressStream = new MemoryStream();
-        ToLz4(new MemoryStream(bytes), compressStream, level);
+        ToLz4(new MemoryStream(rawBytes), compressStream, level, extraMemory, false);
         return compressStream.ToArray();
     }
 
-    public static byte[] UnLz4(byte[] bytes)
+    public static byte[] UnLz4(
+        byte[] rawBytes,
+        LZ4DecoderSettings? settings = null,
+        bool interactive = false)
     {
         var decompressStream = new MemoryStream();
-        UnLz4(new MemoryStream(bytes), decompressStream);
+        UnLz4(new MemoryStream(rawBytes), decompressStream, settings, false, interactive);
         return decompressStream.ToArray();
     }
 

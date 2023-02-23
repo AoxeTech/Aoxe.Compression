@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Zaabee.BrotliNET\Zaabee.BrotliNET.csproj" />
+      <ProjectReference Include="..\..\src\Zaabee.Brotli\Zaabee.Brotli.csproj" />
       <ProjectReference Include="..\..\src\Zaabee.LZ4\Zaabee.LZ4.csproj" />
       <ProjectReference Include="..\..\src\Zaabee.LZMA\Zaabee.LZMA.csproj" />
       <ProjectReference Include="..\..\src\Zaabee.SharpZipLib\Zaabee.SharpZipLib.csproj" />

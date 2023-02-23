@@ -2,11 +2,11 @@
 
 public static partial class SharpZipLibExtensions
 {
-    public static byte[] ToGZip(this byte[] rawData) =>
-        SharpZipLibHelper.ToGZip(rawData);
+    public static byte[] ToGZip(this byte[] rawBytes) =>
+        SharpZipLibHelper.ToGZip(rawBytes);
 
-    public static byte[] UnGZip(this byte[] bytes) =>
-        SharpZipLibHelper.UnGZip(bytes);
+    public static byte[] UnGZip(this byte[] compressBytes) =>
+        SharpZipLibHelper.UnGZip(compressBytes);
 
     public static TStream ToGZip<TStream>(this Stream rawStream)
         where TStream : Stream, new()

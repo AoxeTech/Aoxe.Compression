@@ -2,11 +2,11 @@
 
 public static class Lz4Extensions
 {
-    public static byte[] ToLz4(this byte[] rawData) =>
-        Lz4Helper.ToLz4(rawData);
+    public static byte[] ToLz4(this byte[] rawBytes) =>
+        Lz4Helper.ToLz4(rawBytes);
 
-    public static byte[] UnLz4(this byte[] bytes) =>
-        Lz4Helper.UnLz4(bytes);
+    public static byte[] UnLz4(this byte[] compressBytes) =>
+        Lz4Helper.UnLz4(compressBytes);
 
     public static TStream ToLz4<TStream>(this Stream rawStream)
         where TStream : Stream, new()

@@ -6,11 +6,7 @@ public static partial class SharpZipLibHelper
     {
         var compressStream = new MemoryStream();
         using (var outputStream = new GZipOutputStream(compressStream))
-#if NETSTANDARD2_0
-            outputStream.Write(rawBytes, 0, rawBytes.Length);
-#else
-            outputStream.Write(rawBytes);
-#endif
+            rawBytes.WriteTo(outputStream);
         return compressStream.ToArray();
     }
 

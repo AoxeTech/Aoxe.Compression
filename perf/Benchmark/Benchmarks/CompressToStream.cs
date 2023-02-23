@@ -6,6 +6,9 @@
 public class CompressToStream
 {
     [Benchmark]
+    public void BrotliToStream() => BrotliHelper.ToBrotli(Consts.RawStream, new MemoryStream());
+
+    [Benchmark]
     public void Bzip2ToStream() => SharpZipLibHelper.ToBZip2(Consts.RawStream, new MemoryStream());
 
     [Benchmark]

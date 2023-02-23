@@ -5,16 +5,21 @@
 [MinColumn, MaxColumn, MeanColumn, MedianColumn]
 public class DecompressFromBytes
 {
+    private readonly byte[] _brotliCompressBytes;
     private readonly byte[] _bzipCompressBytes;
     private readonly byte[] _gzipCompressBytes;
     private readonly byte[] _lz4CompressBytes;
 
     public DecompressFromBytes()
     {
+        _brotliCompressBytes = BrotliHelper.ToBrotli(Consts.RawBytes);
         _bzipCompressBytes = SharpZipLibHelper.ToBZip2(Consts.RawBytes);
         _gzipCompressBytes = SharpZipLibHelper.ToGZip(Consts.RawBytes);
         _lz4CompressBytes = Lz4Helper.ToLz4(Consts.RawBytes);
     }
+
+    [Benchmark]
+    public void BrotliFromBytes() => BrotliHelper.UnBrotli(_brotliCompressBytes);
 
     [Benchmark]
     public void Bzip2FromBytes() => SharpZipLibHelper.UnBZip2(_bzipCompressBytes);
