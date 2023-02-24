@@ -7,7 +7,7 @@
         <Version>2023.1.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
-        <PackageTags>Zaabee;LZMA-SDK;Compression</PackageTags>
+        <PackageTags>Zaabee;LZMA-SDK;LZMA;Compression</PackageTags>
         <Description>Helper and Extensions for LZMA-SDK.</Description>
         <PackageProjectUrl>https://github.com/PicoHex/Zaabee.Compression</PackageProjectUrl>
         <LicenseExpression>MIT</LicenseExpression>
