@@ -5,9 +5,9 @@ public static partial class Lz4Helper
     public static async Task CompressAsync(
         Stream inputStream,
         Stream outputStream,
-        LZ4Level level = LZ4Level.L00_FAST,
-        int extraMemory = 0,
-        bool leaveOpen = true)
+        LZ4Level level = Level,
+        int extraMemory = ExtraMemory,
+        bool leaveOpen = LeaveOpen)
     {
 
 #if NETSTANDARD2_0
@@ -24,9 +24,9 @@ public static partial class Lz4Helper
     public static async Task DecompressAsync(
         Stream inputStream,
         Stream outputStream,
-        LZ4DecoderSettings? settings = null,
-        bool leaveOpen = true,
-        bool interactive = false)
+        LZ4DecoderSettings? settings = Settings,
+        bool leaveOpen = LeaveOpen,
+        bool interactive = Interactive)
     {
 #if NETSTANDARD2_0
         using var lz4Stream = LZ4Stream.Decode(inputStream, settings, leaveOpen, interactive);

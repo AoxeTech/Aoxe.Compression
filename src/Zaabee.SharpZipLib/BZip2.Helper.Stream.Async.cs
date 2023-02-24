@@ -5,7 +5,7 @@ public static partial class Bzip2Helper
     public static async Task CompressAsync(
         Stream inputStream,
         Stream outputStream,
-        bool isStreamOwner = false)
+        bool isStreamOwner = IsStreamOwner)
     {
 #if NETSTANDARD2_0
         using var bzip2OutputStream = new BZip2OutputStream(outputStream);
@@ -19,7 +19,7 @@ public static partial class Bzip2Helper
     public static async Task DecompressAsync(
         Stream inputStream,
         Stream outputStream,
-        bool isStreamOwner = false)
+        bool isStreamOwner = IsStreamOwner)
     {
 #if NETSTANDARD2_0
         using var bzip2InputStream = new BZip2InputStream(inputStream);

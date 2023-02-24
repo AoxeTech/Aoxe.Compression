@@ -5,7 +5,7 @@ public static partial class GzipHelper
     public static void Compress(
         Stream inputStream,
         Stream outputStream,
-        bool isStreamOwner = false)
+        bool isStreamOwner = IsStreamOwner)
     {
         using var gzipOutputStream = new GZipOutputStream(outputStream);
         inputStream.CopyTo(gzipOutputStream);
@@ -15,7 +15,7 @@ public static partial class GzipHelper
     public static void Decompress(
         Stream inputStream,
         Stream outputStream,
-        bool isStreamOwner = false)
+        bool isStreamOwner = IsStreamOwner)
     {
         using var gzipInputStream = new GZipInputStream(inputStream);
         gzipInputStream.CopyTo(outputStream);

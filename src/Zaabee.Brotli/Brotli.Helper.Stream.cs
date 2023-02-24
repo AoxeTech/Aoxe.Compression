@@ -5,9 +5,9 @@ public static partial class BrotliHelper
     public static void Compress(
         Stream inputStream,
         Stream outputStream,
-        uint quality = 5,
-        uint window = 22,
-        bool leaveOpen = true)
+        uint quality = Quality,
+        uint window = Window,
+        bool leaveOpen = LeaveOpen)
     {
         using var brotliStream = new BrotliStream(outputStream, CompressionMode.Compress, leaveOpen);
         brotliStream.SetQuality(quality);
@@ -20,7 +20,7 @@ public static partial class BrotliHelper
     public static void Decompress(
         Stream inputStream,
         Stream outputStream,
-        bool leaveOpen = true)
+        bool leaveOpen = LeaveOpen)
     {
         using var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress, leaveOpen);
         brotliStream.CopyTo(outputStream);

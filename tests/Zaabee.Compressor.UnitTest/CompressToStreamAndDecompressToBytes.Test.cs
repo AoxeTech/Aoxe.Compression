@@ -22,7 +22,6 @@ public class CompressToStreamAndDecompressToBytes
     {
         var compressedStream = new MemoryStream();
         compressor.Compress(new MemoryStream(Consts.Data), compressedStream);
-        compressedStream.Position = 0;
         var compressedBytes = compressedStream.ToArray();
         var decompressedBytes = compressor.Decompress(compressedBytes);
         Assert.Equal(Consts.Data, decompressedBytes);

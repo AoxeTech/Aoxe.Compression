@@ -5,9 +5,9 @@ public static partial class BrotliHelper
     public static async Task CompressAsync(
         Stream inputStream,
         Stream outputStream,
-        uint quality = 5,
-        uint window = 22,
-        bool leaveOpen = true)
+        uint quality = Quality,
+        uint window = Window,
+        bool leaveOpen = LeaveOpen)
     {
 #if NETSTANDARD2_0
         using var brotliStream = new BrotliStream(outputStream, CompressionMode.Compress, leaveOpen);
@@ -24,7 +24,7 @@ public static partial class BrotliHelper
     public static async Task DecompressAsync(
         Stream inputStream,
         Stream outputStream,
-        bool leaveOpen = true)
+        bool leaveOpen = LeaveOpen)
     {
 #if NETSTANDARD2_0
         using var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress, leaveOpen);

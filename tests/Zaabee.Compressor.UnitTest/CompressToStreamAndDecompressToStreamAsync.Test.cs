@@ -38,8 +38,8 @@ public class CompressToStreamAndDecompressToStreamAsync
     {
         var compressedStream = new MemoryStream();
         await compressor.CompressAsync(new MemoryStream(Consts.Data), compressedStream);
-        compressedStream.Position = 0;
         var decompressedStream = new MemoryStream();
+        compressedStream = new MemoryStream(compressedStream.ToArray());
         await compressor.DecompressAsync(compressedStream, decompressedStream);
         var decompressedBytes = decompressedStream.ToArray();
         Assert.Equal(Consts.Data, decompressedBytes);
