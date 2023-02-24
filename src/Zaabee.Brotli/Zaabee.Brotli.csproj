@@ -7,7 +7,7 @@
         <Version>2023.1.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
-        <PackageTags>Zaabee;BrotliNET;Compression</PackageTags>
+        <PackageTags>Zaabee;BrotliNET;Brotli;Compression</PackageTags>
         <Description>Helper and Extensions for BrotliNET.</Description>
         <PackageProjectUrl>https://github.com/PicoHex/Zaabee.Compression</PackageProjectUrl>
         <LicenseExpression>MIT</LicenseExpression>

@@ -7,7 +7,7 @@
         <Version>2023.1.6</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
-        <PackageTags>Zaabee;SharpZipLib;Compression</PackageTags>
+        <PackageTags>Zaabee;SharpZipLib;BZip2;GZip;Compression</PackageTags>
         <Description>Helper and Extensions for SharpZipLib.</Description>
         <PackageProjectUrl>https://github.com/PicoHex/Zaabee.Compression</PackageProjectUrl>
         <LicenseExpression>MIT</LicenseExpression>

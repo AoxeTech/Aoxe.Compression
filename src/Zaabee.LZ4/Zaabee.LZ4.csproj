@@ -7,7 +7,7 @@
         <Version>2023.1.0</Version>
         <Authors>Mutuduxf</Authors>
         <Company>Mutuduxf</Company>
-        <PackageTags>Zaabee;K4os.Compression.LZ4;Compression</PackageTags>
+        <PackageTags>Zaabee;K4os.Compression.LZ4;LZ4;Compression</PackageTags>
         <Description>Helper and Extensions for K4os.Compression.LZ4.</Description>
         <PackageProjectUrl>https://github.com/PicoHex/Zaabee.Compression</PackageProjectUrl>
         <LicenseExpression>MIT</LicenseExpression>
