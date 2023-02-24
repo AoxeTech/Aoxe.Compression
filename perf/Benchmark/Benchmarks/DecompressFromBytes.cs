@@ -12,21 +12,21 @@ public class DecompressFromBytes
 
     public DecompressFromBytes()
     {
-        _brotliCompressBytes = BrotliHelper.ToBrotli(Consts.RawBytes);
-        _bzipCompressBytes = SharpZipLibHelper.ToBZip2(Consts.RawBytes);
-        _gzipCompressBytes = SharpZipLibHelper.ToGZip(Consts.RawBytes);
-        _lz4CompressBytes = Lz4Helper.ToLz4(Consts.RawBytes);
+        _brotliCompressBytes = BrotliHelper.Compress(Consts.RawBytes);
+        _bzipCompressBytes = Bzip2Helper.Compress(Consts.RawBytes);
+        _gzipCompressBytes = GzipHelper.Compress(Consts.RawBytes);
+        _lz4CompressBytes = Lz4Helper.Compress(Consts.RawBytes);
     }
 
     [Benchmark]
-    public void BrotliFromBytes() => BrotliHelper.UnBrotli(_brotliCompressBytes);
+    public void BrotliFromBytes() => BrotliHelper.Decompress(_brotliCompressBytes);
 
     [Benchmark]
-    public void Bzip2FromBytes() => SharpZipLibHelper.UnBZip2(_bzipCompressBytes);
+    public void Bzip2FromBytes() => Bzip2Helper.Decompress(_bzipCompressBytes);
 
     [Benchmark]
-    public void GzipFromBytes() => SharpZipLibHelper.UnGZip(_gzipCompressBytes);
+    public void GzipFromBytes() => GzipHelper.Decompress(_gzipCompressBytes);
 
     [Benchmark]
-    public void Lz4FromBytes() => Lz4Helper.UnLz4(_lz4CompressBytes);
+    public void Lz4FromBytes() => Lz4Helper.Decompress(_lz4CompressBytes);
 }

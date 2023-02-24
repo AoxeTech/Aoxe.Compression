@@ -12,22 +12,22 @@ public class BytesTest
     [Fact]
     public void Lz4CompressToBytesAndDecompressToStreamTest()
     {
-        var result = new MemoryStream(Consts.Data.ToLz4()).UnLz4<MemoryStream>().ToArray();
+        var result = new MemoryStream(Consts.Data.ToLz4()).UnLz4().ToArray();
         Assert.Equal(Consts.Data, result);
     }
 
     [Fact]
     public void Lz4CompressToStreamAndDecompressToBytesTest()
     {
-        var result = new MemoryStream(Consts.Data).ToLz4<MemoryStream>().ToArray().UnLz4();
+        var result = new MemoryStream(Consts.Data).ToLz4().ToArray().UnLz4();
         Assert.Equal(Consts.Data, result);
     }
 
     [Fact]
     public void Lz4CompressToStreamAndDecompressToStreamTest()
     {
-        var compressStream = new MemoryStream(Consts.Data).ToLz4<MemoryStream>();
-        var decompressStream = compressStream.UnLz4<MemoryStream>();
+        var compressStream = new MemoryStream(Consts.Data).ToLz4();
+        var decompressStream = compressStream.UnLz4();
         var result = decompressStream.ToArray();
         Assert.Equal(Consts.Data, result);
     }
@@ -35,8 +35,8 @@ public class BytesTest
     [Fact]
     public async Task Lz4CompressToStreamAndDecompressToStreamTestAsync()
     {
-        var compressStream = await new MemoryStream(Consts.Data).ToLz4Async<MemoryStream>();
-        var decompressStream = await compressStream.UnLz4Async<MemoryStream>();
+        var compressStream = await new MemoryStream(Consts.Data).ToLz4Async();
+        var decompressStream = await compressStream.UnLz4Async();
         var result = decompressStream.ToArray();
         Assert.Equal(Consts.Data, result);
     }

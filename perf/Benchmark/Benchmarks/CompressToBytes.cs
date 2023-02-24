@@ -6,14 +6,14 @@
 public class CompressToBytes
 {
     [Benchmark]
-    public void BrotliToBytes() => BrotliHelper.ToBrotli(Consts.RawBytes);
+    public void BrotliToBytes() => BrotliHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void Bzip2ToBytes() => SharpZipLibHelper.ToBZip2(Consts.RawBytes);
+    public void Bzip2ToBytes() => Bzip2Helper.Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void GzipToBytes() => SharpZipLibHelper.ToGZip(Consts.RawBytes);
+    public void GzipToBytes() => GzipHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void Lz4ToBytes() => Lz4Helper.ToLz4(Consts.RawBytes);
+    public void Lz4ToBytes() => Lz4Helper.Compress(Consts.RawBytes);
 }

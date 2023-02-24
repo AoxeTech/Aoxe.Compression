@@ -12,21 +12,21 @@ public class DecompressFromStream
 
     public DecompressFromStream()
     {
-        BrotliHelper.ToBrotli(Consts.RawStream, _brotliCompressStream);
-        SharpZipLibHelper.ToBZip2(Consts.RawStream, _bzipCompressStream);
-        SharpZipLibHelper.ToGZip(Consts.RawStream, _gzipCompressStream);
-        Lz4Helper.ToLz4(Consts.RawStream, _lz4CompressStream);
+        BrotliHelper.Compress(Consts.RawStream, _brotliCompressStream);
+        Bzip2Helper.Compress(Consts.RawStream, _bzipCompressStream);
+        GzipHelper.Compress(Consts.RawStream, _gzipCompressStream);
+        Lz4Helper.Compress(Consts.RawStream, _lz4CompressStream);
     }
 
     [Benchmark]
-    public void BrotliFromStream() => BrotliHelper.UnBrotli(Consts.RawStream, new MemoryStream());
+    public void BrotliFromStream() => BrotliHelper.Decompress(Consts.RawStream, new MemoryStream());
 
     [Benchmark]
-    public void Bzip2FromStream() => SharpZipLibHelper.UnBZip2(Consts.RawStream, new MemoryStream());
+    public void Bzip2FromStream() => Bzip2Helper.Decompress(Consts.RawStream, new MemoryStream());
 
     [Benchmark]
-    public void GzipFromStream() => SharpZipLibHelper.UnGZip(Consts.RawStream, new MemoryStream());
+    public void GzipFromStream() => GzipHelper.Decompress(Consts.RawStream, new MemoryStream());
 
     [Benchmark]
-    public void Lz4FromStream() => Lz4Helper.UnLz4(Consts.RawStream, new MemoryStream());
+    public void Lz4FromStream() => Lz4Helper.Decompress(Consts.RawStream, new MemoryStream());
 }

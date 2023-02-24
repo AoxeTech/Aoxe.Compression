@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <PackageReference Include="LZMA-SDK" Version="22.1.1" />
+      <PackageReference Include="Zaabee.Compressor.Abstractions" Version="2023.2.0" />
       <PackageReference Include="Zaabee.Extensions" Version="2023.1.0" />
     </ItemGroup>
 
