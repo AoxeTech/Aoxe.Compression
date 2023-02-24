@@ -12,22 +12,22 @@ public class BZip2Test
     [Fact]
     public void BZip2CompressToBytesAndDecompressToStreamTest()
     {
-        var result = new MemoryStream(Consts.Data.ToBZip2()).UnBZip2<MemoryStream>().ToArray();
+        var result = new MemoryStream(Consts.Data.ToBZip2()).UnBZip2().ToArray();
         Assert.Equal(Consts.Data, result);
     }
 
     [Fact]
     public void BZip2CompressToStreamAndDecompressToBytesTest()
     {
-        var result = new MemoryStream(Consts.Data).ToBZip2<MemoryStream>().ToArray().UnBZip2();
+        var result = new MemoryStream(Consts.Data).ToBZip2().ToArray().UnBZip2();
         Assert.Equal(Consts.Data, result);
     }
 
     [Fact]
     public void BZip2CompressToStreamAndDecompressToStreamTest()
     {
-        var compressStream = new MemoryStream(Consts.Data).ToBZip2<MemoryStream>();
-        var decompressStream = compressStream.UnBZip2<MemoryStream>();
+        var compressStream = new MemoryStream(Consts.Data).ToBZip2();
+        var decompressStream = compressStream.UnBZip2();
         var result = decompressStream.ToArray();
         Assert.Equal(Consts.Data, result);
     }
@@ -35,8 +35,8 @@ public class BZip2Test
     [Fact]
     public async Task BZip2CompressToStreamAndDecompressToStreamTestAsync()
     {
-        var compressStream = await new MemoryStream(Consts.Data).ToBZip2Async<MemoryStream>();
-        var decompressStream = await compressStream.UnBZip2Async<MemoryStream>();
+        var compressStream = await new MemoryStream(Consts.Data).ToBZip2Async();
+        var decompressStream = await compressStream.UnBZip2Async();
         var result = decompressStream.ToArray();
         Assert.Equal(Consts.Data, result);
     }

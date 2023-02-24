@@ -2,32 +2,24 @@
 
 public static partial class GzipExtensions
 {
-    public static void ToGZip(this Stream rawStream, Stream outputStream)
-    {
+    public static void ToGZip(this Stream rawStream, Stream outputStream) =>
         GzipHelper.Compress(rawStream, outputStream);
-        outputStream.TrySeek(0, SeekOrigin.Begin);
-    }
 
-    public static void UnGZip(this Stream compressedStream, Stream outputStream)
-    {
+    public static void UnGZip(this Stream compressedStream, Stream outputStream) =>
         GzipHelper.Decompress(compressedStream, outputStream);
-        outputStream.TrySeek(0, SeekOrigin.Begin);
-    }
 
-    public static TStream ToGZip<TStream>(this Stream rawStream)
-        where TStream : Stream, new()
+    public static MemoryStream ToGZip(this Stream rawStream)
     {
-        var outputStream = new TStream();
-        GzipHelper.Compress(rawStream, outputStream);
+        var outputStream = new MemoryStream();
+        rawStream.ToGZip(outputStream);
         outputStream.TrySeek(0, SeekOrigin.Begin);
         return outputStream;
     }
 
-    public static TStream UnGZip<TStream>(this Stream compressedStream)
-        where TStream : Stream, new()
+    public static MemoryStream UnGZip(this Stream compressedStream)
     {
-        var outputStream = new TStream();
-        GzipHelper.Decompress(compressedStream, outputStream);
+        var outputStream = new MemoryStream();
+        compressedStream.UnGZip(outputStream);
         outputStream.TrySeek(0, SeekOrigin.Begin);
         return outputStream;
     }
