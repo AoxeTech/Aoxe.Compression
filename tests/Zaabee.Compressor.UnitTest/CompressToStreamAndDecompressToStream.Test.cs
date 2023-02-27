@@ -38,13 +38,13 @@ public class CompressToStreamAndDecompressToStream
     {
         var compressedStream = new MemoryStream();
         var rawStream = Consts.Data.ToMemoryStream();
-        compressor.Compress(rawStream, compressedStream, true);
+        compressor.Compress(rawStream, compressedStream);
 
         Assert.Equal(0, rawStream.Position);
 
         var decompressedStream = new MemoryStream();
         compressedStream = new MemoryStream(compressedStream.ToArray());
-        compressor.Decompress(compressedStream, decompressedStream, true);
+        compressor.Decompress(compressedStream, decompressedStream);
 
         Assert.Equal(0, compressedStream.Position);
 

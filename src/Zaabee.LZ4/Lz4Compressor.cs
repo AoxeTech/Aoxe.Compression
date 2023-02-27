@@ -4,20 +4,17 @@ public class Lz4Compressor : ICompressor
 {
     private readonly LZ4Level _level;
     private readonly int _extraMemory;
-    private readonly bool _leaveOpen;
     private readonly bool _interactive;
     private readonly LZ4DecoderSettings? _settings;
 
     public Lz4Compressor(
         LZ4Level level = Lz4Helper.Level,
         int extraMemory = Lz4Helper.ExtraMemory,
-        bool leaveOpen = Lz4Helper.LeaveOpen,
         bool interactive = Lz4Helper.Interactive,
         LZ4DecoderSettings? settings = Lz4Helper.Settings)
     {
         _interactive = interactive;
         _settings = settings;
-        _leaveOpen = leaveOpen;
         _extraMemory = extraMemory;
         _level = level;
     }
@@ -30,15 +27,13 @@ public class Lz4Compressor : ICompressor
 
     public async Task CompressAsync(
         Stream inputStream,
-        Stream outputStream,
-        bool? leaveOpen = null) =>
-        await inputStream.ToLz4Async(outputStream, _level, _extraMemory, leaveOpen ?? _leaveOpen);
+        Stream outputStream) =>
+        await inputStream.ToLz4Async(outputStream, _level, _extraMemory);
 
     public async Task DecompressAsync(
         Stream inputStream,
-        Stream outputStream,
-        bool? leaveOpen = null) =>
-        await inputStream.UnLz4Async(outputStream, _settings, leaveOpen ?? _leaveOpen, _interactive);
+        Stream outputStream) =>
+        await inputStream.UnLz4Async(outputStream, _settings, _interactive);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToLz4(_level, _extraMemory);
@@ -54,13 +49,11 @@ public class Lz4Compressor : ICompressor
 
     public void Compress(
         Stream inputStream,
-        Stream outputStream,
-        bool? leaveOpen = null) =>
-        inputStream.ToLz4(outputStream, _level, _extraMemory, leaveOpen ?? _leaveOpen);
+        Stream outputStream) =>
+        inputStream.ToLz4(outputStream, _level, _extraMemory);
 
     public void Decompress(
         Stream inputStream,
-        Stream outputStream,
-        bool? leaveOpen = null) =>
-        inputStream.UnLz4(outputStream, _settings, leaveOpen ?? _leaveOpen, _interactive);
+        Stream outputStream) =>
+        inputStream.UnLz4(outputStream, _settings, _interactive);
 }

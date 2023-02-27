@@ -2,13 +2,6 @@
 
 public class GzipCompressor : ICompressor
 {
-    private readonly bool _isStreamOwner;
-
-    public GzipCompressor(bool isStreamOwner = Bzip2Helper.IsStreamOwner)
-    {
-        _isStreamOwner = isStreamOwner;
-    }
-
     public async Task<MemoryStream> CompressAsync(Stream rawStream) =>
         await rawStream.ToGZipAsync();
 
@@ -17,15 +10,13 @@ public class GzipCompressor : ICompressor
 
     public async Task CompressAsync(
         Stream inputStream,
-        Stream outputStream,
-        bool? leaveOpen = null) =>
-        await inputStream.ToGZipAsync(outputStream, !leaveOpen ?? _isStreamOwner);
+        Stream outputStream) =>
+        await inputStream.ToGZipAsync(outputStream);
 
     public async Task DecompressAsync(
         Stream inputStream,
-        Stream outputStream,
-        bool? leaveOpen = null) =>
-        await inputStream.UnGZipAsync(outputStream, !leaveOpen ?? _isStreamOwner);
+        Stream outputStream) =>
+        await inputStream.UnGZipAsync(outputStream);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToGZip();
@@ -41,13 +32,11 @@ public class GzipCompressor : ICompressor
 
     public void Compress(
         Stream inputStream,
-        Stream outputStream,
-        bool? leaveOpen = null) =>
-        inputStream.ToGZip(outputStream, !leaveOpen ?? _isStreamOwner);
+        Stream outputStream) =>
+        inputStream.ToGZip(outputStream);
 
     public void Decompress(
         Stream inputStream,
-        Stream outputStream,
-        bool? leaveOpen = null) =>
-        inputStream.UnGZip(outputStream, !leaveOpen ?? _isStreamOwner);
+        Stream outputStream) =>
+        inputStream.UnGZip(outputStream);
 }

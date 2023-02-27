@@ -6,17 +6,15 @@ public static partial class Lz4Extensions
         this Stream rawStream,
         Stream outputStream,
         LZ4Level level = Lz4Helper.Level,
-        int extraMemory = Lz4Helper.ExtraMemory,
-        bool leaveOpen = Lz4Helper.LeaveOpen) =>
-        await Lz4Helper.CompressAsync(rawStream, outputStream, level, extraMemory, leaveOpen);
+        int extraMemory = Lz4Helper.ExtraMemory) =>
+        await Lz4Helper.CompressAsync(rawStream, outputStream, level, extraMemory);
 
     public static async Task UnLz4Async(
         this Stream compressedStream,
         Stream outputStream,
         LZ4DecoderSettings? settings = Lz4Helper.Settings,
-        bool leaveOpen = Lz4Helper.LeaveOpen,
         bool interactive = Lz4Helper.Interactive) =>
-        await Lz4Helper.DecompressAsync(compressedStream, outputStream, settings, leaveOpen, interactive);
+        await Lz4Helper.DecompressAsync(compressedStream, outputStream, settings, interactive);
 
     public static async Task<MemoryStream> ToLz4Async(
         this Stream rawStream,
@@ -24,8 +22,7 @@ public static partial class Lz4Extensions
         int extraMemory = Lz4Helper.ExtraMemory)
     {
         var outputStream = new MemoryStream();
-        await rawStream.ToLz4Async(outputStream, level, extraMemory, true);
-        outputStream.TrySeek(0, SeekOrigin.Begin);
+        await rawStream.ToLz4Async(outputStream, level, extraMemory);
         return outputStream;
     }
 
@@ -35,8 +32,7 @@ public static partial class Lz4Extensions
         bool interactive = Lz4Helper.Interactive)
     {
         var outputStream = new MemoryStream();
-        await compressedStream.UnLz4Async(outputStream, settings, true, interactive);
-        outputStream.TrySeek(0, SeekOrigin.Begin);
+        await compressedStream.UnLz4Async(outputStream, settings, interactive);
         return outputStream;
     }
 }

@@ -16,7 +16,7 @@ public class BytesTest
         var compressedStream = Consts.Data.ToLz4().ToMemoryStream();
         var decompressStream = compressedStream.UnLz4();
 
-        Assert.Equal(0, decompressStream.Position);
+        Assert.Equal(0, compressedStream.Position);
         
         var result = decompressStream.ToArray();
 
@@ -29,7 +29,7 @@ public class BytesTest
         var rawStream = Consts.Data.ToMemoryStream();
         var decompressStream = rawStream.ToLz4();
 
-        Assert.Equal(0, decompressStream.Position);
+        Assert.Equal(0, rawStream.Position);
 
         var result = decompressStream.ToArray().UnLz4();
 

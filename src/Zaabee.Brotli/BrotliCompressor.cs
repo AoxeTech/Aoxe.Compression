@@ -2,19 +2,15 @@
 
 public class BrotliCompressor : ICompressor
 {
-
     private readonly uint _quality;
     private readonly uint _window;
-    private readonly bool _leaveOpen;
 
     public BrotliCompressor(
         uint quality = BrotliHelper.Quality,
-        uint window = BrotliHelper.Window,
-        bool leaveOpen = BrotliHelper.LeaveOpen)
+        uint window = BrotliHelper.Window)
     {
         _quality = quality;
         _window = window;
-        _leaveOpen = leaveOpen;
     }
 
     public async Task<MemoryStream> CompressAsync(Stream rawStream) =>
@@ -25,15 +21,13 @@ public class BrotliCompressor : ICompressor
 
     public async Task CompressAsync(
         Stream inputStream,
-        Stream outputStream,
-        bool? leaveOpen = null) =>
-        await inputStream.ToBrotliAsync(outputStream, _quality, _window, leaveOpen ?? _leaveOpen);
+        Stream outputStream) =>
+        await inputStream.ToBrotliAsync(outputStream, _quality, _window);
 
     public async Task DecompressAsync(
         Stream inputStream,
-        Stream outputStream,
-        bool? leaveOpen = null) =>
-        await inputStream.UnBrotliAsync(outputStream, leaveOpen ?? _leaveOpen);
+        Stream outputStream) =>
+        await inputStream.UnBrotliAsync(outputStream);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToBrotli(_quality, _window);
@@ -49,13 +43,11 @@ public class BrotliCompressor : ICompressor
 
     public void Compress(
         Stream inputStream,
-        Stream outputStream,
-        bool? leaveOpen = null) =>
-        inputStream.ToBrotli(outputStream, _quality, _window, leaveOpen ?? _leaveOpen);
+        Stream outputStream) =>
+        inputStream.ToBrotli(outputStream, _quality, _window);
 
     public void Decompress(
         Stream inputStream,
-        Stream outputStream,
-        bool? leaveOpen = null) =>
-        inputStream.UnBrotli(outputStream, leaveOpen ?? _leaveOpen);
+        Stream outputStream) =>
+        inputStream.UnBrotli(outputStream);
 }

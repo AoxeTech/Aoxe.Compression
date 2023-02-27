@@ -6,15 +6,13 @@ public static partial class BrotliExtensions
         this Stream rawStream,
         Stream outputStream,
         uint quality = BrotliHelper.Quality,
-        uint window = BrotliHelper.Window,
-        bool leaveOpen = BrotliHelper.LeaveOpen) =>
-        await BrotliHelper.CompressAsync(rawStream, outputStream, quality, window, leaveOpen);
+        uint window = BrotliHelper.Window) =>
+        await BrotliHelper.CompressAsync(rawStream, outputStream, quality, window);
 
     public static async Task UnBrotliAsync(
         this Stream compressedStream,
-        Stream outputStream,
-        bool leaveOpen = BrotliHelper.LeaveOpen) =>
-        await BrotliHelper.DecompressAsync(compressedStream, outputStream, leaveOpen);
+        Stream outputStream) =>
+        await BrotliHelper.DecompressAsync(compressedStream, outputStream);
 
     public static async Task<MemoryStream> ToBrotliAsync(
         this Stream rawStream,
@@ -22,16 +20,14 @@ public static partial class BrotliExtensions
         uint window = BrotliHelper.Window)
     {
         var outputStream = new MemoryStream();
-        await rawStream.ToBrotliAsync(outputStream, quality, window, true);
-        outputStream.TrySeek(0, SeekOrigin.Begin);
+        await rawStream.ToBrotliAsync(outputStream, quality, window);
         return outputStream;
     }
 
     public static async Task<MemoryStream> UnBrotliAsync(this Stream compressedStream)
     {
         var outputStream = new MemoryStream();
-        await compressedStream.UnBrotliAsync(outputStream, true);
-        outputStream.TrySeek(0, SeekOrigin.Begin);
+        await compressedStream.UnBrotliAsync(outputStream);
         return outputStream;
     }
 }

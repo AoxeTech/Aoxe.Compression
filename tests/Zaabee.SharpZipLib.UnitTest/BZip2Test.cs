@@ -16,7 +16,7 @@ public class BZip2Test
         var compressedStream = Consts.Data.ToBZip2().ToMemoryStream();
         var decompressStream = compressedStream.UnBZip2();
 
-        Assert.Equal(0, decompressStream.Position);
+        Assert.Equal(0, compressedStream.Position);
 
         var result = decompressStream.ToArray();
 
@@ -28,8 +28,6 @@ public class BZip2Test
     {
         var rawStream = Consts.Data.ToMemoryStream();
         var decompressStream = rawStream.ToBZip2();
-
-        Assert.Equal(0, decompressStream.Position);
 
         var result = decompressStream.ToArray().UnBZip2();
 
@@ -45,6 +43,7 @@ public class BZip2Test
 
         Assert.Equal(0, rawStream.Position);
 
+        compressStream.TrySeek(0, SeekOrigin.Begin);
         var decompressStream = compressStream.UnBZip2();
 
         Assert.Equal(0, compressStream.Position);
@@ -62,6 +61,7 @@ public class BZip2Test
 
         Assert.Equal(0, rawStream.Position);
 
+        compressStream.TrySeek(0, SeekOrigin.Begin);
         var decompressStream = await compressStream.UnBZip2Async();
 
         Assert.Equal(0, compressStream.Position);

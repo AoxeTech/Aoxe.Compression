@@ -4,31 +4,35 @@ public static partial class GzipHelper
 {
     public static async Task CompressAsync(
         Stream inputStream,
-        Stream outputStream,
-        bool isStreamOwner = IsStreamOwner)
+        Stream outputStream)
     {
 #if NETSTANDARD2_0
-        using var gzipOutputStream = new GZipOutputStream(outputStream);
+        using (var gzipOutputStream = new GZipOutputStream(outputStream))
 #else
-        await using var gzipOutputStream = new GZipOutputStream(outputStream);
+        await using (var gzipOutputStream = new GZipOutputStream(outputStream))
 #endif
-        await inputStream.CopyToAsync(gzipOutputStream);
-        gzipOutputStream.IsStreamOwner = isStreamOwner;
+        {
+            await inputStream.CopyToAsync(gzipOutputStream);
+            gzipOutputStream.IsStreamOwner = false;
+        }
         inputStream.TrySeek(0, SeekOrigin.Begin);
+        outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
     public static async Task DecompressAsync(
         Stream inputStream,
-        Stream outputStream,
-        bool isStreamOwner = IsStreamOwner)
+        Stream outputStream)
     {
 #if NETSTANDARD2_0
-        using var gzipInputStream = new GZipInputStream(inputStream);
+        using (var gzipInputStream = new GZipInputStream(inputStream))
 #else
-        await using var gzipInputStream = new GZipInputStream(inputStream);
+        await using (var gzipInputStream = new GZipInputStream(inputStream))
 #endif
-        await gzipInputStream.CopyToAsync(outputStream);
-        gzipInputStream.IsStreamOwner = isStreamOwner;
+        {
+            await gzipInputStream.CopyToAsync(outputStream);
+            gzipInputStream.IsStreamOwner = false;
+        }
         inputStream.TrySeek(0, SeekOrigin.Begin);
+        outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 }

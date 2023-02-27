@@ -4,21 +4,19 @@ public static partial class GzipExtensions
 {
     public static void ToGZip(
         this Stream rawStream,
-        Stream outputStream,
-        bool isStreamOwner = GzipHelper.IsStreamOwner) =>
-        GzipHelper.Compress(rawStream, outputStream, isStreamOwner);
+        Stream outputStream) =>
+        GzipHelper.Compress(rawStream, outputStream);
 
     public static void UnGZip(
         this Stream compressedStream,
-        Stream outputStream,
-        bool isStreamOwner = GzipHelper.IsStreamOwner) =>
-        GzipHelper.Decompress(compressedStream, outputStream, isStreamOwner);
+        Stream outputStream) =>
+        GzipHelper.Decompress(compressedStream, outputStream);
 
     public static MemoryStream ToGZip(
         this Stream rawStream)
     {
         var outputStream = new MemoryStream();
-        rawStream.ToGZip(outputStream, false);
+        rawStream.ToGZip(outputStream);
         outputStream.TrySeek(0, SeekOrigin.Begin);
         return outputStream;
     }
@@ -26,7 +24,7 @@ public static partial class GzipExtensions
     public static MemoryStream UnGZip(this Stream compressedStream)
     {
         var outputStream = new MemoryStream();
-        compressedStream.UnGZip(outputStream, false);
+        compressedStream.UnGZip(outputStream);
         outputStream.TrySeek(0, SeekOrigin.Begin);
         return outputStream;
     }

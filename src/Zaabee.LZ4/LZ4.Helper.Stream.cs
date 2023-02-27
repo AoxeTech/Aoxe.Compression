@@ -6,23 +6,23 @@ public static partial class Lz4Helper
         Stream inputStream,
         Stream outputStream,
         LZ4Level level = Level,
-        int extraMemory = ExtraMemory,
-        bool leaveOpen = LeaveOpen)
+        int extraMemory = ExtraMemory)
     {
-        using var lz4Stream = LZ4Stream.Encode(outputStream, level, extraMemory, leaveOpen);
-        inputStream.CopyTo(lz4Stream);
+        using (var lz4Stream = LZ4Stream.Encode(outputStream, level, extraMemory, true))
+            inputStream.CopyTo(lz4Stream);
         inputStream.TrySeek(0, SeekOrigin.Begin);
+        outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
     public static void Decompress(
         Stream inputStream,
         Stream outputStream,
         LZ4DecoderSettings? settings = Settings,
-        bool leaveOpen = LeaveOpen,
         bool interactive = Interactive)
     {
-        using var lz4Stream = LZ4Stream.Decode(inputStream, settings, leaveOpen, interactive);
-        lz4Stream.CopyTo(outputStream);
+        using (var lz4Stream = LZ4Stream.Decode(inputStream, settings, true, interactive))
+            lz4Stream.CopyTo(outputStream);
         inputStream.TrySeek(0, SeekOrigin.Begin);
+        outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 }

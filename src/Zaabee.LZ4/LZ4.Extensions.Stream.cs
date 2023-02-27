@@ -6,17 +6,15 @@ public static partial class Lz4Extensions
         this Stream rawStream,
         Stream outputStream,
         LZ4Level level = Lz4Helper.Level,
-        int extraMemory = Lz4Helper.ExtraMemory,
-        bool leaveOpen = Lz4Helper.LeaveOpen) =>
-        Lz4Helper.Compress(rawStream, outputStream, level, extraMemory, leaveOpen);
+        int extraMemory = Lz4Helper.ExtraMemory) =>
+        Lz4Helper.Compress(rawStream, outputStream, level, extraMemory);
 
     public static void UnLz4(
         this Stream compressedStream,
         Stream outputStream,
         LZ4DecoderSettings? settings = Lz4Helper.Settings,
-        bool leaveOpen = Lz4Helper.LeaveOpen,
         bool interactive = Lz4Helper.Interactive) =>
-        Lz4Helper.Decompress(compressedStream, outputStream, settings, leaveOpen, interactive);
+        Lz4Helper.Decompress(compressedStream, outputStream, settings, interactive);
 
     public static MemoryStream ToLz4(
         this Stream rawStream,
@@ -24,8 +22,7 @@ public static partial class Lz4Extensions
         int extraMemory = Lz4Helper.ExtraMemory)
     {
         var outputStream = new MemoryStream();
-        rawStream.ToLz4(outputStream, level, extraMemory, true);
-        outputStream.TrySeek(0, SeekOrigin.Begin);
+        rawStream.ToLz4(outputStream, level, extraMemory);
         return outputStream;
     }
 
@@ -35,8 +32,7 @@ public static partial class Lz4Extensions
         bool interactive = Lz4Helper.Interactive)
     {
         var outputStream = new MemoryStream();
-        compressedStream.UnLz4(outputStream, settings, true, interactive);
-        outputStream.TrySeek(0, SeekOrigin.Begin);
+        compressedStream.UnLz4(outputStream, settings, interactive);
         return outputStream;
     }
 }

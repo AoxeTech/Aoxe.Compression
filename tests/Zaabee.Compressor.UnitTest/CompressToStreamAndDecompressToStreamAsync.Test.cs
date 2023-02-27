@@ -38,13 +38,13 @@ public class CompressToStreamAndDecompressToStreamAsync
     {
         var compressedStream = new MemoryStream();
         var rawStream = Consts.Data.ToMemoryStream();
-        await compressor.CompressAsync(rawStream, compressedStream, true);
+        await compressor.CompressAsync(rawStream, compressedStream);
 
         Assert.Equal(0, rawStream.Position);
 
         var decompressedStream = new MemoryStream();
         compressedStream = new MemoryStream(compressedStream.ToArray());
-        await compressor.DecompressAsync(compressedStream, decompressedStream, true);
+        await compressor.DecompressAsync(compressedStream, decompressedStream);
 
         Assert.Equal(0, compressedStream.Position);
 

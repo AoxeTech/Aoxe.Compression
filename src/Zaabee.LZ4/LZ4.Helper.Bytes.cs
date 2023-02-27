@@ -8,7 +8,7 @@ public static partial class Lz4Helper
         int extraMemory = ExtraMemory)
     {
         var outputStream = new MemoryStream();
-        Compress(new MemoryStream(rawBytes), outputStream, level, extraMemory, LeaveOpen);
+        Compress(new MemoryStream(rawBytes), outputStream, level, extraMemory);
         return outputStream.ToArray();
     }
 
@@ -18,7 +18,7 @@ public static partial class Lz4Helper
         bool interactive = Interactive)
     {
         var outputStream = new MemoryStream();
-        Decompress(new MemoryStream(compressedBytes), outputStream, settings, LeaveOpen, interactive);
+        Decompress(new MemoryStream(compressedBytes), outputStream, settings, interactive);
         return outputStream.ToArray();
     }
 }
