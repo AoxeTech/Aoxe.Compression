@@ -14,6 +14,7 @@ public static partial class Bzip2Helper
 #endif
         await inputStream.CopyToAsync(bzip2OutputStream);
         bzip2OutputStream.IsStreamOwner = isStreamOwner;
+        inputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
     public static async Task DecompressAsync(
@@ -28,5 +29,6 @@ public static partial class Bzip2Helper
 #endif
         await bzip2InputStream.CopyToAsync(outputStream);
         bzip2InputStream.IsStreamOwner = isStreamOwner;
+        inputStream.TrySeek(0, SeekOrigin.Begin);
     }
 }

@@ -22,6 +22,7 @@ public class BytesTest
     {
         var compressedBytes = compressor.Compress(Consts.Data);
         var decompressedBytes = compressor.Decompress(compressedBytes);
+        
         Assert.Equal(Consts.Data, decompressedBytes);
     }
 }

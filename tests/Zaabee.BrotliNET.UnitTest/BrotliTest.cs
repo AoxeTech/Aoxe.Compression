@@ -6,38 +6,68 @@ public class BrotliTest
     public void BrotliCompressToBytesAndDecompressToBytesTest()
     {
         var result = Consts.Data.ToBrotli().UnBrotli();
+
         Assert.Equal(Consts.Data, result);
     }
 
     [Fact]
     public void BrotliCompressToBytesAndDecompressToStreamTest()
     {
-        var result = Consts.Data.ToBrotli().ToMemoryStream().UnBrotli().ToArray();
+        var compressedStream = Consts.Data.ToBrotli().ToMemoryStream();
+        var decompressStream = compressedStream.UnBrotli();
+
+        Assert.Equal(0, decompressStream.Position);
+        
+        var result = decompressStream.ToArray();
+
         Assert.Equal(Consts.Data, result);
     }
 
     [Fact]
     public void BrotliCompressToStreamAndDecompressToBytesTest()
     {
-        var result = Consts.Data.ToMemoryStream().ToBrotli().ToArray().UnBrotli();
+        var rawStream = Consts.Data.ToMemoryStream();
+        var decompressStream = rawStream.ToBrotli();
+
+        Assert.Equal(0, decompressStream.Position);
+
+        var result = decompressStream.ToArray().UnBrotli();
+
+        Assert.Equal(0, rawStream.Position);
         Assert.Equal(Consts.Data, result);
     }
 
     [Fact]
     public void BrotliCompressToStreamAndDecompressToStreamTest()
     {
-        var compressStream = Consts.Data.ToMemoryStream().ToBrotli();
+        var rawStream = Consts.Data.ToMemoryStream();
+        var compressStream = rawStream.ToBrotli();
+
+        Assert.Equal(0, rawStream.Position);
+
         var decompressStream = compressStream.UnBrotli();
+
+        Assert.Equal(0, compressStream.Position);
+
         var result = decompressStream.ToArray();
+
         Assert.Equal(Consts.Data, result);
     }
 
     [Fact]
     public async Task BrotliCompressToStreamAndDecompressToStreamTestAsync()
     {
-        var compressStream = await Consts.Data.ToMemoryStream().ToBrotliAsync();
+        var rawStream = Consts.Data.ToMemoryStream();
+        var compressStream = await rawStream.ToBrotliAsync();
+
+        Assert.Equal(0, rawStream.Position);
+
         var decompressStream = await compressStream.UnBrotliAsync();
+
+        Assert.Equal(0, compressStream.Position);
+
         var result = decompressStream.ToArray();
+
         Assert.Equal(Consts.Data, result);
     }
 }

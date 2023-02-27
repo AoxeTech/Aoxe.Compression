@@ -10,6 +10,7 @@ public static partial class GzipHelper
         using var gzipOutputStream = new GZipOutputStream(outputStream);
         inputStream.CopyTo(gzipOutputStream);
         gzipOutputStream.IsStreamOwner = isStreamOwner;
+        inputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
     public static void Decompress(
@@ -20,5 +21,6 @@ public static partial class GzipHelper
         using var gzipInputStream = new GZipInputStream(inputStream);
         gzipInputStream.CopyTo(outputStream);
         gzipInputStream.IsStreamOwner = isStreamOwner;
+        inputStream.TrySeek(0, SeekOrigin.Begin);
     }
 }

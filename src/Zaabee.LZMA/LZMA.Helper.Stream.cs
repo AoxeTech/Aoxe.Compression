@@ -6,8 +6,6 @@ public static partial class LzmaHelper
     {
         using var inputMemory = new MemoryStream();
         inputStream.CopyTo(inputMemory);
-        inputStream.Flush();
-        inputMemory.Flush();
         inputMemory.Position = 0;
 
         var encoder = new Encoder();

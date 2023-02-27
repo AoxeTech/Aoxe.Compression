@@ -13,6 +13,7 @@ public static partial class BrotliHelper
         brotliStream.SetQuality(quality);
         brotliStream.SetWindow(window);
         inputStream.CopyTo(brotliStream);
+        inputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
     public static void Decompress(
@@ -22,5 +23,6 @@ public static partial class BrotliHelper
     {
         using var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress, leaveOpen);
         brotliStream.CopyTo(outputStream);
+        inputStream.TrySeek(0, SeekOrigin.Begin);
     }
 }

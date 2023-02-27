@@ -11,6 +11,7 @@ public static partial class Lz4Helper
     {
         using var lz4Stream = LZ4Stream.Encode(outputStream, level, extraMemory, leaveOpen);
         inputStream.CopyTo(lz4Stream);
+        inputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
     public static void Decompress(
@@ -22,5 +23,6 @@ public static partial class Lz4Helper
     {
         using var lz4Stream = LZ4Stream.Decode(inputStream, settings, leaveOpen, interactive);
         lz4Stream.CopyTo(outputStream);
+        inputStream.TrySeek(0, SeekOrigin.Begin);
     }
 }

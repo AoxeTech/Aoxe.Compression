@@ -37,19 +37,35 @@ public class CompressToStreamAndDecompressToStream
     private void CompressToStreamAndDecompressToStreamTest1(ICompressor compressor)
     {
         var compressedStream = new MemoryStream();
-        compressor.Compress(Consts.Data.ToMemoryStream(), compressedStream);
+        var rawStream = Consts.Data.ToMemoryStream();
+        compressor.Compress(rawStream, compressedStream, true);
+
+        Assert.Equal(0, rawStream.Position);
+
         var decompressedStream = new MemoryStream();
         compressedStream = new MemoryStream(compressedStream.ToArray());
-        compressor.Decompress(compressedStream, decompressedStream);
+        compressor.Decompress(compressedStream, decompressedStream, true);
+
+        Assert.Equal(0, compressedStream.Position);
+
         var decompressedBytes = decompressedStream.ToArray();
+
         Assert.Equal(Consts.Data, decompressedBytes);
     }
 
     private void CompressToStreamAndDecompressToStreamTest2(ICompressor compressor)
     {
-        var compressedStream = compressor.Compress(Consts.Data.ToMemoryStream());
+        var rawStream = Consts.Data.ToMemoryStream();
+        var compressedStream = compressor.Compress(rawStream);
+
+        Assert.Equal(0, rawStream.Position);
+
         var decompressedStream = compressor.Decompress(compressedStream);
+
+        Assert.Equal(0, compressedStream.Position);
+        
         var decompressedBytes = decompressedStream.ToArray();
+        
         Assert.Equal(Consts.Data, decompressedBytes);
     }
 }

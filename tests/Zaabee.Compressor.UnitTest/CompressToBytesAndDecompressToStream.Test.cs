@@ -21,8 +21,13 @@ public class StreamTest
     private void CompressToBytesAndDecompressToStreamTest(ICompressor compressor)
     {
         var compressedBytes = compressor.Compress(Consts.Data);
-        var decompressedStream = compressor.Decompress(compressedBytes.ToMemoryStream());
+        var compressedStream = compressedBytes.ToMemoryStream();
+        var decompressedStream = compressor.Decompress(compressedStream);
+        
+        Assert.Equal(0, compressedStream.Position);
+        
         var decompressedBytes = decompressedStream.ToArray();
+        
         Assert.Equal(Consts.Data, decompressedBytes);
     }
 }
