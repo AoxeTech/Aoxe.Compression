@@ -31,10 +31,12 @@ public class LeaveOpenAsyncTest
         var compressedStream = new MemoryStream();
         await compressor.CompressAsync(new MemoryStream(Consts.Data), compressedStream, leaveOpen);
         Assert.Equal(leaveOpen, compressedStream.CanWrite);
+        
         var decompressedStream = new MemoryStream();
         var reCompressedStream = new MemoryStream(compressedStream.ToArray());
         await compressor.DecompressAsync(reCompressedStream, decompressedStream, leaveOpen);
         Assert.Equal(leaveOpen, reCompressedStream.CanWrite);
+        
         var decompressedBytes = decompressedStream.ToArray();
         Assert.Equal(Consts.Data, decompressedBytes);
     }

@@ -31,10 +31,12 @@ public class LeaveOpenTest
           var compressedStream = new MemoryStream();
           compressor.Compress(new MemoryStream(Consts.Data), compressedStream, leaveOpen);
           Assert.Equal(leaveOpen, compressedStream.CanWrite);
+          
           var decompressedStream = new MemoryStream();
           var reCompressedStream = new MemoryStream(compressedStream.ToArray());
           compressor.Decompress(reCompressedStream, decompressedStream, leaveOpen);
           Assert.Equal(leaveOpen, reCompressedStream.CanWrite);
+          
           var decompressedBytes = decompressedStream.ToArray();
           Assert.Equal(Consts.Data, decompressedBytes);
      }
