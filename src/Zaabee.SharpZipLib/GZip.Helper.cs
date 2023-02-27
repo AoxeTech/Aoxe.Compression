@@ -2,5 +2,5 @@
 
 public static partial class GzipHelper
 {
-    internal const bool IsStreamOwner = false;
+    internal const bool IsStreamOwner = true;
 }

@@ -4,7 +4,7 @@ public static partial class LzmaHelper
 {
     public static void Compress(Stream inputStream, Stream outputStream)
     {
-        using MemoryStream inputMemory = new MemoryStream();
+        using var inputMemory = new MemoryStream();
         inputStream.CopyTo(inputMemory);
         inputStream.Flush();
         inputMemory.Flush();
@@ -25,7 +25,7 @@ public static partial class LzmaHelper
 
     public static void Decompress(Stream inputStream, Stream outputStream)
     {
-        using MemoryStream inputMemory = new MemoryStream();
+        using var inputMemory = new MemoryStream();
         inputStream.CopyTo(inputMemory);
         inputStream.Flush();
         inputMemory.Flush();

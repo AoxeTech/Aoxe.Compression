@@ -2,7 +2,7 @@
 
 public class BrotliCompressor : ICompressor
 {
-    
+
     private readonly uint _quality;
     private readonly uint _window;
     private readonly bool _leaveOpen;
@@ -23,11 +23,17 @@ public class BrotliCompressor : ICompressor
     public async Task<MemoryStream> DecompressAsync(Stream compressedStream) =>
         await compressedStream.UnBrotliAsync();
 
-    public async Task CompressAsync(Stream inputStream, Stream outputStream) =>
-        await inputStream.ToBrotliAsync(outputStream, _quality, _window, _leaveOpen);
+    public async Task CompressAsync(
+        Stream inputStream,
+        Stream outputStream,
+        bool leaveOpen = CompressorConsts.LeaveOpen) =>
+        await inputStream.ToBrotliAsync(outputStream, _quality, _window, leaveOpen);
 
-    public async Task DecompressAsync(Stream inputStream, Stream outputStream) =>
-        await inputStream.UnBrotliAsync(outputStream, _leaveOpen);
+    public async Task DecompressAsync(
+        Stream inputStream,
+        Stream outputStream,
+        bool leaveOpen = CompressorConsts.LeaveOpen) =>
+        await inputStream.UnBrotliAsync(outputStream, leaveOpen);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToBrotli(_quality, _window);
@@ -41,9 +47,15 @@ public class BrotliCompressor : ICompressor
     public MemoryStream Decompress(Stream compressedStream) =>
         compressedStream.UnBrotli();
 
-    public void Compress(Stream inputStream, Stream outputStream) =>
-        inputStream.ToBrotli(outputStream, _quality, _window, _leaveOpen);
+    public void Compress(
+        Stream inputStream,
+        Stream outputStream,
+        bool leaveOpen = CompressorConsts.LeaveOpen) =>
+        inputStream.ToBrotli(outputStream, _quality, _window, leaveOpen);
 
-    public void Decompress(Stream inputStream, Stream outputStream) =>
-        inputStream.UnBrotli(outputStream, _leaveOpen);
+    public void Decompress(
+        Stream inputStream,
+        Stream outputStream,
+        bool leaveOpen = CompressorConsts.LeaveOpen) =>
+        inputStream.UnBrotli(outputStream, leaveOpen);
 }

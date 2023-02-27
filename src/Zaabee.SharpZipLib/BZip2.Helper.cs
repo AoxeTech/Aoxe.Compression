@@ -2,5 +2,5 @@
 
 public static partial class Bzip2Helper
 {
-    internal const bool IsStreamOwner = false;
+    internal const bool IsStreamOwner = true;
 }

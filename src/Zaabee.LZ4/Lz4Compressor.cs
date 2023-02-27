@@ -28,11 +28,17 @@ public class Lz4Compressor : ICompressor
     public async Task<MemoryStream> DecompressAsync(Stream compressedStream) =>
         await compressedStream.UnLz4Async(_settings, _interactive);
 
-    public async Task CompressAsync(Stream inputStream, Stream outputStream) =>
-        await inputStream.ToLz4Async(outputStream, _level, _extraMemory, _leaveOpen);
+    public async Task CompressAsync(
+        Stream inputStream,
+        Stream outputStream,
+        bool leaveOpen = CompressorConsts.LeaveOpen) =>
+        await inputStream.ToLz4Async(outputStream, _level, _extraMemory, leaveOpen);
 
-    public async Task DecompressAsync(Stream inputStream, Stream outputStream) =>
-        await inputStream.UnLz4Async(outputStream, _settings, _leaveOpen, _interactive);
+    public async Task DecompressAsync(
+        Stream inputStream,
+        Stream outputStream,
+        bool leaveOpen = CompressorConsts.LeaveOpen) =>
+        await inputStream.UnLz4Async(outputStream, _settings, _leaveOpen, leaveOpen);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToLz4(_level, _extraMemory);
@@ -46,9 +52,15 @@ public class Lz4Compressor : ICompressor
     public MemoryStream Decompress(Stream compressedStream) =>
         compressedStream.UnLz4(_settings, _interactive);
 
-    public void Compress(Stream inputStream, Stream outputStream) =>
-        inputStream.ToLz4(outputStream, _level, _extraMemory, _leaveOpen);
+    public void Compress(
+        Stream inputStream,
+        Stream outputStream,
+        bool leaveOpen = CompressorConsts.LeaveOpen) =>
+        inputStream.ToLz4(outputStream, _level, _extraMemory, leaveOpen);
 
-    public void Decompress(Stream inputStream, Stream outputStream) =>
-        inputStream.UnLz4(outputStream, _settings, _leaveOpen, _interactive);
+    public void Decompress(
+        Stream inputStream,
+        Stream outputStream,
+        bool leaveOpen = CompressorConsts.LeaveOpen) =>
+        inputStream.UnLz4(outputStream, _settings, _leaveOpen, leaveOpen);
 }

@@ -15,11 +15,17 @@ public class Bzip2Compressor : ICompressor
     public async Task<MemoryStream> DecompressAsync(Stream compressedStream) =>
         await compressedStream.UnBZip2Async();
 
-    public async Task CompressAsync(Stream inputStream, Stream outputStream) =>
-        await inputStream.ToBZip2Async(outputStream, _isStreamOwner);
+    public async Task CompressAsync(
+        Stream inputStream,
+        Stream outputStream,
+        bool leaveOpen = CompressorConsts.LeaveOpen) =>
+        await inputStream.ToBZip2Async(outputStream, !leaveOpen);
 
-    public async Task DecompressAsync(Stream inputStream, Stream outputStream) =>
-        await inputStream.UnBZip2Async(outputStream, _isStreamOwner);
+    public async Task DecompressAsync(
+        Stream inputStream,
+        Stream outputStream,
+        bool leaveOpen = CompressorConsts.LeaveOpen) =>
+        await inputStream.UnBZip2Async(outputStream, !leaveOpen);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToBZip2();
@@ -33,9 +39,15 @@ public class Bzip2Compressor : ICompressor
     public MemoryStream Decompress(Stream compressedStream) =>
         compressedStream.UnBZip2();
 
-    public void Compress(Stream inputStream, Stream outputStream) =>
-        inputStream.ToBZip2(outputStream, _isStreamOwner);
+    public void Compress(
+        Stream inputStream,
+        Stream outputStream,
+        bool leaveOpen = CompressorConsts.LeaveOpen) =>
+        inputStream.ToBZip2(outputStream, !leaveOpen);
 
-    public void Decompress(Stream inputStream, Stream outputStream) =>
-        inputStream.UnBZip2(outputStream, _isStreamOwner);
+    public void Decompress(
+        Stream inputStream,
+        Stream outputStream,
+        bool leaveOpen = CompressorConsts.LeaveOpen) =>
+        inputStream.UnBZip2(outputStream, !leaveOpen);
 }
