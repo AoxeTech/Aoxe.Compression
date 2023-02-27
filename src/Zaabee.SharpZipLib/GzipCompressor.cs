@@ -18,14 +18,14 @@ public class GzipCompressor : ICompressor
     public async Task CompressAsync(
         Stream inputStream,
         Stream outputStream,
-        bool leaveOpen = CompressorConsts.LeaveOpen) =>
-        await inputStream.ToGZipAsync(outputStream, !leaveOpen);
+        bool? leaveOpen = null) =>
+        await inputStream.ToGZipAsync(outputStream, !leaveOpen ?? _isStreamOwner);
 
     public async Task DecompressAsync(
         Stream inputStream,
         Stream outputStream,
-        bool leaveOpen = CompressorConsts.LeaveOpen) =>
-        await inputStream.UnGZipAsync(outputStream, !leaveOpen);
+        bool? leaveOpen = null) =>
+        await inputStream.UnGZipAsync(outputStream, !leaveOpen ?? _isStreamOwner);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToGZip();
@@ -42,12 +42,12 @@ public class GzipCompressor : ICompressor
     public void Compress(
         Stream inputStream,
         Stream outputStream,
-        bool leaveOpen = CompressorConsts.LeaveOpen) =>
-        inputStream.ToGZip(outputStream, !leaveOpen);
+        bool? leaveOpen = null) =>
+        inputStream.ToGZip(outputStream, !leaveOpen ?? _isStreamOwner);
 
     public void Decompress(
         Stream inputStream,
         Stream outputStream,
-        bool leaveOpen = CompressorConsts.LeaveOpen) =>
-        inputStream.UnGZip(outputStream, !leaveOpen);
+        bool? leaveOpen = null) =>
+        inputStream.UnGZip(outputStream, !leaveOpen ?? _isStreamOwner);
 }

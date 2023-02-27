@@ -31,14 +31,14 @@ public class Lz4Compressor : ICompressor
     public async Task CompressAsync(
         Stream inputStream,
         Stream outputStream,
-        bool leaveOpen = CompressorConsts.LeaveOpen) =>
-        await inputStream.ToLz4Async(outputStream, _level, _extraMemory, leaveOpen);
+        bool? leaveOpen = null) =>
+        await inputStream.ToLz4Async(outputStream, _level, _extraMemory, leaveOpen ?? _leaveOpen);
 
     public async Task DecompressAsync(
         Stream inputStream,
         Stream outputStream,
-        bool leaveOpen = CompressorConsts.LeaveOpen) =>
-        await inputStream.UnLz4Async(outputStream, _settings, _leaveOpen, leaveOpen);
+        bool? leaveOpen = null) =>
+        await inputStream.UnLz4Async(outputStream, _settings, _leaveOpen, leaveOpen ?? _leaveOpen);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToLz4(_level, _extraMemory);
@@ -55,12 +55,12 @@ public class Lz4Compressor : ICompressor
     public void Compress(
         Stream inputStream,
         Stream outputStream,
-        bool leaveOpen = CompressorConsts.LeaveOpen) =>
-        inputStream.ToLz4(outputStream, _level, _extraMemory, leaveOpen);
+        bool? leaveOpen = null) =>
+        inputStream.ToLz4(outputStream, _level, _extraMemory, leaveOpen ?? _leaveOpen);
 
     public void Decompress(
         Stream inputStream,
         Stream outputStream,
-        bool leaveOpen = CompressorConsts.LeaveOpen) =>
-        inputStream.UnLz4(outputStream, _settings, _leaveOpen, leaveOpen);
+        bool? leaveOpen = null) =>
+        inputStream.UnLz4(outputStream, _settings, _leaveOpen, leaveOpen ?? _leaveOpen);
 }
