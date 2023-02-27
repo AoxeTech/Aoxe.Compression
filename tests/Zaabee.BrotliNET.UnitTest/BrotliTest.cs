@@ -12,21 +12,21 @@ public class BrotliTest
     [Fact]
     public void BrotliCompressToBytesAndDecompressToStreamTest()
     {
-        var result = new MemoryStream(Consts.Data.ToBrotli()).UnBrotli().ToArray();
+        var result = Consts.Data.ToBrotli().ToMemoryStream().UnBrotli().ToArray();
         Assert.Equal(Consts.Data, result);
     }
 
     [Fact]
     public void BrotliCompressToStreamAndDecompressToBytesTest()
     {
-        var result = new MemoryStream(Consts.Data).ToBrotli().ToArray().UnBrotli();
+        var result = Consts.Data.ToMemoryStream().ToBrotli().ToArray().UnBrotli();
         Assert.Equal(Consts.Data, result);
     }
 
     [Fact]
     public void BrotliCompressToStreamAndDecompressToStreamTest()
     {
-        var compressStream = new MemoryStream(Consts.Data).ToBrotli();
+        var compressStream = Consts.Data.ToMemoryStream().ToBrotli();
         var decompressStream = compressStream.UnBrotli();
         var result = decompressStream.ToArray();
         Assert.Equal(Consts.Data, result);
@@ -35,7 +35,7 @@ public class BrotliTest
     [Fact]
     public async Task BrotliCompressToStreamAndDecompressToStreamTestAsync()
     {
-        var compressStream = await new MemoryStream(Consts.Data).ToBrotliAsync();
+        var compressStream = await Consts.Data.ToMemoryStream().ToBrotliAsync();
         var decompressStream = await compressStream.UnBrotliAsync();
         var result = decompressStream.ToArray();
         Assert.Equal(Consts.Data, result);

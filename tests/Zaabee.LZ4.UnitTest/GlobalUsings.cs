@@ -3,3 +3,4 @@
 global using K4os.Compression.LZ4;
 global using TestModel;
 global using Xunit;
+global using Zaabee.Extensions;
