@@ -38,7 +38,7 @@ public class Lz4Compressor : ICompressor
         Stream inputStream,
         Stream outputStream,
         bool? leaveOpen = null) =>
-        await inputStream.UnLz4Async(outputStream, _settings, _leaveOpen, leaveOpen ?? _leaveOpen);
+        await inputStream.UnLz4Async(outputStream, _settings, leaveOpen ?? _leaveOpen, _interactive);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToLz4(_level, _extraMemory);
@@ -62,5 +62,5 @@ public class Lz4Compressor : ICompressor
         Stream inputStream,
         Stream outputStream,
         bool? leaveOpen = null) =>
-        inputStream.UnLz4(outputStream, _settings, _leaveOpen, leaveOpen ?? _leaveOpen);
+        inputStream.UnLz4(outputStream, _settings, leaveOpen ?? _leaveOpen, _interactive);
 }

@@ -16,9 +16,6 @@ public static partial class Lz4Helper
         await using var lz4Stream = LZ4Stream.Encode(outputStream, level, extraMemory, leaveOpen);
 #endif
         await inputStream.CopyToAsync(lz4Stream);
-
-        await inputStream.FlushAsync();
-        lz4Stream.Flush();
     }
 
     public static async Task DecompressAsync(
@@ -34,8 +31,5 @@ public static partial class Lz4Helper
         await using var lz4Stream = LZ4Stream.Decode(inputStream, settings, leaveOpen, interactive);
 #endif
         await lz4Stream.CopyToAsync(outputStream);
-
-        await inputStream.FlushAsync();
-        lz4Stream.Flush();
     }
 }

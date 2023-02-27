@@ -17,8 +17,6 @@ public static partial class BrotliHelper
         brotliStream.SetQuality(quality);
         brotliStream.SetWindow(window);
         await inputStream.CopyToAsync(brotliStream);
-        await inputStream.FlushAsync();
-        brotliStream.Flush();
     }
 
     public static async Task DecompressAsync(
@@ -32,7 +30,5 @@ public static partial class BrotliHelper
         await using var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress, leaveOpen);
 #endif
         await brotliStream.CopyToAsync(outputStream);
-        await outputStream.FlushAsync();
-        brotliStream.Flush();
     }
 }
