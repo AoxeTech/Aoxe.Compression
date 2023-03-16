@@ -1,6 +1,6 @@
 ﻿namespace Zaabee.LZ4.UnitTest;
 
-public class BytesTest
+public class Lz4Test
 {
     [Fact]
     public void Lz4CompressToBytesAndDecompressToBytesTest()
@@ -17,7 +17,7 @@ public class BytesTest
         var decompressStream = compressedStream.UnLz4();
 
         Assert.Equal(0, compressedStream.Position);
-        
+
         var result = decompressStream.ToArray();
 
         Assert.Equal(Consts.Data, result);

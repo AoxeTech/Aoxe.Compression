@@ -7,6 +7,10 @@ public class StreamTest
         CompressToBytesAndDecompressToStreamTest(new BrotliCompressor());
 
     [Fact]
+    public void LzmaCompressToBytesAndDecompressToStreamTest() =>
+        CompressToBytesAndDecompressToStreamTest(new LzmaCompressor());
+
+    [Fact]
     public void Lz4CompressToBytesAndDecompressToStreamTest() =>
         CompressToBytesAndDecompressToStreamTest(new Lz4Compressor());
 

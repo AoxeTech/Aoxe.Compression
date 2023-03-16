@@ -7,6 +7,10 @@ public class CompressToStreamAndDecompressToBytes
         CompressToStreamAndDecompressToBytesTest(new BrotliCompressor());
 
     [Fact]
+    public void LzmaCompressToStreamAndDecompressToBytesTest() =>
+        CompressToStreamAndDecompressToBytesTest(new LzmaCompressor());
+
+    [Fact]
     public void Lz4CompressToStreamAndDecompressToBytesTest() =>
         CompressToStreamAndDecompressToBytesTest(new Lz4Compressor());
 
@@ -23,12 +27,12 @@ public class CompressToStreamAndDecompressToBytes
         var compressedStream = new MemoryStream();
         var rawStream = Consts.Data.ToMemoryStream();
         compressor.Compress(rawStream, compressedStream);
-        
+
         Assert.Equal(0, rawStream.Position);
-        
+
         var compressedBytes = compressedStream.ToArray();
         var decompressedBytes = compressor.Decompress(compressedBytes);
-        
+
         Assert.Equal(Consts.Data, decompressedBytes);
     }
 }

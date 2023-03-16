@@ -7,6 +7,10 @@ public class BytesTest
         CompressToBytesAndDecompressToBytesTest(new BrotliCompressor());
 
     [Fact]
+    public void LzmaCompressToBytesAndDecompressToBytesTest() =>
+        CompressToBytesAndDecompressToBytesTest(new LzmaCompressor());
+
+    [Fact]
     public void Lz4CompressToBytesAndDecompressToBytesTest() =>
         CompressToBytesAndDecompressToBytesTest(new Lz4Compressor());
 
