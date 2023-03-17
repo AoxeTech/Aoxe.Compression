@@ -2,22 +2,35 @@
 
 public static partial class LzmaHelper
 {
+    public static async Task<MemoryStream> CompressAsync(
+        Stream inputStream)
+    {
+        var outputStream = new MemoryStream();
+        await CompressAsync(inputStream, outputStream);
+        return outputStream;
+    }
+
+    public static async Task<MemoryStream> DecompressAsync(
+        Stream inputStream)
+    {
+        var outputStream = new MemoryStream();
+        await DecompressAsync(inputStream, outputStream);
+        return outputStream;
+    }
+
     public static async Task CompressAsync(
         Stream inputStream,
         Stream outputStream)
     {
+        var encoder = new Encoder();
         // Write the encoder properties
-        Encoder.WriteCoderProperties(outputStream);
+        encoder.WriteCoderProperties(outputStream);
 
         // Write the decompressed file size.
-#if NETSTANDARD2_0
         await outputStream.WriteAsync(BitConverter.GetBytes(inputStream.Length), 0, 8);
-#else
-        await outputStream.WriteAsync(BitConverter.GetBytes(inputStream.Length).AsMemory(0, 8));
-#endif
 
         // Encode
-        Encoder.Code(inputStream, outputStream, inputStream.Length, -1, null);
+        encoder.Code(inputStream, outputStream, inputStream.Length, -1, null);
         await outputStream.FlushAsync();
         inputStream.TrySeek(0, SeekOrigin.Begin);
         outputStream.TrySeek(0, SeekOrigin.Begin);
@@ -27,6 +40,7 @@ public static partial class LzmaHelper
         Stream inputStream,
         Stream outputStream)
     {
+        var decoder = new Decoder();
         // Read the decoder properties
         var properties = new byte[5];
 #if NETSTANDARD2_0
@@ -34,7 +48,7 @@ public static partial class LzmaHelper
 #else
         await inputStream.ReadAsync(properties.AsMemory(0, 5));
 #endif
-            Decoder.SetDecoderProperties(properties);
+        decoder.SetDecoderProperties(properties);
 
         // Read in the decompress file size.
         var fileLengthBytes = new byte[8];
@@ -46,7 +60,7 @@ public static partial class LzmaHelper
         var fileLength = BitConverter.ToInt64(fileLengthBytes, 0);
 
         // Decode
-        Decoder.Code(inputStream, outputStream, inputStream.Length, fileLength, null);
+        decoder.Code(inputStream, outputStream, inputStream.Length, fileLength, null);
         await outputStream.FlushAsync();
         inputStream.TrySeek(0, SeekOrigin.Begin);
         outputStream.TrySeek(0, SeekOrigin.Begin);

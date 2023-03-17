@@ -2,6 +2,24 @@
 
 public static partial class BrotliHelper
 {
+    public static MemoryStream Compress(
+        Stream inputStream,
+        uint quality = Quality,
+        uint window = Window)
+    {
+        var outputStream = new MemoryStream();
+        Compress(inputStream, outputStream, quality, window);
+        return outputStream;
+    }
+
+    public static MemoryStream Decompress(
+        Stream inputStream)
+    {
+        var outputStream = new MemoryStream();
+        Decompress(inputStream, outputStream);
+        return outputStream;
+    }
+
     public static void Compress(
         Stream inputStream,
         Stream outputStream,

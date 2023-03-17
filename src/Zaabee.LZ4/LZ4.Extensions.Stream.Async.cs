@@ -19,20 +19,12 @@ public static partial class Lz4Extensions
     public static async Task<MemoryStream> ToLz4Async(
         this Stream rawStream,
         LZ4Level level = Lz4Helper.Level,
-        int extraMemory = Lz4Helper.ExtraMemory)
-    {
-        var outputStream = new MemoryStream();
-        await rawStream.ToLz4Async(outputStream, level, extraMemory);
-        return outputStream;
-    }
+        int extraMemory = Lz4Helper.ExtraMemory) =>
+        await Lz4Helper.CompressAsync(rawStream, level, extraMemory);
 
     public static async Task<MemoryStream> UnLz4Async(
         this Stream compressedStream,
         LZ4DecoderSettings? settings = Lz4Helper.Settings,
-        bool interactive = Lz4Helper.Interactive)
-    {
-        var outputStream = new MemoryStream();
-        await compressedStream.UnLz4Async(outputStream, settings, interactive);
-        return outputStream;
-    }
+        bool interactive = Lz4Helper.Interactive) =>
+        await Lz4Helper.DecompressAsync(compressedStream, settings, interactive);
 }

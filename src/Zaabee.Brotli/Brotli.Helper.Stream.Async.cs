@@ -2,6 +2,24 @@
 
 public static partial class BrotliHelper
 {
+    public static async Task<MemoryStream> CompressAsync(
+        Stream inputStream,
+        uint quality = Quality,
+        uint window = Window)
+    {
+        var outputStream = new MemoryStream();
+        await CompressAsync(inputStream, outputStream, quality, window);
+        return outputStream;
+    }
+
+    public static async Task<MemoryStream> DecompressAsync(
+        Stream inputStream)
+    {
+        var outputStream = new MemoryStream();
+        await DecompressAsync(inputStream, outputStream);
+        return outputStream;
+    }
+
     public static async Task CompressAsync(
         Stream inputStream,
         Stream outputStream,

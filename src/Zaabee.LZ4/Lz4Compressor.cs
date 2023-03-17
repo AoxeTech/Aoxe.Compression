@@ -1,6 +1,6 @@
 ﻿namespace Zaabee.LZ4;
 
-public class Lz4Compressor : ICompressor
+public sealed class Lz4Compressor : ICompressor
 {
     private readonly LZ4Level _level;
     private readonly int _extraMemory;

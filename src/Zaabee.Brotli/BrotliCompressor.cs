@@ -1,6 +1,6 @@
 ﻿namespace Zaabee.Brotli;
 
-public class BrotliCompressor : ICompressor
+public sealed class BrotliCompressor : ICompressor
 {
     private readonly uint _quality;
     private readonly uint _window;

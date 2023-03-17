@@ -13,18 +13,10 @@ public static partial class LzmaExtensions
         LzmaHelper.Decompress(compressedStream, outputStream);
 
     public static MemoryStream ToLzma(
-        this Stream rawStream)
-    {
-        var outputStream = new MemoryStream();
-        rawStream.ToLzma(outputStream);
-        return outputStream;
-    }
+        this Stream rawStream) =>
+        LzmaHelper.Compress(rawStream);
 
     public static MemoryStream UnLzma(
-        this Stream compressedStream)
-    {
-        var outputStream = new MemoryStream();
-        compressedStream.UnLzma(outputStream);
-        return outputStream;
-    }
+        this Stream compressedStream) =>
+        LzmaHelper.Decompress(compressedStream);
 }

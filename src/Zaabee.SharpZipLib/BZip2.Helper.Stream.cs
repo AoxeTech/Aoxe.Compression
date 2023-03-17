@@ -2,6 +2,22 @@
 
 public static partial class Bzip2Helper
 {
+    public static MemoryStream Compress(
+        Stream inputStream)
+    {
+        var outputStream = new MemoryStream();
+        Compress(inputStream, outputStream);
+        return outputStream;
+    }
+
+    public static MemoryStream Decompress(
+        Stream inputStream)
+    {
+        var outputStream = new MemoryStream();
+        Decompress(inputStream, outputStream);
+        return outputStream;
+    }
+
     public static void Compress(
         Stream inputStream,
         Stream outputStream)

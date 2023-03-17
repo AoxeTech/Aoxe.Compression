@@ -13,18 +13,10 @@ public static partial class LzmaExtensions
         await LzmaHelper.DecompressAsync(compressedStream, outputStream);
 
     public static async Task<MemoryStream> ToLzmaAsync(
-        this Stream rawStream)
-    {
-        var outputStream = new MemoryStream();
-        await rawStream.ToLzmaAsync(outputStream);
-        return outputStream;
-    }
+        this Stream rawStream) =>
+        await LzmaHelper.CompressAsync(rawStream);
 
     public static async Task<MemoryStream> UnLzmaAsync(
-        this Stream compressedStream)
-    {
-        var outputStream = new MemoryStream();
-        await compressedStream.UnLzmaAsync(outputStream);
-        return outputStream;
-    }
+        this Stream compressedStream) =>
+        await LzmaHelper.DecompressAsync(compressedStream);
 }

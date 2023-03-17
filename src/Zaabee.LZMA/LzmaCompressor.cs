@@ -1,6 +1,6 @@
 ﻿namespace Zaabee.LZMA;
 
-public class LzmaCompressor : ICompressor
+public sealed class LzmaCompressor : ICompressor
 {
     public async Task<MemoryStream> CompressAsync(Stream rawStream) =>
         await rawStream.ToLzmaAsync();

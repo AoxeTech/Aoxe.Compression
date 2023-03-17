@@ -2,6 +2,26 @@
 
 public static partial class Lz4Helper
 {
+    public static MemoryStream Compress(
+        Stream inputStream,
+        LZ4Level level = Level,
+        int extraMemory = ExtraMemory)
+    {
+        var outputStream = new MemoryStream();
+        Compress(inputStream, outputStream, level, extraMemory);
+        return outputStream;
+    }
+
+    public static MemoryStream Decompress(
+        Stream inputStream,
+        LZ4DecoderSettings? settings = Settings,
+        bool interactive = Interactive)
+    {
+        var outputStream = new MemoryStream();
+        Decompress(inputStream, outputStream, settings, interactive);
+        return outputStream;
+    }
+
     public static void Compress(
         Stream inputStream,
         Stream outputStream,

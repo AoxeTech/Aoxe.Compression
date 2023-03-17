@@ -1,6 +1,6 @@
 ﻿namespace Zaabee.SharpZipLib;
 
-public class Bzip2Compressor : ICompressor
+public sealed class Bzip2Compressor : ICompressor
 {
     public async Task<MemoryStream> CompressAsync(Stream rawStream) =>
         await rawStream.ToBZip2Async();

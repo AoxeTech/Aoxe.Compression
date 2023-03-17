@@ -17,17 +17,9 @@ public static partial class BrotliExtensions
     public static async Task<MemoryStream> ToBrotliAsync(
         this Stream rawStream,
         uint quality = BrotliHelper.Quality,
-        uint window = BrotliHelper.Window)
-    {
-        var outputStream = new MemoryStream();
-        await rawStream.ToBrotliAsync(outputStream, quality, window);
-        return outputStream;
-    }
+        uint window = BrotliHelper.Window) =>
+        await BrotliHelper.CompressAsync(rawStream, quality, window);
 
-    public static async Task<MemoryStream> UnBrotliAsync(this Stream compressedStream)
-    {
-        var outputStream = new MemoryStream();
-        await compressedStream.UnBrotliAsync(outputStream);
-        return outputStream;
-    }
+    public static async Task<MemoryStream> UnBrotliAsync(this Stream compressedStream) =>
+        await BrotliHelper.DecompressAsync(compressedStream);
 }

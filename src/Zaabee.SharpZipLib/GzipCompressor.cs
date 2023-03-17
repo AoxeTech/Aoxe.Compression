@@ -1,6 +1,6 @@
 ﻿namespace Zaabee.SharpZipLib;
 
-public class GzipCompressor : ICompressor
+public sealed class GzipCompressor : ICompressor
 {
     public async Task<MemoryStream> CompressAsync(Stream rawStream) =>
         await rawStream.ToGZipAsync();

@@ -2,6 +2,22 @@
 
 public static partial class GzipHelper
 {
+    public static async Task<MemoryStream> CompressAsync(
+        Stream inputStream)
+    {
+        var outputStream = new MemoryStream();
+        await CompressAsync(inputStream, outputStream);
+        return outputStream;
+    }
+
+    public static async Task<MemoryStream> DecompressAsync(
+        Stream inputStream)
+    {
+        var outputStream = new MemoryStream();
+        await DecompressAsync(inputStream, outputStream);
+        return outputStream;
+    }
+
     public static async Task CompressAsync(
         Stream inputStream,
         Stream outputStream)

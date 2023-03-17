@@ -5,20 +5,11 @@
 [MinColumn, MaxColumn, MeanColumn, MedianColumn]
 public class DecompressFromBytes
 {
-    private readonly byte[] _brotliCompressBytes;
-    private readonly byte[] _bzipCompressBytes;
-    private readonly byte[] _gzipCompressBytes;
-    private readonly byte[] _lz4CompressBytes;
-    private readonly byte[] _lzmaCompressBytes;
-
-    public DecompressFromBytes()
-    {
-        _brotliCompressBytes = BrotliHelper.Compress(Consts.RawBytes);
-        _bzipCompressBytes = Bzip2Helper.Compress(Consts.RawBytes);
-        _gzipCompressBytes = GzipHelper.Compress(Consts.RawBytes);
-        _lz4CompressBytes = Lz4Helper.Compress(Consts.RawBytes);
-        _lzmaCompressBytes = LzmaHelper.Compress(Consts.RawBytes);
-    }
+    private readonly byte[] _brotliCompressBytes = BrotliHelper.Compress(Consts.RawBytes);
+    private readonly byte[] _bzipCompressBytes = Bzip2Helper.Compress(Consts.RawBytes);
+    private readonly byte[] _gzipCompressBytes = GzipHelper.Compress(Consts.RawBytes);
+    private readonly byte[] _lz4CompressBytes = Lz4Helper.Compress(Consts.RawBytes);
+    private readonly byte[] _lzmaCompressBytes = LzmaHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
     public void BrotliFromBytes() => BrotliHelper.Decompress(_brotliCompressBytes);

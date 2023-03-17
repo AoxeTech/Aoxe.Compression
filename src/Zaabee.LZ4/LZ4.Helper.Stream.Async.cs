@@ -2,13 +2,32 @@
 
 public static partial class Lz4Helper
 {
+    public static async Task<MemoryStream> CompressAsync(
+        Stream inputStream,
+        LZ4Level level = Level,
+        int extraMemory = ExtraMemory)
+    {
+        var outputStream = new MemoryStream();
+        await CompressAsync(inputStream, outputStream, level, extraMemory);
+        return outputStream;
+    }
+
+    public static async Task<MemoryStream> DecompressAsync(
+        Stream inputStream,
+        LZ4DecoderSettings? settings = Settings,
+        bool interactive = Interactive)
+    {
+        var outputStream = new MemoryStream();
+        await DecompressAsync(inputStream, outputStream, settings, interactive);
+        return outputStream;
+    }
+
     public static async Task CompressAsync(
         Stream inputStream,
         Stream outputStream,
         LZ4Level level = Level,
         int extraMemory = ExtraMemory)
     {
-
 #if NETSTANDARD2_0
         using (var lz4Stream = LZ4Stream.Encode(outputStream, level, extraMemory, true))
 #else
