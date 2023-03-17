@@ -16,4 +16,7 @@ public class CompressToStream
 
     [Benchmark]
     public void Lz4ToStream() => Lz4Helper.Compress(Consts.RawStream, new MemoryStream());
+
+    [Benchmark]
+    public void LzmaToStream() => LzmaHelper.Compress(Consts.RawStream, new MemoryStream());
 }

@@ -9,6 +9,7 @@ public class DecompressFromStream
     private readonly MemoryStream _bzipCompressStream = new();
     private readonly MemoryStream _gzipCompressStream = new();
     private readonly MemoryStream _lz4CompressStream = new();
+    private readonly MemoryStream _lzmaCompressStream = new();
 
     public DecompressFromStream()
     {
@@ -16,6 +17,7 @@ public class DecompressFromStream
         Bzip2Helper.Compress(Consts.RawStream, _bzipCompressStream);
         GzipHelper.Compress(Consts.RawStream, _gzipCompressStream);
         Lz4Helper.Compress(Consts.RawStream, _lz4CompressStream);
+        LzmaHelper.Compress(Consts.RawStream, _lzmaCompressStream);
     }
 
     [Benchmark]
@@ -29,4 +31,7 @@ public class DecompressFromStream
 
     [Benchmark]
     public void Lz4FromStream() => Lz4Helper.Decompress(Consts.RawStream, new MemoryStream());
+
+    [Benchmark]
+    public void LzmaFromStream() => LzmaHelper.Decompress(Consts.RawStream, new MemoryStream());
 }

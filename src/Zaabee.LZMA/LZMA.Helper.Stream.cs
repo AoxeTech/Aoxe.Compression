@@ -6,16 +6,14 @@ public static partial class LzmaHelper
         Stream inputStream,
         Stream outputStream)
     {
-        var encoder = new Encoder();
-
         // Write the encoder properties
-        encoder.WriteCoderProperties(outputStream);
+        Encoder.WriteCoderProperties(outputStream);
 
         // Write the decompressed file size.
         outputStream.Write(BitConverter.GetBytes(inputStream.Length), 0, 8);
 
         // Encode
-        encoder.Code(inputStream, outputStream, inputStream.Length, -1, null);
+        Encoder.Code(inputStream, outputStream, inputStream.Length, -1, null);
         outputStream.Flush();
         inputStream.TrySeek(0, SeekOrigin.Begin);
         outputStream.TrySeek(0, SeekOrigin.Begin);
@@ -25,12 +23,10 @@ public static partial class LzmaHelper
         Stream inputStream,
         Stream outputStream)
     {
-        var decoder = new Decoder();
-
         // Read the decoder properties
         var properties = new byte[5];
         inputStream.Read(properties, 0, 5);
-        decoder.SetDecoderProperties(properties);
+        Decoder.SetDecoderProperties(properties);
 
         // Read in the decompress file size.
         var fileLengthBytes = new byte[8];
@@ -38,7 +34,7 @@ public static partial class LzmaHelper
         var fileLength = BitConverter.ToInt64(fileLengthBytes, 0);
 
         // Decode
-        decoder.Code(inputStream, outputStream, inputStream.Length, fileLength, null);
+        Decoder.Code(inputStream, outputStream, inputStream.Length, fileLength, null);
         outputStream.Flush();
         inputStream.TrySeek(0, SeekOrigin.Begin);
         outputStream.TrySeek(0, SeekOrigin.Begin);
