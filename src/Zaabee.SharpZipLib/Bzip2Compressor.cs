@@ -2,21 +2,27 @@
 
 public sealed class Bzip2Compressor : ICompressor
 {
-    public async Task<MemoryStream> CompressAsync(Stream rawStream) =>
-        await rawStream.ToBZip2Async();
+    public async Task<MemoryStream> CompressAsync(
+        Stream rawStream,
+        CancellationToken cancellationToken = default) =>
+        await rawStream.ToBZip2Async(cancellationToken);
 
-    public async Task<MemoryStream> DecompressAsync(Stream compressedStream) =>
-        await compressedStream.UnBZip2Async();
+    public async Task<MemoryStream> DecompressAsync(
+        Stream compressedStream,
+        CancellationToken cancellationToken = default) =>
+        await compressedStream.UnBZip2Async(cancellationToken);
 
     public async Task CompressAsync(
         Stream inputStream,
-        Stream outputStream) =>
-        await inputStream.ToBZip2Async(outputStream);
+        Stream outputStream,
+        CancellationToken cancellationToken = default) =>
+        await inputStream.ToBZip2Async(outputStream, cancellationToken);
 
     public async Task DecompressAsync(
         Stream inputStream,
-        Stream outputStream) =>
-        await inputStream.UnBZip2Async(outputStream);
+        Stream outputStream,
+        CancellationToken cancellationToken = default) =>
+        await inputStream.UnBZip2Async(outputStream, cancellationToken);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToBZip2();

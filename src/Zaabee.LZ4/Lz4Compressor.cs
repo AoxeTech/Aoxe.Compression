@@ -19,21 +19,27 @@ public sealed class Lz4Compressor : ICompressor
         _level = level;
     }
 
-    public async Task<MemoryStream> CompressAsync(Stream rawStream) =>
-        await rawStream.ToLz4Async(_level, _extraMemory);
+    public async Task<MemoryStream> CompressAsync(
+        Stream rawStream,
+        CancellationToken cancellationToken = default) =>
+        await rawStream.ToLz4Async(_level, _extraMemory, cancellationToken);
 
-    public async Task<MemoryStream> DecompressAsync(Stream compressedStream) =>
-        await compressedStream.UnLz4Async(_settings, _interactive);
+    public async Task<MemoryStream> DecompressAsync(
+        Stream compressedStream,
+        CancellationToken cancellationToken = default) =>
+        await compressedStream.UnLz4Async(_settings, _interactive, cancellationToken);
 
     public async Task CompressAsync(
         Stream inputStream,
-        Stream outputStream) =>
-        await inputStream.ToLz4Async(outputStream, _level, _extraMemory);
+        Stream outputStream,
+        CancellationToken cancellationToken = default) =>
+        await inputStream.ToLz4Async(outputStream, _level, _extraMemory, cancellationToken);
 
     public async Task DecompressAsync(
         Stream inputStream,
-        Stream outputStream) =>
-        await inputStream.UnLz4Async(outputStream, _settings, _interactive);
+        Stream outputStream,
+        CancellationToken cancellationToken = default) =>
+        await inputStream.UnLz4Async(outputStream, _settings, _interactive, cancellationToken);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToLz4(_level, _extraMemory);

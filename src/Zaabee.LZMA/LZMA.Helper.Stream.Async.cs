@@ -3,65 +3,69 @@
 public static partial class LzmaHelper
 {
     public static async Task<MemoryStream> CompressAsync(
-        Stream inputStream)
+        Stream inputStream,
+        CancellationToken cancellationToken = default)
     {
         var outputStream = new MemoryStream();
-        await CompressAsync(inputStream, outputStream);
+        await CompressAsync(inputStream, outputStream, cancellationToken);
         return outputStream;
     }
 
     public static async Task<MemoryStream> DecompressAsync(
-        Stream inputStream)
+        Stream inputStream,
+        CancellationToken cancellationToken = default)
     {
         var outputStream = new MemoryStream();
-        await DecompressAsync(inputStream, outputStream);
+        await DecompressAsync(inputStream, outputStream, cancellationToken);
         return outputStream;
     }
 
     public static async Task CompressAsync(
         Stream inputStream,
-        Stream outputStream)
+        Stream outputStream,
+        CancellationToken cancellationToken = default)
     {
         var encoder = new Encoder();
         // Write the encoder properties
         encoder.WriteCoderProperties(outputStream);
 
         // Write the decompressed file size.
-        await outputStream.WriteAsync(BitConverter.GetBytes(inputStream.Length), 0, 8);
+        await outputStream.WriteAsync(BitConverter.GetBytes(inputStream.Length), 0, 8, cancellationToken);
 
         // Encode
         encoder.Code(inputStream, outputStream, inputStream.Length, -1, null);
-        await outputStream.FlushAsync();
+        await outputStream.FlushAsync(cancellationToken);
         inputStream.TrySeek(0, SeekOrigin.Begin);
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
     public static async Task DecompressAsync(
         Stream inputStream,
-        Stream outputStream)
+        Stream outputStream,
+        CancellationToken cancellationToken = default)
     {
         var decoder = new Decoder();
         // Read the decoder properties
         var properties = new byte[5];
 #if NETSTANDARD2_0
-        await inputStream.ReadAsync(properties, 0, 5);
+        await inputStream.ReadAsync(properties, 0, 5, cancellationToken);
 #else
-        await inputStream.ReadAsync(properties.AsMemory(0, 5));
+        await inputStream.ReadAsync(properties.AsMemory(0, 5), cancellationToken);
 #endif
         decoder.SetDecoderProperties(properties);
 
         // Read in the decompress file size.
         var fileLengthBytes = new byte[8];
 #if NETSTANDARD2_0
-        await inputStream.ReadAsync(fileLengthBytes,0, 8);
+        await inputStream.ReadAsync(fileLengthBytes, 0, 8, cancellationToken);
 #else
-        await inputStream.ReadAsync(fileLengthBytes.AsMemory(0, 8));
+        await inputStream.ReadAsync(fileLengthBytes.AsMemory(0, 8), cancellationToken);
 #endif
         var fileLength = BitConverter.ToInt64(fileLengthBytes, 0);
 
         // Decode
         decoder.Code(inputStream, outputStream, inputStream.Length, fileLength, null);
-        await outputStream.FlushAsync();
+        await outputStream.FlushAsync(cancellationToken);
         inputStream.TrySeek(0, SeekOrigin.Begin);
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }

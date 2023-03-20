@@ -2,21 +2,27 @@
 
 public sealed class LzmaCompressor : ICompressor
 {
-    public async Task<MemoryStream> CompressAsync(Stream rawStream) =>
-        await rawStream.ToLzmaAsync();
+    public async Task<MemoryStream> CompressAsync(
+        Stream rawStream,
+        CancellationToken cancellationToken = default) =>
+        await rawStream.ToLzmaAsync(cancellationToken: cancellationToken);
 
-    public async Task<MemoryStream> DecompressAsync(Stream compressedStream) =>
-        await compressedStream.UnLzmaAsync();
+    public async Task<MemoryStream> DecompressAsync(
+        Stream compressedStream,
+        CancellationToken cancellationToken = default) =>
+        await compressedStream.UnLzmaAsync(cancellationToken: cancellationToken);
 
     public async Task CompressAsync(
         Stream inputStream,
-        Stream outputStream) =>
-        await inputStream.ToLzmaAsync(outputStream);
+        Stream outputStream,
+        CancellationToken cancellationToken = default) =>
+        await inputStream.ToLzmaAsync(outputStream, cancellationToken: cancellationToken);
 
     public async Task DecompressAsync(
         Stream inputStream,
-        Stream outputStream) =>
-        await inputStream.UnLzmaAsync(outputStream);
+        Stream outputStream,
+        CancellationToken cancellationToken = default) =>
+        await inputStream.UnLzmaAsync(outputStream, cancellationToken: cancellationToken);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToLzma();

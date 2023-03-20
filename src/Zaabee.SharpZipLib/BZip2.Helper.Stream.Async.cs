@@ -3,32 +3,37 @@
 public static partial class Bzip2Helper
 {
     public static async Task<MemoryStream> CompressAsync(
-        Stream inputStream)
+        Stream inputStream,
+        CancellationToken cancellationToken = default)
     {
         var outputStream = new MemoryStream();
-        await CompressAsync(inputStream, outputStream);
+        await CompressAsync(inputStream, outputStream, cancellationToken);
         return outputStream;
     }
 
     public static async Task<MemoryStream> DecompressAsync(
-        Stream inputStream)
+        Stream inputStream,
+        CancellationToken cancellationToken = default)
     {
         var outputStream = new MemoryStream();
-        await DecompressAsync(inputStream, outputStream);
+        await DecompressAsync(inputStream, outputStream, cancellationToken);
         return outputStream;
     }
 
     public static async Task CompressAsync(
         Stream inputStream,
-        Stream outputStream)
+        Stream outputStream,
+        CancellationToken cancellationToken = default)
     {
 #if NETSTANDARD2_0
         using (var bzip2OutputStream = new BZip2OutputStream(outputStream))
-#else
-        await using (var bzip2OutputStream = new BZip2OutputStream(outputStream))
-#endif
         {
             await inputStream.CopyToAsync(bzip2OutputStream);
+#else
+        await using (var bzip2OutputStream = new BZip2OutputStream(outputStream))
+        {
+            await inputStream.CopyToAsync(bzip2OutputStream, cancellationToken);
+#endif
             bzip2OutputStream.IsStreamOwner = false;
         }
         inputStream.TrySeek(0, SeekOrigin.Begin);
@@ -37,15 +42,18 @@ public static partial class Bzip2Helper
 
     public static async Task DecompressAsync(
         Stream inputStream,
-        Stream outputStream)
+        Stream outputStream,
+        CancellationToken cancellationToken = default)
     {
 #if NETSTANDARD2_0
         using (var bzip2InputStream = new BZip2InputStream(inputStream))
-#else
-        await using (var bzip2InputStream = new BZip2InputStream(inputStream))
-#endif
         {
             await bzip2InputStream.CopyToAsync(outputStream);
+#else
+        await using (var bzip2InputStream = new BZip2InputStream(inputStream))
+        {
+            await bzip2InputStream.CopyToAsync(outputStream, cancellationToken);
+#endif
             bzip2InputStream.IsStreamOwner = false;
         }
         inputStream.TrySeek(0, SeekOrigin.Begin);
