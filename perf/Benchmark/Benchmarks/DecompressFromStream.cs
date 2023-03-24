@@ -5,24 +5,28 @@
 [MinColumn, MaxColumn, MeanColumn, MedianColumn]
 public class DecompressFromStream
 {
-    private readonly MemoryStream _brotliCompressStream = BrotliHelper.Compress(Consts.RawStream);
-    private readonly MemoryStream _bzipCompressStream = Bzip2Helper.Compress(Consts.RawStream);
-    private readonly MemoryStream _gzipCompressStream = GzipHelper.Compress(Consts.RawStream);
-    private readonly MemoryStream _lz4CompressStream = Lz4Helper.Compress(Consts.RawStream);
-    private readonly MemoryStream _lzmaCompressStream = LzmaHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream BrotliCompressStream = BrotliHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream BzipCompressStream = Bzip2Helper.Compress(Consts.RawStream);
+    private static readonly MemoryStream GzipCompressStream = GzipHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream Lz4CompressStream = Lz4Helper.Compress(Consts.RawStream);
+    private static readonly MemoryStream LzmaCompressStream = LzmaHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream ZstdCompressStream = ZstdHelper.Compress(Consts.RawStream);
 
     [Benchmark]
-    public void BrotliFromStream() => BrotliHelper.Decompress(_brotliCompressStream, new MemoryStream());
+    public void BrotliFromStream() => BrotliHelper.Decompress(BrotliCompressStream, new MemoryStream());
 
     [Benchmark]
-    public void Bzip2FromStream() => Bzip2Helper.Decompress(_bzipCompressStream, new MemoryStream());
+    public void Bzip2FromStream() => Bzip2Helper.Decompress(BzipCompressStream, new MemoryStream());
 
     [Benchmark]
-    public void GzipFromStream() => GzipHelper.Decompress(_gzipCompressStream, new MemoryStream());
+    public void GzipFromStream() => GzipHelper.Decompress(GzipCompressStream, new MemoryStream());
 
     [Benchmark]
-    public void Lz4FromStream() => Lz4Helper.Decompress(_lz4CompressStream, new MemoryStream());
+    public void Lz4FromStream() => Lz4Helper.Decompress(Lz4CompressStream, new MemoryStream());
 
     [Benchmark]
-    public void LzmaFromStream() => LzmaHelper.Decompress(_lzmaCompressStream, new MemoryStream());
+    public void LzmaFromStream() => LzmaHelper.Decompress(LzmaCompressStream, new MemoryStream());
+
+    [Benchmark]
+    public void ZstdFromStream() => ZstdHelper.Decompress(ZstdCompressStream, new MemoryStream());
 }

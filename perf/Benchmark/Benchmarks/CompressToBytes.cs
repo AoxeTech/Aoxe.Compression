@@ -19,4 +19,7 @@ public class CompressToBytes
 
     [Benchmark]
     public void LzmaToBytes() => LzmaHelper.Compress(Consts.RawBytes);
+
+    [Benchmark]
+    public void ZstdToBytes() => ZstdHelper.Compress(Consts.RawBytes);
 }
