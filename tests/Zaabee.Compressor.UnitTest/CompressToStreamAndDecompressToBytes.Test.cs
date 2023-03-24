@@ -22,6 +22,10 @@ public class CompressToStreamAndDecompressToBytes
     public void GzipCompressToStreamAndDecompressToBytesTest() =>
         CompressToStreamAndDecompressToBytesTest(new GzipCompressor());
 
+    [Fact]
+    public void ZstdCompressToStreamAndDecompressToBytesTest() =>
+        CompressToStreamAndDecompressToBytesTest(new ZstdCompressor());
+
     private void CompressToStreamAndDecompressToBytesTest(ICompressor compressor)
     {
         var compressedStream = new MemoryStream();

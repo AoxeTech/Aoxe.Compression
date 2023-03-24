@@ -22,6 +22,10 @@ public class StreamTest
     public void GzipCompressToBytesAndDecompressToStreamTest() =>
         CompressToBytesAndDecompressToStreamTest(new GzipCompressor());
 
+    [Fact]
+    public void ZstdCompressToBytesAndDecompressToStreamTest() =>
+        CompressToBytesAndDecompressToStreamTest(new ZstdCompressor());
+
     private void CompressToBytesAndDecompressToStreamTest(ICompressor compressor)
     {
         var compressedBytes = compressor.Compress(Consts.Data);

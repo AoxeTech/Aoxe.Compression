@@ -22,6 +22,10 @@ public class BytesTest
     public void GzipCompressToBytesAndDecompressToBytesTest() =>
         CompressToBytesAndDecompressToBytesTest(new GzipCompressor());
 
+    [Fact]
+    public void ZstdCompressToBytesAndDecompressToBytesTest() =>
+        CompressToBytesAndDecompressToBytesTest(new ZstdCompressor());
+
     private void CompressToBytesAndDecompressToBytesTest(ICompressor compressor)
     {
         var compressedBytes = compressor.Compress(Consts.Data);
