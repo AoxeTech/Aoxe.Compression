@@ -17,6 +17,7 @@ The compressors that Zaabee.Compression supports are as follows:
 |    GZip    | Zaabee.SharpZipLib |     SharpZipLib      |
 |    LZ4     |     Zaabee.LZ4     | K4os.Compression.LZ4 |
 |    LZMA    |    Zaabee.LZMA     |       LZMA-SDK       |
+|     XZ     |     Zaabee.XZ      |  XZ.NET-netstandard  |
 |    Zstd    |    Zaabee.Zstd     |       ZstdNet        |
 
 ## How to use Zaabee.Compression?
@@ -28,6 +29,7 @@ dotnet add package Zaabee.Brotli
 dotnet add package Zaabee.SharpZipLib
 dotnet add package Zaabee.LZ4
 dotnet add package Zaabee.LZMA
+dotnet add package Zaabee.XZ
 dotnet add package Zaabee.Zstd
 ```
 
@@ -39,8 +41,9 @@ var bytes = Encoding.UTF8.GetBytes("Hello World");
 var brotliBytes = bytes.ToBrotli();
 var bzipBytes = bytes.ToBZip();
 var gzipBytes = bytes.ToGZip();
-var lz4Bytes = bytes.ToLZ4();
-var lzmaBytes = bytes.ToLZMA();
+var lz4Bytes = bytes.ToLz4();
+var lzmaBytes = bytes.ToLzma();
+var xzBytes = bytes.ToXz();
 var zstdBytes = bytes.ToZstd();
 ```
 
@@ -50,8 +53,9 @@ var zstdBytes = bytes.ToZstd();
 var brotliDecompressBytes = brotliBytes.UnBrotli();
 var bzipDecompressBytes = bzipBytes.UnBZip();
 var gzipDecompressBytes = gzipBytes.UnGZip();
-var lz4DecompressBytes = lz4Bytes.UnLZ4();
-var lzmaDecompressBytes = lzmaBytes.UnLZMA();
+var lz4DecompressBytes = lz4Bytes.UnLz4();
+var lzmaDecompressBytes = lzmaBytes.UnLzma();
+var xzDecompressBytes = xzBytes.UnXz();
 var zstdDecompressBytes = zstdBytes.UnZstd();
 ```
 
@@ -63,8 +67,9 @@ var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes("Hello World"));
 var brotliStream = memoryStream.ToBrotli();
 var bzipStream = memoryStream.ToBZip();
 var gzipStream = memoryStream.ToGZip();
-var lz4Stream = memoryStream.ToLZ4();
-var lzmaStream = memoryStream.ToLZMA();
+var lz4Stream = memoryStream.ToLz4();
+var lzmaStream = memoryStream.ToLzma();
+var xzStream = memoryStream.ToXz();
 var zstdStream = memoryStream.ToZstd();
 ```
 
@@ -74,8 +79,9 @@ var zstdStream = memoryStream.ToZstd();
 var brotliDecompressStream = brotliStream.UnBrotli();
 var bzipDecompressStream = bzipStream.UnBZip();
 var gzipDecompressStream = gzipStream.UnGZip();
-var lz4DecompressStream = lz4Stream.UnLZ4();
-var lzmaDecompressStream = lzmaStream.UnLZMA();
+var lz4DecompressStream = lz4Stream.UnLz4();
+var lzmaDecompressStream = lzmaStream.UnLzma();
+var xzDecompressStream = xzStream.UnXz();
 var zstdDecompressStream = zstdStream.UnZstd();
 ```
 
