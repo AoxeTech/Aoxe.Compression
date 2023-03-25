@@ -26,6 +26,10 @@ public class CompressToStreamAndDecompressToBytes
     public void ZstdCompressToStreamAndDecompressToBytesTest() =>
         CompressToStreamAndDecompressToBytesTest(new ZstdCompressor());
 
+    [Fact]
+    public void XzCompressToStreamAndDecompressToBytesTest() =>
+        CompressToStreamAndDecompressToBytesTest(new XzCompressor());
+
     private void CompressToStreamAndDecompressToBytesTest(ICompressor compressor)
     {
         var compressedStream = new MemoryStream();

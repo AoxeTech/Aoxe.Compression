@@ -27,6 +27,10 @@ public class CompressToStreamAndDecompressToStream
         CompressToStreamAndDecompressToStreamTest1(new ZstdCompressor());
 
     [Fact]
+    public void XzCompressToStreamAndDecompressToStreamTest1() =>
+        CompressToStreamAndDecompressToStreamTest1(new XzCompressor());
+
+    [Fact]
     public void BrotliCompressToStreamAndDecompressToStreamTest2() =>
         CompressToStreamAndDecompressToStreamTest2(new BrotliCompressor());
 
@@ -49,6 +53,10 @@ public class CompressToStreamAndDecompressToStream
     [Fact]
     public void ZstdCompressToStreamAndDecompressToStreamTest2() =>
         CompressToStreamAndDecompressToStreamTest2(new ZstdCompressor());
+
+    [Fact]
+    public void XzCompressToStreamAndDecompressToStreamTest2() =>
+        CompressToStreamAndDecompressToStreamTest2(new XzCompressor());
 
     private void CompressToStreamAndDecompressToStreamTest1(ICompressor compressor)
     {

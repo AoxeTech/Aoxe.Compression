@@ -26,6 +26,10 @@ public class BytesTest
     public void ZstdCompressToBytesAndDecompressToBytesTest() =>
         CompressToBytesAndDecompressToBytesTest(new ZstdCompressor());
 
+    [Fact]
+    public void XzCompressToBytesAndDecompressToBytesTest() =>
+        CompressToBytesAndDecompressToBytesTest(new XzCompressor());
+
     private void CompressToBytesAndDecompressToBytesTest(ICompressor compressor)
     {
         var compressedBytes = compressor.Compress(Consts.Data);

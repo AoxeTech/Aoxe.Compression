@@ -10,6 +10,7 @@ public class DecompressFromBytes
     private static readonly byte[] GzipCompressBytes = GzipHelper.Compress(Consts.RawBytes);
     private static readonly byte[] Lz4CompressBytes = Lz4Helper.Compress(Consts.RawBytes);
     private static readonly byte[] LzmaCompressBytes = LzmaHelper.Compress(Consts.RawBytes);
+    private static readonly byte[] XzCompressBytes = XzHelper.Compress(Consts.RawBytes);
     private static readonly byte[] ZstdCompressBytes = ZstdHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
@@ -26,6 +27,9 @@ public class DecompressFromBytes
 
     [Benchmark]
     public void LzmaFromBytes() => LzmaHelper.Decompress(LzmaCompressBytes);
+
+    [Benchmark]
+    public void XzFromBytes() => XzHelper.Decompress(XzCompressBytes);
 
     [Benchmark]
     public void ZstdFromBytes() => ZstdHelper.Decompress(ZstdCompressBytes);
