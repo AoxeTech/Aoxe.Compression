@@ -3,6 +3,10 @@
 public class CompressToStreamAndDecompressToStream
 {
     [Fact]
+    public void NullCompressToStreamAndDecompressToStreamTest1() =>
+        CompressToStreamAndDecompressToStreamTest1(new NullCompressor());
+
+    [Fact]
     public void BrotliCompressToStreamAndDecompressToStreamTest1() =>
         CompressToStreamAndDecompressToStreamTest1(new BrotliCompressor());
 
@@ -29,6 +33,10 @@ public class CompressToStreamAndDecompressToStream
     [Fact]
     public void XzCompressToStreamAndDecompressToStreamTest1() =>
         CompressToStreamAndDecompressToStreamTest1(new XzCompressor());
+
+    [Fact]
+    public void NullCompressToStreamAndDecompressToStreamTest2() =>
+        CompressToStreamAndDecompressToStreamTest2(new NullCompressor());
 
     [Fact]
     public void BrotliCompressToStreamAndDecompressToStreamTest2() =>
@@ -87,9 +95,9 @@ public class CompressToStreamAndDecompressToStream
         var decompressedStream = compressor.Decompress(compressedStream);
 
         Assert.Equal(0, compressedStream.Position);
-        
+
         var decompressedBytes = decompressedStream.ToArray();
-        
+
         Assert.Equal(Consts.Data, decompressedBytes);
     }
 }

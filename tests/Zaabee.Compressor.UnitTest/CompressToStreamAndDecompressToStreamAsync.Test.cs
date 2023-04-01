@@ -3,6 +3,10 @@
 public class CompressToStreamAndDecompressToStreamAsync
 {
     [Fact]
+    public async Task NullCompressToStreamAndDecompressToStreamAsyncTest1() =>
+        await CompressToStreamAndDecompressToStreamAsyncTest1(new NullCompressor());
+
+    [Fact]
     public async Task BrotliCompressToStreamAndDecompressToStreamAsyncTest1() =>
         await CompressToStreamAndDecompressToStreamAsyncTest1(new BrotliCompressor());
 
@@ -29,6 +33,10 @@ public class CompressToStreamAndDecompressToStreamAsync
     [Fact]
     public async Task XzCompressToStreamAndDecompressToStreamAsyncTest1() =>
         await CompressToStreamAndDecompressToStreamAsyncTest1(new XzCompressor());
+
+    [Fact]
+    public async Task NullCompressToStreamAndDecompressToStreamAsyncTest2() =>
+        await CompressToStreamAndDecompressToStreamAsyncTest2(new NullCompressor());
 
     [Fact]
     public async Task BrotliCompressToStreamAndDecompressToStreamAsyncTest2() =>

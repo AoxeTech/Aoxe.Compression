@@ -3,6 +3,10 @@
 public class CompressToStreamAndDecompressToBytes
 {
     [Fact]
+    public void NullCompressToStreamAndDecompressToBytesTest() =>
+        CompressToStreamAndDecompressToBytesTest(new NullCompressor());
+
+    [Fact]
     public void BrotliCompressToStreamAndDecompressToBytesTest() =>
         CompressToStreamAndDecompressToBytesTest(new BrotliCompressor());
 

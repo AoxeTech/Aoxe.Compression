@@ -3,6 +3,10 @@
 public class StreamTest
 {
     [Fact]
+    public void NullCompressToBytesAndDecompressToStreamTest() =>
+        CompressToBytesAndDecompressToStreamTest(new NullCompressor());
+
+    [Fact]
     public void BrotliCompressToBytesAndDecompressToStreamTest() =>
         CompressToBytesAndDecompressToStreamTest(new BrotliCompressor());
 
@@ -35,11 +39,11 @@ public class StreamTest
         var compressedBytes = compressor.Compress(Consts.Data);
         var compressedStream = compressedBytes.ToMemoryStream();
         var decompressedStream = compressor.Decompress(compressedStream);
-        
+
         Assert.Equal(0, compressedStream.Position);
-        
+
         var decompressedBytes = decompressedStream.ToArray();
-        
+
         Assert.Equal(Consts.Data, decompressedBytes);
     }
 }
