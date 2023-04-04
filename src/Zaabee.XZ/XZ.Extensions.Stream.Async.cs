@@ -7,28 +7,24 @@ public static partial class XzExtensions
         Stream outputStream,
         int threads = XzHelper.Threads,
         uint preset = XzHelper.Preset,
-        bool levelOpen = XzHelper.LevelOpen,
         CancellationToken cancellationToken = default) =>
-        await XzHelper.CompressAsync(rawStream, outputStream, threads, preset, levelOpen, cancellationToken);
+        await XzHelper.CompressAsync(rawStream, outputStream, threads, preset, cancellationToken);
 
     public static async Task UnXzAsync(
         this Stream compressedStream,
         Stream outputStream,
-        bool levelOpen = XzHelper.LevelOpen,
         CancellationToken cancellationToken = default) =>
-        await XzHelper.DecompressAsync(compressedStream, outputStream, levelOpen, cancellationToken);
+        await XzHelper.DecompressAsync(compressedStream, outputStream, cancellationToken);
 
     public static async Task<MemoryStream> ToXzAsync(
         this Stream rawStream,
         int threads = XzHelper.Threads,
         uint preset = XzHelper.Preset,
-        bool levelOpen = XzHelper.LevelOpen,
         CancellationToken cancellationToken = default) =>
-        await XzHelper.CompressAsync(rawStream, threads, preset, levelOpen, cancellationToken);
+        await XzHelper.CompressAsync(rawStream, threads, preset, cancellationToken);
 
     public static async Task<MemoryStream> UnXzAsync(
         this Stream compressedStream,
-        bool levelOpen = XzHelper.LevelOpen,
         CancellationToken cancellationToken = default) =>
-        await XzHelper.DecompressAsync(compressedStream, levelOpen, cancellationToken);
+        await XzHelper.DecompressAsync(compressedStream, cancellationToken);
 }

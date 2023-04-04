@@ -6,21 +6,19 @@ public static partial class XzHelper
         Stream inputStream,
         int threads = Threads,
         uint preset = Preset,
-        bool levelOpen = LevelOpen,
         CancellationToken cancellationToken = default)
     {
         var outputStream = new MemoryStream();
-        await CompressAsync(inputStream, outputStream, threads, preset, levelOpen, cancellationToken);
+        await CompressAsync(inputStream, outputStream, threads, preset, cancellationToken);
         return outputStream;
     }
 
     public static async Task<MemoryStream> DecompressAsync(
         Stream inputStream,
-        bool levelOpen = LevelOpen,
         CancellationToken cancellationToken = default)
     {
         var outputStream = new MemoryStream();
-        await DecompressAsync(inputStream, outputStream, levelOpen, cancellationToken);
+        await DecompressAsync(inputStream, outputStream, cancellationToken);
         return outputStream;
     }
 
@@ -29,14 +27,13 @@ public static partial class XzHelper
         Stream outputStream,
         int threads = Threads,
         uint preset = Preset,
-        bool levelOpen = LevelOpen,
         CancellationToken cancellationToken = default)
     {
 #if NETSTANDARD2_0
-        using (var xzOutputStream = new XZOutputStream(outputStream, threads, preset, levelOpen))
+        using (var xzOutputStream = new XZOutputStream(outputStream, threads, preset, true))
             await inputStream.CopyToAsync(xzOutputStream);
 #else
-        await using (var xzOutputStream = new XZOutputStream(outputStream, threads, preset, levelOpen))
+        await using (var xzOutputStream = new XZOutputStream(outputStream, threads, preset, true))
             await inputStream.CopyToAsync(xzOutputStream, cancellationToken);
 #endif
         inputStream.TrySeek(0, SeekOrigin.Begin);
@@ -46,14 +43,13 @@ public static partial class XzHelper
     public static async Task DecompressAsync(
         Stream inputStream,
         Stream outputStream,
-        bool levelOpen = LevelOpen,
         CancellationToken cancellationToken = default)
     {
 #if NETSTANDARD2_0
-        using (var xzInputStream = new XZInputStream(inputStream, levelOpen))
+        using (var xzInputStream = new XZInputStream(inputStream, true))
             await xzInputStream.CopyToAsync(outputStream);
 #else
-        await using (var xzInputStream = new XZInputStream(inputStream, levelOpen))
+        await using (var xzInputStream = new XZInputStream(inputStream, true))
             await xzInputStream.CopyToAsync(outputStream, cancellationToken);
 #endif
         inputStream.TrySeek(0, SeekOrigin.Begin);

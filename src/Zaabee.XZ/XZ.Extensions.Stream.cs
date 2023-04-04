@@ -6,25 +6,21 @@ public static partial class XzExtensions
         this Stream rawStream,
         Stream outputStream,
         int threads = XzHelper.Threads,
-        uint preset = XzHelper.Preset,
-        bool levelOpen = XzHelper.LevelOpen) =>
-        XzHelper.Compress(rawStream, outputStream, threads, preset, levelOpen);
+        uint preset = XzHelper.Preset) =>
+        XzHelper.Compress(rawStream, outputStream, threads, preset);
 
     public static void UnXz(
         this Stream compressedStream,
-        Stream outputStream,
-        bool levelOpen = XzHelper.LevelOpen) =>
-        XzHelper.Decompress(compressedStream, outputStream, levelOpen);
+        Stream outputStream) =>
+        XzHelper.Decompress(compressedStream, outputStream);
 
     public static MemoryStream ToXz(
         this Stream rawStream,
         int threads = XzHelper.Threads,
-        uint preset = XzHelper.Preset,
-        bool levelOpen = XzHelper.LevelOpen) =>
+        uint preset = XzHelper.Preset) =>
         XzHelper.Compress(rawStream);
 
     public static MemoryStream UnXz(
-        this Stream compressedStream,
-        bool levelOpen = XzHelper.LevelOpen) =>
-        XzHelper.Decompress(compressedStream, levelOpen);
+        this Stream compressedStream) =>
+        XzHelper.Decompress(compressedStream);
 }

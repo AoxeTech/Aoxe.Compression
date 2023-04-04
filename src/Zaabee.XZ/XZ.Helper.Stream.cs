@@ -5,20 +5,18 @@ public static partial class XzHelper
     public static MemoryStream Compress(
         Stream inputStream,
         int threads = Threads,
-        uint preset = Preset,
-        bool levelOpen = LevelOpen)
+        uint preset = Preset)
     {
         var outputStream = new MemoryStream();
-        Compress(inputStream, outputStream,threads,preset,levelOpen);
+        Compress(inputStream, outputStream, threads, preset);
         return outputStream;
     }
 
     public static MemoryStream Decompress(
-        Stream inputStream,
-        bool levelOpen = LevelOpen)
+        Stream inputStream)
     {
         var outputStream = new MemoryStream();
-        Decompress(inputStream, outputStream,levelOpen);
+        Decompress(inputStream, outputStream);
         return outputStream;
     }
 
@@ -26,10 +24,9 @@ public static partial class XzHelper
         Stream inputStream,
         Stream outputStream,
         int threads = Threads,
-        uint preset = Preset,
-        bool levelOpen = LevelOpen)
+        uint preset = Preset)
     {
-        using (var xzOutputStream = new XZOutputStream(outputStream, threads, preset, levelOpen))
+        using (var xzOutputStream = new XZOutputStream(outputStream, threads, preset, true))
             inputStream.CopyTo(xzOutputStream);
         inputStream.TrySeek(0, SeekOrigin.Begin);
         outputStream.TrySeek(0, SeekOrigin.Begin);
@@ -37,10 +34,9 @@ public static partial class XzHelper
 
     public static void Decompress(
         Stream inputStream,
-        Stream outputStream,
-        bool levelOpen = LevelOpen)
+        Stream outputStream)
     {
-        using (var xzInputStream = new XZInputStream(inputStream, levelOpen))
+        using (var xzInputStream = new XZInputStream(inputStream, true))
             xzInputStream.CopyTo(outputStream);
         inputStream.TrySeek(0, SeekOrigin.Begin);
         outputStream.TrySeek(0, SeekOrigin.Begin);
