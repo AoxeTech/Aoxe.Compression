@@ -2,7 +2,7 @@
 
 ---
 
-The wraps and extensions for compressors. It is also the compressor provider for all Zaabee technology stacks.
+Provide an easy way to use compressions. These packages support the wraps and extensions for compressors. It is also the compressor provider for all Zaabee technology stacks like configuration, cache, queue, rpc, etc.
 
 ## Why use Zaabee.Compression?
 
