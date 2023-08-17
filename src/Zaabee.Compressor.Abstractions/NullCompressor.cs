@@ -1,6 +1,4 @@
-﻿using Zaabee.Extensions;
-
-namespace Zaabee.Compressor.Abstractions;
+﻿namespace Zaabee.Compressor.Abstractions;
 
 public class NullCompressor : ICompressor
 {
@@ -70,6 +68,13 @@ public class NullCompressor : ICompressor
         return memoryStream;
     }
 
+    public void Compress(Stream inputStream, Stream outputStream)
+    {
+        inputStream.CopyTo(outputStream);
+        inputStream.TrySeek(0, SeekOrigin.Begin);
+        outputStream.TrySeek(0, SeekOrigin.Begin);
+    }
+
     public MemoryStream Decompress(Stream compressedStream)
     {
         var memoryStream = new MemoryStream();
@@ -77,13 +82,6 @@ public class NullCompressor : ICompressor
         compressedStream.TrySeek(0, SeekOrigin.Begin);
         memoryStream.TrySeek(0, SeekOrigin.Begin);
         return memoryStream;
-    }
-
-    public void Compress(Stream inputStream, Stream outputStream)
-    {
-        inputStream.CopyTo(outputStream);
-        inputStream.TrySeek(0, SeekOrigin.Begin);
-        outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
     public void Decompress(Stream inputStream, Stream outputStream)
