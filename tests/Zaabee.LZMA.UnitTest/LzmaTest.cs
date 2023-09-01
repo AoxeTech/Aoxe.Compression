@@ -5,28 +5,28 @@ public class LzmaTest
     [Fact]
     public void LzmaCompressToBytesAndDecompressToBytesTest()
     {
-        var result = Consts.Data.ToLzma().UnLzma();
+        var result = TestConsts.Data.ToLzma().UnLzma();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public void LzmaCompressToBytesAndDecompressToStreamTest()
     {
-        var compressedStream = Consts.Data.ToLzma().ToMemoryStream();
+        var compressedStream = TestConsts.Data.ToLzma().ToMemoryStream();
         var decompressStream = compressedStream.UnLzma();
 
         Assert.Equal(0, compressedStream.Position);
 
         var result = decompressStream.ToArray();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public void LzmaCompressToStreamAndDecompressToBytesTest()
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var decompressStream = rawStream.ToLzma();
 
         Assert.Equal(0, rawStream.Position);
@@ -34,13 +34,13 @@ public class LzmaTest
         var result = decompressStream.ToArray().UnLzma();
 
         Assert.Equal(0, rawStream.Position);
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public void LzmaCompressToStreamAndDecompressToStreamTest()
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var compressStream = rawStream.ToLzma();
 
         Assert.Equal(0, rawStream.Position);
@@ -51,13 +51,13 @@ public class LzmaTest
 
         var result = decompressStream.ToArray();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public async Task LzmaCompressToStreamAndDecompressToStreamTestAsync()
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var compressStream = await rawStream.ToLzmaAsync();
 
         Assert.Equal(0, rawStream.Position);
@@ -68,6 +68,14 @@ public class LzmaTest
 
         var result = decompressStream.ToArray();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
+    }
+
+    [Fact]
+    public void LzmaCompressStringToBytesAndDecompressToStringTestAsync()
+    {
+        var compressBytes = TestConsts.Str.ToLzma();
+        var result = compressBytes.UnLzmaToString();
+        Assert.Equal(TestConsts.Str, result);
     }
 }

@@ -69,7 +69,7 @@ public class CompressToStreamAndDecompressToStreamAsync
     private async Task CompressToStreamAndDecompressToStreamAsyncTest1(ICompressor compressor)
     {
         var compressedStream = new MemoryStream();
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         await compressor.CompressAsync(rawStream, compressedStream);
 
         Assert.Equal(0, rawStream.Position);
@@ -82,12 +82,12 @@ public class CompressToStreamAndDecompressToStreamAsync
 
         var decompressedBytes = decompressedStream.ToArray();
 
-        Assert.Equal(Consts.Data, decompressedBytes);
+        Assert.Equal(TestConsts.Data, decompressedBytes);
     }
 
     private async Task CompressToStreamAndDecompressToStreamAsyncTest2(ICompressor compressor)
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var compressedStream = await compressor.CompressAsync(rawStream);
 
         Assert.Equal(0, rawStream.Position);
@@ -98,6 +98,6 @@ public class CompressToStreamAndDecompressToStreamAsync
 
         var decompressedBytes = decompressedStream.ToArray();
 
-        Assert.Equal(Consts.Data, decompressedBytes);
+        Assert.Equal(TestConsts.Data, decompressedBytes);
     }
 }

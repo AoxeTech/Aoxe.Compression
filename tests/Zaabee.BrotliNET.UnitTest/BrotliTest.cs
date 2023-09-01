@@ -5,41 +5,41 @@ public class BrotliTest
     [Fact]
     public void BrotliCompressToBytesAndDecompressToBytesTest()
     {
-        var result = Consts.Data.ToBrotli().UnBrotli();
+        var result = TestConsts.Data.ToBrotli().UnBrotli();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public void BrotliCompressToBytesAndDecompressToStreamTest()
     {
-        var compressedStream = Consts.Data.ToBrotli().ToMemoryStream();
+        var compressedStream = TestConsts.Data.ToBrotli().ToMemoryStream();
         var decompressStream = compressedStream.UnBrotli();
 
         Assert.Equal(0, compressedStream.Position);
         
         var result = decompressStream.ToArray();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public void BrotliCompressToStreamAndDecompressToBytesTest()
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var decompressStream = rawStream.ToBrotli();
 
         Assert.Equal(0, rawStream.Position);
 
         var result = decompressStream.ToArray().UnBrotli();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public void BrotliCompressToStreamAndDecompressToStreamTest()
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var compressStream = rawStream.ToBrotli();
 
         Assert.Equal(0, rawStream.Position);
@@ -50,13 +50,13 @@ public class BrotliTest
 
         var result = decompressStream.ToArray();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public async Task BrotliCompressToStreamAndDecompressToStreamTestAsync()
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var compressStream = await rawStream.ToBrotliAsync();
 
         Assert.Equal(0, rawStream.Position);
@@ -67,6 +67,14 @@ public class BrotliTest
 
         var result = decompressStream.ToArray();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
+    }
+
+    [Fact]
+    public void BrotliCompressStringToBytesAndDecompressToStringTestAsync()
+    {
+        var compressBytes = TestConsts.Str.ToBrotli();
+        var result = compressBytes.UnBrotliToString();
+        Assert.Equal(TestConsts.Str, result);
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace Zaabee.LZMA;
+﻿using Decoder = SevenZip.Compression.LZMA.Decoder;
+using Encoder = SevenZip.Compression.LZMA.Encoder;
+
+namespace Zaabee.LZMA;
 
 public static partial class LzmaHelper
 {

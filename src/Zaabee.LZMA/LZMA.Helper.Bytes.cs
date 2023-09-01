@@ -2,7 +2,6 @@
 
 public static partial class LzmaHelper
 {
-
     public static byte[] Compress(
         byte[] rawBytes)
     {

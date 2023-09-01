@@ -5,28 +5,28 @@ public class GZipTest
     [Fact]
     public void GZipCompressToBytesAndDecompressToBytesTest()
     {
-        var result = Consts.Data.ToGZip().UnGZip();
+        var result = TestConsts.Data.ToGZip().UnGZip();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public void GZipCompressToBytesAndDecompressToStreamTest()
     {
-        var compressedStream = Consts.Data.ToGZip().ToMemoryStream();
+        var compressedStream = TestConsts.Data.ToGZip().ToMemoryStream();
         var decompressStream = compressedStream.UnGZip();
 
         Assert.Equal(0, decompressStream.Position);
         
         var result = decompressStream.ToArray();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public void GZipCompressToStreamAndDecompressToBytesTest()
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var decompressStream = rawStream.ToGZip();
 
         Assert.Equal(0, decompressStream.Position);
@@ -34,13 +34,13 @@ public class GZipTest
         var result = decompressStream.ToArray().UnGZip();
 
         Assert.Equal(0, rawStream.Position);
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public void GZipCompressToStreamAndDecompressToStreamTest()
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var compressStream = rawStream.ToGZip();
 
         Assert.Equal(0, rawStream.Position);
@@ -51,13 +51,13 @@ public class GZipTest
 
         var result = decompressStream.ToArray();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public async Task GZipCompressToStreamAndDecompressToStreamTestAsync()
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var compressStream = await rawStream.ToGZipAsync();
 
         Assert.Equal(0, rawStream.Position);
@@ -68,6 +68,14 @@ public class GZipTest
 
         var result = decompressStream.ToArray();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
+    }
+
+    [Fact]
+    public void GZipCompressStringToBytesAndDecompressToStringTestAsync()
+    {
+        var compressBytes = TestConsts.Str.ToGZip();
+        var result = compressBytes.UnGZipToString();
+        Assert.Equal(TestConsts.Str, result);
     }
 }

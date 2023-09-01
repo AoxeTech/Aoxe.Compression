@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.Zstd.UnitTest", "tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.XZ.UnitTest", "tests\Zaabee.XZ.UnitTest\Zaabee.XZ.UnitTest.csproj", "{92B03B14-C246-41D3-A23F-A7F2C1A96C15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.Snappy", "src\Zaabee.Snappy\Zaabee.Snappy.csproj", "{829CE0E8-6536-4ECF-84F2-20D155A49055}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,7 @@ Global
 		{DB751327-63F0-4F97-9759-DF71F6580774} = {158FA242-DD0C-4482-BD54-4E7EDA9C44CA}
 		{D9663D19-647A-4FC9-A109-D09875640929} = {5BE4F706-456E-4DF8-A606-69F992835B47}
 		{92B03B14-C246-41D3-A23F-A7F2C1A96C15} = {5BE4F706-456E-4DF8-A606-69F992835B47}
+		{829CE0E8-6536-4ECF-84F2-20D155A49055} = {158FA242-DD0C-4482-BD54-4E7EDA9C44CA}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F9369C2B-0732-46F2-B95A-8F109BFE59A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -126,5 +129,9 @@ Global
 		{92B03B14-C246-41D3-A23F-A7F2C1A96C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92B03B14-C246-41D3-A23F-A7F2C1A96C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92B03B14-C246-41D3-A23F-A7F2C1A96C15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829CE0E8-6536-4ECF-84F2-20D155A49055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829CE0E8-6536-4ECF-84F2-20D155A49055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829CE0E8-6536-4ECF-84F2-20D155A49055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829CE0E8-6536-4ECF-84F2-20D155A49055}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

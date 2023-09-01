@@ -5,28 +5,28 @@ public class ZstdTest
     [Fact]
     public void ZstdCompressToBytesAndDecompressToBytesTest()
     {
-        var result = Consts.Data.ToZstd().UnZstd();
+        var result = TestConsts.Data.ToZstd().UnZstd();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public void ZstdCompressToBytesAndDecompressToStreamTest()
     {
-        var compressedStream = Consts.Data.ToZstd().ToMemoryStream();
+        var compressedStream = TestConsts.Data.ToZstd().ToMemoryStream();
         var decompressStream = compressedStream.UnZstd();
 
         Assert.Equal(0, compressedStream.Position);
 
         var result = decompressStream.ToArray();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public void ZstdCompressToStreamAndDecompressToBytesTest()
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var decompressStream = rawStream.ToZstd();
 
         Assert.Equal(0, rawStream.Position);
@@ -34,13 +34,13 @@ public class ZstdTest
         var result = decompressStream.ToArray().UnZstd();
 
         Assert.Equal(0, rawStream.Position);
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public void ZstdCompressToStreamAndDecompressToStreamTest()
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var compressStream = rawStream.ToZstd();
 
         Assert.Equal(0, rawStream.Position);
@@ -51,13 +51,13 @@ public class ZstdTest
 
         var result = decompressStream.ToArray();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
     }
 
     [Fact]
     public async Task ZstdCompressToStreamAndDecompressToStreamTestAsync()
     {
-        var rawStream = Consts.Data.ToMemoryStream();
+        var rawStream = TestConsts.Data.ToMemoryStream();
         var compressStream = await rawStream.ToZstdAsync();
 
         Assert.Equal(0, rawStream.Position);
@@ -68,6 +68,14 @@ public class ZstdTest
 
         var result = decompressStream.ToArray();
 
-        Assert.Equal(Consts.Data, result);
+        Assert.Equal(TestConsts.Data, result);
+    }
+
+    [Fact]
+    public void ZstdCompressStringToBytesAndDecompressToStringTestAsync()
+    {
+        var compressBytes = TestConsts.Str.ToZstd();
+        var result = compressBytes.UnZstdToString();
+        Assert.Equal(TestConsts.Str, result);
     }
 }

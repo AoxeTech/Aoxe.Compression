@@ -36,9 +36,9 @@ public class BytesTest
 
     private void CompressToBytesAndDecompressToBytesTest(ICompressor compressor)
     {
-        var compressedBytes = compressor.Compress(Consts.Data);
+        var compressedBytes = compressor.Compress(TestConsts.Data);
         var decompressedBytes = compressor.Decompress(compressedBytes);
 
-        Assert.Equal(Consts.Data, decompressedBytes);
+        Assert.Equal(TestConsts.Data, decompressedBytes);
     }
 }
