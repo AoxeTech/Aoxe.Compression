@@ -34,6 +34,10 @@ public class BytesTest
     public void XzCompressToBytesAndDecompressToBytesTest() =>
         CompressToBytesAndDecompressToBytesTest(new XzCompressor());
 
+    [Fact]
+    public void SnappyCompressToBytesAndDecompressToBytesTest() =>
+        CompressToBytesAndDecompressToBytesTest(new SnappyCompressor());
+
     private void CompressToBytesAndDecompressToBytesTest(ICompressor compressor)
     {
         var compressedBytes = compressor.Compress(TestConsts.Data);

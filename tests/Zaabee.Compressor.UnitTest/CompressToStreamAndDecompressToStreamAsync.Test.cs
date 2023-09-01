@@ -35,6 +35,10 @@ public class CompressToStreamAndDecompressToStreamAsync
         await CompressToStreamAndDecompressToStreamAsyncTest1(new XzCompressor());
 
     [Fact]
+    public async Task SnappyCompressToStreamAndDecompressToStreamAsyncTest1() =>
+        await CompressToStreamAndDecompressToStreamAsyncTest1(new SnappyCompressor());
+
+    [Fact]
     public async Task NullCompressToStreamAndDecompressToStreamAsyncTest2() =>
         await CompressToStreamAndDecompressToStreamAsyncTest2(new NullCompressor());
 
@@ -65,6 +69,10 @@ public class CompressToStreamAndDecompressToStreamAsync
     [Fact]
     public async Task XzCompressToStreamAndDecompressToStreamAsyncTest2() =>
         await CompressToStreamAndDecompressToStreamAsyncTest2(new XzCompressor());
+
+    [Fact]
+    public async Task SnappyCompressToStreamAndDecompressToStreamAsyncTest2() =>
+        await CompressToStreamAndDecompressToStreamAsyncTest2(new SnappyCompressor());
 
     private async Task CompressToStreamAndDecompressToStreamAsyncTest1(ICompressor compressor)
     {

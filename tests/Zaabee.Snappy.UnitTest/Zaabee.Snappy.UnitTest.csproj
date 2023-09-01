@@ -22,13 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Zaabee.Brotli\Zaabee.Brotli.csproj" />
-      <ProjectReference Include="..\..\src\Zaabee.LZ4\Zaabee.LZ4.csproj" />
-      <ProjectReference Include="..\..\src\Zaabee.LZMA\Zaabee.LZMA.csproj" />
-      <ProjectReference Include="..\..\src\Zaabee.SharpZipLib\Zaabee.SharpZipLib.csproj" />
       <ProjectReference Include="..\..\src\Zaabee.Snappy\Zaabee.Snappy.csproj" />
-      <ProjectReference Include="..\..\src\Zaabee.XZ\Zaabee.XZ.csproj" />
-      <ProjectReference Include="..\..\src\Zaabee.Zstd\Zaabee.Zstd.csproj" />
       <ProjectReference Include="..\TestModel\TestModel.csproj" />
     </ItemGroup>
 

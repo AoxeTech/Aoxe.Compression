@@ -34,6 +34,10 @@ public class StreamTest
     public void XzCompressToBytesAndDecompressToStreamTest() =>
         CompressToBytesAndDecompressToStreamTest(new XzCompressor());
 
+    [Fact]
+    public void SnappyCompressToBytesAndDecompressToStreamTest() =>
+        CompressToBytesAndDecompressToStreamTest(new SnappyCompressor());
+
     private void CompressToBytesAndDecompressToStreamTest(ICompressor compressor)
     {
         var compressedBytes = compressor.Compress(TestConsts.Data);

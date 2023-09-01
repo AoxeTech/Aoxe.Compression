@@ -34,6 +34,10 @@ public class CompressToStreamAndDecompressToBytes
     public void XzCompressToStreamAndDecompressToBytesTest() =>
         CompressToStreamAndDecompressToBytesTest(new XzCompressor());
 
+    [Fact]
+    public void SnappyCompressToStreamAndDecompressToBytesTest() =>
+        CompressToStreamAndDecompressToBytesTest(new SnappyCompressor());
+
     private void CompressToStreamAndDecompressToBytesTest(ICompressor compressor)
     {
         var compressedStream = new MemoryStream();

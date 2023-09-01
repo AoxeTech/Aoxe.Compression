@@ -34,6 +34,10 @@ public class StringTest
     public void XzCompressAndDecompressString() =>
         CompressAndDecompressString(new XzCompressor());
 
+    [Fact]
+    public void SnappyCompressAndDecompressString() =>
+        CompressAndDecompressString(new SnappyCompressor());
+
     private void CompressAndDecompressString(ICompressor compressor)
     {
         const string str = "Hello World!";

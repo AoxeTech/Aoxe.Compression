@@ -35,6 +35,10 @@ public class CompressToStreamAndDecompressToStream
         CompressToStreamAndDecompressToStreamTest1(new XzCompressor());
 
     [Fact]
+    public void SnappyCompressToStreamAndDecompressToStreamTest1() =>
+        CompressToStreamAndDecompressToStreamTest1(new SnappyCompressor());
+
+    [Fact]
     public void NullCompressToStreamAndDecompressToStreamTest2() =>
         CompressToStreamAndDecompressToStreamTest2(new NullCompressor());
 
@@ -65,6 +69,10 @@ public class CompressToStreamAndDecompressToStream
     [Fact]
     public void XzCompressToStreamAndDecompressToStreamTest2() =>
         CompressToStreamAndDecompressToStreamTest2(new XzCompressor());
+
+    [Fact]
+    public void SnappyCompressToStreamAndDecompressToStreamTest2() =>
+        CompressToStreamAndDecompressToStreamTest2(new SnappyCompressor());
 
     private void CompressToStreamAndDecompressToStreamTest1(ICompressor compressor)
     {
