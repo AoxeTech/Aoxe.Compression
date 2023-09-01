@@ -29,6 +29,9 @@ public class DecompressFromBytes
     public void LzmaFromBytes() => LzmaHelper.Decompress(LzmaCompressBytes);
 
     [Benchmark]
+    public void SnappyFromBytes() => SnappyHelper.Decompress(XzCompressBytes);
+
+    [Benchmark]
     public void XzFromBytes() => XzHelper.Decompress(XzCompressBytes);
 
     [Benchmark]

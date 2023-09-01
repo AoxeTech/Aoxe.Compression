@@ -21,6 +21,9 @@ public class CompressToStream
     public void LzmaToStream() => LzmaHelper.Compress(Consts.RawStream, new MemoryStream());
 
     [Benchmark]
+    public void SnappyToStream() => SnappyHelper.Compress(Consts.RawStream, new MemoryStream());
+
+    [Benchmark]
     public void XzToStream() => XzHelper.Compress(Consts.RawStream, new MemoryStream());
 
     [Benchmark]

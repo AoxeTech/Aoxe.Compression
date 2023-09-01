@@ -29,6 +29,9 @@ public class DecompressFromStream
     public void LzmaFromStream() => LzmaHelper.Decompress(LzmaCompressStream, new MemoryStream());
 
     [Benchmark]
+    public void SnappyFromStream() => SnappyHelper.Decompress(XzCompressStream, new MemoryStream());
+
+    [Benchmark]
     public void XzFromStream() => XzHelper.Decompress(XzCompressStream, new MemoryStream());
 
     [Benchmark]
