@@ -2,7 +2,7 @@
 
 public static partial class SnappyHelper
 {
-    public static async Task<MemoryStream> CompressAsync(
+    public static async ValueTask<MemoryStream> CompressAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default)
     {
@@ -12,7 +12,7 @@ public static partial class SnappyHelper
         return new MemoryStream(compressedBytes);
     }
 
-    public static async Task<MemoryStream> DecompressAsync(
+    public static async ValueTask<MemoryStream> DecompressAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default)
     {
@@ -22,7 +22,7 @@ public static partial class SnappyHelper
         return new MemoryStream(rawBytes);
     }
 
-    public static async Task CompressAsync(
+    public static async ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default)
@@ -38,7 +38,7 @@ public static partial class SnappyHelper
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
-    public static async Task DecompressAsync(
+    public static async ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default)

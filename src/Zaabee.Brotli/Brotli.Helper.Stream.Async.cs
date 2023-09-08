@@ -2,7 +2,7 @@
 
 public static partial class BrotliHelper
 {
-    public static async Task<MemoryStream> CompressAsync(
+    public static async ValueTask<MemoryStream> CompressAsync(
         Stream inputStream,
         uint quality = Quality,
         uint window = Window,
@@ -13,7 +13,7 @@ public static partial class BrotliHelper
         return outputStream;
     }
 
-    public static async Task<MemoryStream> DecompressAsync(
+    public static async ValueTask<MemoryStream> DecompressAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default)
     {
@@ -22,7 +22,7 @@ public static partial class BrotliHelper
         return outputStream;
     }
 
-    public static async Task CompressAsync(
+    public static async ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
         uint quality = Quality,
@@ -47,7 +47,7 @@ public static partial class BrotliHelper
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
-    public static async Task DecompressAsync(
+    public static async ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default)

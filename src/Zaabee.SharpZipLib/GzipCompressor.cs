@@ -2,27 +2,27 @@
 
 public sealed class GzipCompressor : ICompressor
 {
-    public async Task<MemoryStream> CompressAsync(
+    public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,
         CancellationToken cancellationToken = default) =>
-        await rawStream.ToGZipAsync(cancellationToken);
+        rawStream.ToGZipAsync(cancellationToken);
 
-    public async Task<MemoryStream> DecompressAsync(
+    public ValueTask<MemoryStream> DecompressAsync(
         Stream compressedStream,
         CancellationToken cancellationToken = default) =>
-        await compressedStream.UnGZipAsync(cancellationToken);
+        compressedStream.UnGZipAsync(cancellationToken);
 
-    public async Task CompressAsync(
+    public ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await inputStream.ToGZipAsync(outputStream, cancellationToken);
+        inputStream.ToGZipAsync(outputStream, cancellationToken);
 
-    public async Task DecompressAsync(
+    public ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await inputStream.UnGZipAsync(outputStream, cancellationToken);
+        inputStream.UnGZipAsync(outputStream, cancellationToken);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToGZip();

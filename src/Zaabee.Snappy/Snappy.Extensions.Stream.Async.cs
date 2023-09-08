@@ -2,25 +2,25 @@
 
 public static partial class SnappyExtensions
 {
-    public static async Task ToSnappyAsync(
+    public static ValueTask ToSnappyAsync(
         this Stream rawStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await SnappyHelper.CompressAsync(rawStream, outputStream, cancellationToken);
+        SnappyHelper.CompressAsync(rawStream, outputStream, cancellationToken);
 
-    public static async Task UnSnappyAsync(
+    public static ValueTask UnSnappyAsync(
         this Stream compressedStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await SnappyHelper.DecompressAsync(compressedStream, outputStream, cancellationToken);
+        SnappyHelper.DecompressAsync(compressedStream, outputStream, cancellationToken);
 
-    public static async Task<MemoryStream> ToSnappyAsync(
+    public static ValueTask<MemoryStream> ToSnappyAsync(
         this Stream rawStream,
         CancellationToken cancellationToken = default) =>
-        await SnappyHelper.CompressAsync(rawStream, cancellationToken);
+        SnappyHelper.CompressAsync(rawStream, cancellationToken);
 
-    public static async Task<MemoryStream> UnSnappyAsync(
+    public static ValueTask<MemoryStream> UnSnappyAsync(
         this Stream compressedStream,
         CancellationToken cancellationToken = default) =>
-        await SnappyHelper.DecompressAsync(compressedStream, cancellationToken);
+        SnappyHelper.DecompressAsync(compressedStream, cancellationToken);
 }

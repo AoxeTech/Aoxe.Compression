@@ -2,25 +2,25 @@
 
 public static partial class LzmaExtensions
 {
-    public static async Task ToLzmaAsync(
+    public static ValueTask ToLzmaAsync(
         this Stream rawStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await LzmaHelper.CompressAsync(rawStream, outputStream, cancellationToken);
+        LzmaHelper.CompressAsync(rawStream, outputStream, cancellationToken);
 
-    public static async Task UnLzmaAsync(
+    public static ValueTask UnLzmaAsync(
         this Stream compressedStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await LzmaHelper.DecompressAsync(compressedStream, outputStream, cancellationToken);
+        LzmaHelper.DecompressAsync(compressedStream, outputStream, cancellationToken);
 
-    public static async Task<MemoryStream> ToLzmaAsync(
+    public static ValueTask<MemoryStream> ToLzmaAsync(
         this Stream rawStream,
         CancellationToken cancellationToken = default) =>
-        await LzmaHelper.CompressAsync(rawStream, cancellationToken);
+        LzmaHelper.CompressAsync(rawStream, cancellationToken);
 
-    public static async Task<MemoryStream> UnLzmaAsync(
+    public static ValueTask<MemoryStream> UnLzmaAsync(
         this Stream compressedStream,
         CancellationToken cancellationToken = default) =>
-        await LzmaHelper.DecompressAsync(compressedStream, cancellationToken);
+        LzmaHelper.DecompressAsync(compressedStream, cancellationToken);
 }

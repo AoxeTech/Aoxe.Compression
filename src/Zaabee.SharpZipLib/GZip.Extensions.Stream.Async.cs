@@ -2,25 +2,25 @@
 
 public static partial class GzipExtensions
 {
-    public static async Task ToGZipAsync(
+    public static ValueTask ToGZipAsync(
         this Stream rawStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await GzipHelper.CompressAsync(rawStream, outputStream, cancellationToken);
+        GzipHelper.CompressAsync(rawStream, outputStream, cancellationToken);
 
-    public static async Task UnGZipAsync(
+    public static ValueTask UnGZipAsync(
         this Stream compressedStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await GzipHelper.DecompressAsync(compressedStream, outputStream, cancellationToken);
+        GzipHelper.DecompressAsync(compressedStream, outputStream, cancellationToken);
 
-    public static async Task<MemoryStream> ToGZipAsync(
+    public static ValueTask<MemoryStream> ToGZipAsync(
         this Stream rawStream,
         CancellationToken cancellationToken = default) =>
-        await GzipHelper.CompressAsync(rawStream, cancellationToken);
+        GzipHelper.CompressAsync(rawStream, cancellationToken);
 
-    public static async Task<MemoryStream> UnGZipAsync(
+    public static ValueTask<MemoryStream> UnGZipAsync(
         this Stream compressedStream,
         CancellationToken cancellationToken = default) =>
-        await GzipHelper.DecompressAsync(compressedStream, cancellationToken);
+        GzipHelper.DecompressAsync(compressedStream, cancellationToken);
 }

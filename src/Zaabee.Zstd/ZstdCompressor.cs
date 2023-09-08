@@ -9,27 +9,27 @@ public sealed class ZstdCompressor : ICompressor
         _level = level;
     }
 
-    public async Task<MemoryStream> CompressAsync(
+    public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,
         CancellationToken cancellationToken = default) =>
-        await rawStream.ToZstdAsync(_level, cancellationToken);
+        rawStream.ToZstdAsync(_level, cancellationToken);
 
-    public async Task<MemoryStream> DecompressAsync(
+    public ValueTask<MemoryStream> DecompressAsync(
         Stream compressedStream,
         CancellationToken cancellationToken = default) =>
-        await compressedStream.UnZstdAsync(cancellationToken);
+        compressedStream.UnZstdAsync(cancellationToken);
 
-    public async Task CompressAsync(
+    public ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await inputStream.ToZstdAsync(outputStream, _level, cancellationToken);
+        inputStream.ToZstdAsync(outputStream, _level, cancellationToken);
 
-    public async Task DecompressAsync(
+    public ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await inputStream.UnZstdAsync(outputStream, cancellationToken);
+        inputStream.UnZstdAsync(outputStream, cancellationToken);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToZstd(_level);

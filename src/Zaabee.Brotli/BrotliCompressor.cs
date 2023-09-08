@@ -13,27 +13,27 @@ public sealed class BrotliCompressor : ICompressor
         _window = window;
     }
 
-    public async Task<MemoryStream> CompressAsync(
+    public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,
         CancellationToken cancellationToken = default) =>
-        await rawStream.ToBrotliAsync(_quality, _window, cancellationToken);
+        rawStream.ToBrotliAsync(_quality, _window, cancellationToken);
 
-    public async Task<MemoryStream> DecompressAsync(
+    public ValueTask<MemoryStream> DecompressAsync(
         Stream compressedStream,
         CancellationToken cancellationToken = default) =>
-        await compressedStream.UnBrotliAsync(cancellationToken);
+        compressedStream.UnBrotliAsync(cancellationToken);
 
-    public async Task CompressAsync(
+    public ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await inputStream.ToBrotliAsync(outputStream, _quality, _window, cancellationToken);
+        inputStream.ToBrotliAsync(outputStream, _quality, _window, cancellationToken);
 
-    public async Task DecompressAsync(
+    public ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await inputStream.UnBrotliAsync(outputStream, cancellationToken);
+        inputStream.UnBrotliAsync(outputStream, cancellationToken);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToBrotli(_quality, _window);

@@ -2,27 +2,27 @@
 
 public class SnappyCompressor : ICompressor
 {
-    public async Task<MemoryStream> CompressAsync(
+    public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,
         CancellationToken cancellationToken = default) =>
-        await rawStream.ToSnappyAsync(cancellationToken);
+        rawStream.ToSnappyAsync(cancellationToken);
 
-    public async Task<MemoryStream> DecompressAsync(
+    public ValueTask<MemoryStream> DecompressAsync(
         Stream compressedStream,
         CancellationToken cancellationToken = default) =>
-        await compressedStream.UnSnappyAsync(cancellationToken);
+        compressedStream.UnSnappyAsync(cancellationToken);
 
-    public async Task CompressAsync(
+    public ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await inputStream.ToSnappyAsync(outputStream, cancellationToken);
+        inputStream.ToSnappyAsync(outputStream, cancellationToken);
 
-    public async Task DecompressAsync(
+    public ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await inputStream.UnSnappyAsync(outputStream, cancellationToken);
+        inputStream.UnSnappyAsync(outputStream, cancellationToken);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToSnappy();

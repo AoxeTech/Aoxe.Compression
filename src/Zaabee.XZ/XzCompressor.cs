@@ -13,27 +13,27 @@ public class XzCompressor : ICompressor
         _preset = preset;
     }
 
-    public async Task<MemoryStream> CompressAsync(
+    public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,
         CancellationToken cancellationToken = default) =>
-        await rawStream.ToXzAsync(_threads, _preset, cancellationToken);
+        rawStream.ToXzAsync(_threads, _preset, cancellationToken);
 
-    public async Task<MemoryStream> DecompressAsync(
+    public ValueTask<MemoryStream> DecompressAsync(
         Stream compressedStream,
         CancellationToken cancellationToken = default) =>
-        await compressedStream.UnXzAsync(cancellationToken);
+        compressedStream.UnXzAsync(cancellationToken);
 
-    public async Task CompressAsync(
+    public ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await inputStream.ToXzAsync(outputStream, _threads, _preset, cancellationToken);
+        inputStream.ToXzAsync(outputStream, _threads, _preset, cancellationToken);
 
-    public async Task DecompressAsync(
+    public ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default) =>
-        await inputStream.UnXzAsync(outputStream, cancellationToken);
+        inputStream.UnXzAsync(outputStream, cancellationToken);
 
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToXz();

@@ -2,7 +2,7 @@
 
 public static partial class GzipHelper
 {
-    public static async Task<MemoryStream> CompressAsync(
+    public static async ValueTask<MemoryStream> CompressAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default)
     {
@@ -11,7 +11,7 @@ public static partial class GzipHelper
         return outputStream;
     }
 
-    public static async Task<MemoryStream> DecompressAsync(
+    public static async ValueTask<MemoryStream> DecompressAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default)
     {
@@ -20,7 +20,7 @@ public static partial class GzipHelper
         return outputStream;
     }
 
-    public static async Task CompressAsync(
+    public static async ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default)
@@ -40,7 +40,7 @@ public static partial class GzipHelper
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
-    public static async Task DecompressAsync(
+    public static async ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default)

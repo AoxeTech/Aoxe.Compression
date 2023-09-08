@@ -2,7 +2,7 @@
 
 public static partial class ZstdHelper
 {
-    public static async Task<MemoryStream> CompressAsync(
+    public static async ValueTask<MemoryStream> CompressAsync(
         Stream inputStream,
         int level = Level,
         CancellationToken cancellationToken = default)
@@ -12,7 +12,7 @@ public static partial class ZstdHelper
         return outputStream;
     }
 
-    public static async Task<MemoryStream> DecompressAsync(
+    public static async ValueTask<MemoryStream> DecompressAsync(
         Stream inputStream,
         CancellationToken cancellationToken = default)
     {
@@ -21,7 +21,7 @@ public static partial class ZstdHelper
         return outputStream;
     }
 
-    public static async Task CompressAsync(
+    public static async ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
         int level = Level,
@@ -38,7 +38,7 @@ public static partial class ZstdHelper
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
-    public static async Task DecompressAsync(
+    public static async ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default)

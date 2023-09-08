@@ -74,7 +74,7 @@ public class CompressToStreamAndDecompressToStreamAsync
     public async Task SnappyCompressToStreamAndDecompressToStreamAsyncTest2() =>
         await CompressToStreamAndDecompressToStreamAsyncTest2(new SnappyCompressor());
 
-    private async Task CompressToStreamAndDecompressToStreamAsyncTest1(ICompressor compressor)
+    private async ValueTask CompressToStreamAndDecompressToStreamAsyncTest1(ICompressor compressor)
     {
         var compressedStream = new MemoryStream();
         var rawStream = TestConsts.Data.ToMemoryStream();
@@ -93,7 +93,7 @@ public class CompressToStreamAndDecompressToStreamAsync
         Assert.Equal(TestConsts.Data, decompressedBytes);
     }
 
-    private async Task CompressToStreamAndDecompressToStreamAsyncTest2(ICompressor compressor)
+    private async ValueTask CompressToStreamAndDecompressToStreamAsyncTest2(ICompressor compressor)
     {
         var rawStream = TestConsts.Data.ToMemoryStream();
         var compressedStream = await compressor.CompressAsync(rawStream);
