@@ -35,7 +35,7 @@ public class NullCompressor : ICompressor
         return memoryStream;
     }
 
-    public async Task CompressAsync(Stream inputStream, Stream outputStream,
+    public async ValueTask CompressAsync(Stream inputStream, Stream outputStream,
         CancellationToken cancellationToken = default)
     {
 #if NETSTANDARD2_0
@@ -47,7 +47,7 @@ public class NullCompressor : ICompressor
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
-    public async Task DecompressAsync(Stream inputStream, Stream outputStream,
+    public async ValueTask DecompressAsync(Stream inputStream, Stream outputStream,
         CancellationToken cancellationToken = default)
     {
 #if NETSTANDARD2_0
