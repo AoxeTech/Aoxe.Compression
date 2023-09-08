@@ -8,7 +8,7 @@ public class NullCompressor : ICompressor
     public byte[] Decompress(byte[] compressedBytes) =>
         compressedBytes.ToArray();
 
-    public async Task<MemoryStream> CompressAsync(Stream rawStream, CancellationToken cancellationToken = default)
+    public async ValueTask<MemoryStream> CompressAsync(Stream rawStream, CancellationToken cancellationToken = default)
     {
         var memoryStream = new MemoryStream();
 #if NETSTANDARD2_0
@@ -21,7 +21,7 @@ public class NullCompressor : ICompressor
         return memoryStream;
     }
 
-    public async Task<MemoryStream> DecompressAsync(Stream compressedStream,
+    public async ValueTask<MemoryStream> DecompressAsync(Stream compressedStream,
         CancellationToken cancellationToken = default)
     {
         var memoryStream = new MemoryStream();
