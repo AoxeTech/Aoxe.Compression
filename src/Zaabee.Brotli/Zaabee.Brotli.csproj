@@ -17,8 +17,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Brotli.NET" Version="2.1.1" />
-        <PackageReference Include="Zaabee.Compressor.Abstractions" Version="2023.15.1" />
-    </ItemGroup>
+    <PackageReference Include="Brotli.NET" Version="2.1.1" />
+    <PackageReference Include="Zaabee.Compressor.Abstractions" Version="2023.15.1" />
+</ItemGroup>
 
 </Project>
