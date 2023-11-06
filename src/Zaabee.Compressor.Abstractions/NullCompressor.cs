@@ -1,6 +1,6 @@
 ﻿namespace Zaabee.Compressor.Abstractions;
 
-public class NullCompressor : ICompressor
+public sealed class NullCompressor : ICompressor
 {
     public byte[] Compress(byte[] rawBytes) =>
         rawBytes.ToArray();
