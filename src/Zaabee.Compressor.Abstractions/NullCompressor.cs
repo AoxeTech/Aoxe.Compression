@@ -3,10 +3,10 @@
 public sealed class NullCompressor : ICompressor
 {
     public byte[] Compress(byte[] rawBytes) =>
-        rawBytes.ToArray();
+        rawBytes.CloneNew();
 
     public byte[] Decompress(byte[] compressedBytes) =>
-        compressedBytes.ToArray();
+        compressedBytes.CloneNew();
 
     public async ValueTask<MemoryStream> CompressAsync(Stream rawStream, CancellationToken cancellationToken = default)
     {
