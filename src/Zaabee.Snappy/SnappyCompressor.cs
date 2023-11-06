@@ -1,6 +1,6 @@
 ﻿namespace Zaabee.Snappy;
 
-public class SnappyCompressor : ICompressor
+public sealed class SnappyCompressor : ICompressor
 {
     public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,

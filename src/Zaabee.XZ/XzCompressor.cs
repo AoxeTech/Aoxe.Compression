@@ -1,6 +1,6 @@
 ﻿namespace Zaabee.XZ;
 
-public class XzCompressor : ICompressor
+public sealed class XzCompressor : ICompressor
 {
     private readonly int _threads;
     private readonly uint _preset;
