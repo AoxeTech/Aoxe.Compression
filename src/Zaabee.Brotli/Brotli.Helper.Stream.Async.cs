@@ -6,7 +6,8 @@ public static partial class BrotliHelper
         Stream inputStream,
         uint quality = Quality,
         uint window = Window,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var outputStream = new MemoryStream();
         await CompressAsync(inputStream, outputStream, quality, window, cancellationToken);
@@ -15,7 +16,8 @@ public static partial class BrotliHelper
 
     public static async ValueTask<MemoryStream> DecompressAsync(
         Stream inputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var outputStream = new MemoryStream();
         await DecompressAsync(inputStream, outputStream, cancellationToken);
@@ -27,7 +29,8 @@ public static partial class BrotliHelper
         Stream outputStream,
         uint quality = Quality,
         uint window = Window,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
 #if NETSTANDARD2_0
         using (var brotliStream = new BrotliStream(outputStream, CompressionMode.Compress, true))
@@ -36,7 +39,9 @@ public static partial class BrotliHelper
             brotliStream.SetWindow(window);
             await inputStream.CopyToAsync(brotliStream);
 #else
-        await using (var brotliStream = new BrotliStream(outputStream, CompressionMode.Compress, true))
+        await using (
+            var brotliStream = new BrotliStream(outputStream, CompressionMode.Compress, true)
+        )
         {
             brotliStream.SetQuality(quality);
             brotliStream.SetWindow(window);
@@ -50,13 +55,16 @@ public static partial class BrotliHelper
     public static async ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
 #if NETSTANDARD2_0
         using (var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress, true))
             await brotliStream.CopyToAsync(outputStream);
 #else
-        await using (var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress, true))
+        await using (
+            var brotliStream = new BrotliStream(inputStream, CompressionMode.Decompress, true)
+        )
             await brotliStream.CopyToAsync(outputStream, cancellationToken);
 #endif
         inputStream.TrySeek(0, SeekOrigin.Begin);

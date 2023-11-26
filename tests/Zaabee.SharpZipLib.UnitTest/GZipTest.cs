@@ -17,7 +17,7 @@ public class GZipTest
         var decompressStream = compressedStream.UnGZip();
 
         Assert.Equal(0, decompressStream.Position);
-        
+
         var result = decompressStream.ToArray();
 
         Assert.Equal(TestConsts.Data, result);

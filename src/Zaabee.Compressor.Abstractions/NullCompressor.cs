@@ -2,13 +2,14 @@
 
 public sealed class NullCompressor : ICompressor
 {
-    public byte[] Compress(byte[] rawBytes) =>
-        rawBytes.CloneNew();
+    public byte[] Compress(byte[] rawBytes) => rawBytes.CloneNew();
 
-    public byte[] Decompress(byte[] compressedBytes) =>
-        compressedBytes.CloneNew();
+    public byte[] Decompress(byte[] compressedBytes) => compressedBytes.CloneNew();
 
-    public async ValueTask<MemoryStream> CompressAsync(Stream rawStream, CancellationToken cancellationToken = default)
+    public async ValueTask<MemoryStream> CompressAsync(
+        Stream rawStream,
+        CancellationToken cancellationToken = default
+    )
     {
         var memoryStream = new MemoryStream();
 #if NETSTANDARD2_0
@@ -21,8 +22,10 @@ public sealed class NullCompressor : ICompressor
         return memoryStream;
     }
 
-    public async ValueTask<MemoryStream> DecompressAsync(Stream compressedStream,
-        CancellationToken cancellationToken = default)
+    public async ValueTask<MemoryStream> DecompressAsync(
+        Stream compressedStream,
+        CancellationToken cancellationToken = default
+    )
     {
         var memoryStream = new MemoryStream();
 #if NETSTANDARD2_0
@@ -35,8 +38,11 @@ public sealed class NullCompressor : ICompressor
         return memoryStream;
     }
 
-    public async ValueTask CompressAsync(Stream inputStream, Stream outputStream,
-        CancellationToken cancellationToken = default)
+    public async ValueTask CompressAsync(
+        Stream inputStream,
+        Stream outputStream,
+        CancellationToken cancellationToken = default
+    )
     {
 #if NETSTANDARD2_0
         await inputStream.CopyToAsync(outputStream);
@@ -47,8 +53,11 @@ public sealed class NullCompressor : ICompressor
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
-    public async ValueTask DecompressAsync(Stream inputStream, Stream outputStream,
-        CancellationToken cancellationToken = default)
+    public async ValueTask DecompressAsync(
+        Stream inputStream,
+        Stream outputStream,
+        CancellationToken cancellationToken = default
+    )
     {
 #if NETSTANDARD2_0
         await inputStream.CopyToAsync(outputStream);

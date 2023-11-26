@@ -6,12 +6,9 @@ public static partial class BrotliHelper
         string str,
         uint quality = Quality,
         uint window = Window,
-        Encoding? encoding = null) =>
-        Compress(str.GetBytes(encoding ?? Consts.DefaultEncoding), quality, window);
+        Encoding? encoding = null
+    ) => Compress(str.GetBytes(encoding ?? Consts.DefaultEncoding), quality, window);
 
-    public static string DecompressToString(
-        byte[] compressedBytes,
-        Encoding? encoding = null) =>
-        Decompress(compressedBytes)
-            .GetString(encoding ?? Consts.DefaultEncoding);
+    public static string DecompressToString(byte[] compressedBytes, Encoding? encoding = null) =>
+        Decompress(compressedBytes).GetString(encoding ?? Consts.DefaultEncoding);
 }

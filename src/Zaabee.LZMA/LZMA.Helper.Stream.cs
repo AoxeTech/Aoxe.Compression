@@ -5,25 +5,21 @@ namespace Zaabee.LZMA;
 
 public static partial class LzmaHelper
 {
-    public static MemoryStream Compress(
-        Stream inputStream)
+    public static MemoryStream Compress(Stream inputStream)
     {
         var outputStream = new MemoryStream();
         Compress(inputStream, outputStream);
         return outputStream;
     }
 
-    public static MemoryStream Decompress(
-        Stream inputStream)
+    public static MemoryStream Decompress(Stream inputStream)
     {
         var outputStream = new MemoryStream();
         Decompress(inputStream, outputStream);
         return outputStream;
     }
 
-    public static void Compress(
-        Stream inputStream,
-        Stream outputStream)
+    public static void Compress(Stream inputStream, Stream outputStream)
     {
         var encoder = new Encoder();
         encoder.WriteCoderProperties(outputStream);
@@ -34,9 +30,7 @@ public static partial class LzmaHelper
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
-    public static void Decompress(
-        Stream inputStream,
-        Stream outputStream)
+    public static void Decompress(Stream inputStream, Stream outputStream)
     {
         var decoder = new Decoder();
         var properties = new byte[5];

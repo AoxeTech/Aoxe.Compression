@@ -2,27 +2,21 @@
 
 public static partial class ZstdHelper
 {
-    public static MemoryStream Compress(
-        Stream inputStream,
-        int level = Level)
+    public static MemoryStream Compress(Stream inputStream, int level = Level)
     {
         var outputStream = new MemoryStream();
         Compress(inputStream, outputStream, level);
         return outputStream;
     }
 
-    public static MemoryStream Decompress(
-        Stream inputStream)
+    public static MemoryStream Decompress(Stream inputStream)
     {
         var outputStream = new MemoryStream();
         Decompress(inputStream, outputStream);
         return outputStream;
     }
 
-    public static void Compress(
-        Stream inputStream,
-        Stream outputStream,
-        int level = Level)
+    public static void Compress(Stream inputStream, Stream outputStream, int level = Level)
     {
         var inputBytes = inputStream.ReadToEnd();
         var outputBytes = Compress(inputBytes, level);
@@ -35,9 +29,7 @@ public static partial class ZstdHelper
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
-    public static void Decompress(
-        Stream inputStream,
-        Stream outputStream)
+    public static void Decompress(Stream inputStream, Stream outputStream)
     {
         var inputBytes = inputStream.ReadToEnd();
         var outputBytes = Decompress(inputBytes);

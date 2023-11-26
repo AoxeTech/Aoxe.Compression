@@ -17,7 +17,7 @@ public class BrotliTest
         var decompressStream = compressedStream.UnBrotli();
 
         Assert.Equal(0, compressedStream.Position);
-        
+
         var result = decompressStream.ToArray();
 
         Assert.Equal(TestConsts.Data, result);

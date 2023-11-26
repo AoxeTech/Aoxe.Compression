@@ -6,7 +6,8 @@ public static partial class XzHelper
         Stream inputStream,
         int threads = Threads,
         uint preset = Preset,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var outputStream = new MemoryStream();
         await CompressAsync(inputStream, outputStream, threads, preset, cancellationToken);
@@ -15,7 +16,8 @@ public static partial class XzHelper
 
     public static async ValueTask<MemoryStream> DecompressAsync(
         Stream inputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var outputStream = new MemoryStream();
         await DecompressAsync(inputStream, outputStream, cancellationToken);
@@ -27,7 +29,8 @@ public static partial class XzHelper
         Stream outputStream,
         int threads = Threads,
         uint preset = Preset,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
 #if NETSTANDARD2_0
         using (var xzOutputStream = new XZOutputStream(outputStream, threads, preset, true))
@@ -43,7 +46,8 @@ public static partial class XzHelper
     public static async ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
 #if NETSTANDARD2_0
         using (var xzInputStream = new XZInputStream(inputStream, true))

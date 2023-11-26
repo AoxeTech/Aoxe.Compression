@@ -2,25 +2,21 @@
 
 public static partial class Bzip2Helper
 {
-    public static MemoryStream Compress(
-        Stream inputStream)
+    public static MemoryStream Compress(Stream inputStream)
     {
         var outputStream = new MemoryStream();
         Compress(inputStream, outputStream);
         return outputStream;
     }
 
-    public static MemoryStream Decompress(
-        Stream inputStream)
+    public static MemoryStream Decompress(Stream inputStream)
     {
         var outputStream = new MemoryStream();
         Decompress(inputStream, outputStream);
         return outputStream;
     }
 
-    public static void Compress(
-        Stream inputStream,
-        Stream outputStream)
+    public static void Compress(Stream inputStream, Stream outputStream)
     {
         using (var bzip2OutputStream = new BZip2OutputStream(outputStream))
         {
@@ -31,9 +27,7 @@ public static partial class Bzip2Helper
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
-    public static void Decompress(
-        Stream inputStream,
-        Stream outputStream)
+    public static void Decompress(Stream inputStream, Stream outputStream)
     {
         using (var bzip2InputStream = new BZip2InputStream(inputStream))
         {

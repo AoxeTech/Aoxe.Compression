@@ -5,7 +5,8 @@ public static partial class ZstdHelper
     public static async ValueTask<MemoryStream> CompressAsync(
         Stream inputStream,
         int level = Level,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var outputStream = new MemoryStream();
         await CompressAsync(inputStream, outputStream, level, cancellationToken);
@@ -14,7 +15,8 @@ public static partial class ZstdHelper
 
     public static async ValueTask<MemoryStream> DecompressAsync(
         Stream inputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var outputStream = new MemoryStream();
         await DecompressAsync(inputStream, outputStream, cancellationToken);
@@ -25,7 +27,8 @@ public static partial class ZstdHelper
         Stream inputStream,
         Stream outputStream,
         int level = Level,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var inputBytes = await inputStream.ReadToEndAsync(cancellationToken: cancellationToken);
         var outputBytes = Compress(inputBytes, level);
@@ -41,7 +44,8 @@ public static partial class ZstdHelper
     public static async ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var inputBytes = await inputStream.ReadToEndAsync(cancellationToken: cancellationToken);
         var outputBytes = Decompress(inputBytes);

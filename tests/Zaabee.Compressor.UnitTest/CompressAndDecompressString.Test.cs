@@ -31,8 +31,7 @@ public class StringTest
         CompressAndDecompressString(new ZstdCompressor());
 
     [Fact]
-    public void XzCompressAndDecompressString() =>
-        CompressAndDecompressString(new XzCompressor());
+    public void XzCompressAndDecompressString() => CompressAndDecompressString(new XzCompressor());
 
     [Fact]
     public void SnappyCompressAndDecompressString() =>

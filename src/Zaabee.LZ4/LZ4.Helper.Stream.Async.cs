@@ -6,7 +6,8 @@ public static partial class Lz4Helper
         Stream inputStream,
         LZ4Level level = Level,
         int extraMemory = ExtraMemory,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var outputStream = new MemoryStream();
         await CompressAsync(inputStream, outputStream, level, extraMemory, cancellationToken);
@@ -17,7 +18,8 @@ public static partial class Lz4Helper
         Stream inputStream,
         LZ4DecoderSettings? settings = Settings,
         bool interactive = Interactive,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var outputStream = new MemoryStream();
         await DecompressAsync(inputStream, outputStream, settings, interactive, cancellationToken);
@@ -29,7 +31,8 @@ public static partial class Lz4Helper
         Stream outputStream,
         LZ4Level level = Level,
         int extraMemory = ExtraMemory,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
 #if NETSTANDARD2_0
         using (var lz4Stream = LZ4Stream.Encode(outputStream, level, extraMemory, true))
@@ -47,7 +50,8 @@ public static partial class Lz4Helper
         Stream outputStream,
         LZ4DecoderSettings? settings = Settings,
         bool interactive = Interactive,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
 #if NETSTANDARD2_0
         using (var lz4Stream = LZ4Stream.Decode(inputStream, settings, true, interactive))

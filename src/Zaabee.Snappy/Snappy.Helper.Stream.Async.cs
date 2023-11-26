@@ -4,7 +4,8 @@ public static partial class SnappyHelper
 {
     public static async ValueTask<MemoryStream> CompressAsync(
         Stream inputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var rawBytes = await inputStream.ReadToEndAsync(cancellationToken);
         var compressedBytes = IronSnappy.Snappy.Encode(rawBytes);
@@ -14,7 +15,8 @@ public static partial class SnappyHelper
 
     public static async ValueTask<MemoryStream> DecompressAsync(
         Stream inputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var compressedBytes = await inputStream.ReadToEndAsync(cancellationToken);
         var rawBytes = IronSnappy.Snappy.Decode(compressedBytes);
@@ -25,12 +27,18 @@ public static partial class SnappyHelper
     public static async ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var rawBytes = await inputStream.ReadToEndAsync(cancellationToken);
         var compressedBytes = IronSnappy.Snappy.Encode(rawBytes);
 #if NETSTANDARD2_0
-        await outputStream.WriteAsync(compressedBytes, 0, compressedBytes.Length, cancellationToken);
+        await outputStream.WriteAsync(
+            compressedBytes,
+            0,
+            compressedBytes.Length,
+            cancellationToken
+        );
 #else
         await outputStream.WriteAsync(compressedBytes, cancellationToken);
 #endif
@@ -41,7 +49,8 @@ public static partial class SnappyHelper
     public static async ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var compressedBytes = await inputStream.ReadToEndAsync(cancellationToken);
         var rawBytes = IronSnappy.Snappy.Decode(compressedBytes);

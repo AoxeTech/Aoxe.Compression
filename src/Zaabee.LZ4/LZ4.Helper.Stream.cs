@@ -5,7 +5,8 @@ public static partial class Lz4Helper
     public static MemoryStream Compress(
         Stream inputStream,
         LZ4Level level = Level,
-        int extraMemory = ExtraMemory)
+        int extraMemory = ExtraMemory
+    )
     {
         var outputStream = new MemoryStream();
         Compress(inputStream, outputStream, level, extraMemory);
@@ -15,7 +16,8 @@ public static partial class Lz4Helper
     public static MemoryStream Decompress(
         Stream inputStream,
         LZ4DecoderSettings? settings = Settings,
-        bool interactive = Interactive)
+        bool interactive = Interactive
+    )
     {
         var outputStream = new MemoryStream();
         Decompress(inputStream, outputStream, settings, interactive);
@@ -26,7 +28,8 @@ public static partial class Lz4Helper
         Stream inputStream,
         Stream outputStream,
         LZ4Level level = Level,
-        int extraMemory = ExtraMemory)
+        int extraMemory = ExtraMemory
+    )
     {
         using (var lz4Stream = LZ4Stream.Encode(outputStream, level, extraMemory, true))
             inputStream.CopyTo(lz4Stream);
@@ -38,7 +41,8 @@ public static partial class Lz4Helper
         Stream inputStream,
         Stream outputStream,
         LZ4DecoderSettings? settings = Settings,
-        bool interactive = Interactive)
+        bool interactive = Interactive
+    )
     {
         using (var lz4Stream = LZ4Stream.Decode(inputStream, settings, true, interactive))
             lz4Stream.CopyTo(outputStream);

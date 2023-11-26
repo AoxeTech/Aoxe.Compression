@@ -4,7 +4,8 @@ public static partial class GzipHelper
 {
     public static async ValueTask<MemoryStream> CompressAsync(
         Stream inputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var outputStream = new MemoryStream();
         await CompressAsync(inputStream, outputStream, cancellationToken);
@@ -13,7 +14,8 @@ public static partial class GzipHelper
 
     public static async ValueTask<MemoryStream> DecompressAsync(
         Stream inputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var outputStream = new MemoryStream();
         await DecompressAsync(inputStream, outputStream, cancellationToken);
@@ -23,7 +25,8 @@ public static partial class GzipHelper
     public static async ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
 #if NETSTANDARD2_0
         using (var gzipOutputStream = new GZipOutputStream(outputStream))
@@ -43,7 +46,8 @@ public static partial class GzipHelper
     public static async ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
 #if NETSTANDARD2_0
         using (var gzipInputStream = new GZipInputStream(inputStream))

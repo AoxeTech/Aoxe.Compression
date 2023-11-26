@@ -6,19 +6,17 @@ public static partial class BrotliExtensions
         this Stream rawStream,
         Stream outputStream,
         uint quality = BrotliHelper.Quality,
-        uint window = BrotliHelper.Window) =>
-        BrotliHelper.Compress(rawStream, outputStream, quality, window);
+        uint window = BrotliHelper.Window
+    ) => BrotliHelper.Compress(rawStream, outputStream, quality, window);
 
-    public static void UnBrotli(
-        this Stream compressedStream,
-        Stream outputStream) =>
+    public static void UnBrotli(this Stream compressedStream, Stream outputStream) =>
         BrotliHelper.Decompress(compressedStream, outputStream);
 
     public static MemoryStream ToBrotli(
         this Stream rawStream,
         uint quality = BrotliHelper.Quality,
-        uint window = BrotliHelper.Window) =>
-        BrotliHelper.Compress(rawStream, quality, window);
+        uint window = BrotliHelper.Window
+    ) => BrotliHelper.Compress(rawStream, quality, window);
 
     public static MemoryStream UnBrotli(this Stream compressedStream) =>
         BrotliHelper.Decompress(compressedStream);

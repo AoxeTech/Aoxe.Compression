@@ -2,8 +2,7 @@
 
 public static partial class SnappyHelper
 {
-    public static MemoryStream Compress(
-        Stream inputStream)
+    public static MemoryStream Compress(Stream inputStream)
     {
         var rawBytes = inputStream.ReadToEnd();
         var compressedBytes = IronSnappy.Snappy.Encode(rawBytes);
@@ -11,8 +10,7 @@ public static partial class SnappyHelper
         return new MemoryStream(compressedBytes);
     }
 
-    public static MemoryStream Decompress(
-        Stream inputStream)
+    public static MemoryStream Decompress(Stream inputStream)
     {
         var compressedBytes = inputStream.ReadToEnd();
         var rawBytes = IronSnappy.Snappy.Decode(compressedBytes);
@@ -20,9 +18,7 @@ public static partial class SnappyHelper
         return new MemoryStream(rawBytes);
     }
 
-    public static void Compress(
-        Stream inputStream,
-        Stream outputStream)
+    public static void Compress(Stream inputStream, Stream outputStream)
     {
         var rawBytes = inputStream.ReadToEnd();
         var compressedBytes = IronSnappy.Snappy.Encode(rawBytes);
@@ -31,9 +27,7 @@ public static partial class SnappyHelper
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
 
-    public static void Decompress(
-        Stream inputStream,
-        Stream outputStream)
+    public static void Decompress(Stream inputStream, Stream outputStream)
     {
         var compressedBytes = inputStream.ReadToEnd();
         var rawBytes = IronSnappy.Snappy.Decode(compressedBytes);

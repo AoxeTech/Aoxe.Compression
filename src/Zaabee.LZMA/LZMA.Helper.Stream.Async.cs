@@ -7,7 +7,8 @@ public static partial class LzmaHelper
 {
     public static async ValueTask<MemoryStream> CompressAsync(
         Stream inputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var outputStream = new MemoryStream();
         await CompressAsync(inputStream, outputStream, cancellationToken);
@@ -16,7 +17,8 @@ public static partial class LzmaHelper
 
     public static async ValueTask<MemoryStream> DecompressAsync(
         Stream inputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var outputStream = new MemoryStream();
         await DecompressAsync(inputStream, outputStream, cancellationToken);
@@ -26,14 +28,20 @@ public static partial class LzmaHelper
     public static async ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var encoder = new Encoder();
         // Write the encoder properties
         encoder.WriteCoderProperties(outputStream);
 
         // Write the decompressed file size.
-        await outputStream.WriteAsync(BitConverter.GetBytes(inputStream.Length), 0, 8, cancellationToken);
+        await outputStream.WriteAsync(
+            BitConverter.GetBytes(inputStream.Length),
+            0,
+            8,
+            cancellationToken
+        );
 
         // Encode
         encoder.Code(inputStream, outputStream, inputStream.Length, -1, null);
@@ -45,7 +53,8 @@ public static partial class LzmaHelper
     public static async ValueTask DecompressAsync(
         Stream inputStream,
         Stream outputStream,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var decoder = new Decoder();
         // Read the decoder properties
