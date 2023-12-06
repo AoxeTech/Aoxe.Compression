@@ -6,26 +6,38 @@
 public class CompressToBytes
 {
     [Benchmark]
-    public void BrotliToBytes() => BrotliHelper.Compress(Consts.RawBytes);
+    public void BrotliToBytes() => Zaabee.Brotli.BrotliHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void Bzip2ToBytes() => Bzip2Helper.Compress(Consts.RawBytes);
+    public void SharpZipLibBzip2ToBytes() => Zaabee.SharpZipLib.Bzip2Helper.Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void GzipToBytes() => GzipHelper.Compress(Consts.RawBytes);
+    public void SharpZipLibDeflateToBytes() => Zaabee.SharpZipLib.DeflateHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void Lz4ToBytes() => Lz4Helper.Compress(Consts.RawBytes);
+    public void SharpZipLibGzipToBytes() => Zaabee.SharpZipLib.GzipHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void LzmaToBytes() => LzmaHelper.Compress(Consts.RawBytes);
+    public void SystemIoCompressionBrotliToBytes() => Zaabee.SystemIoCompression.BrotliHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void SnappyToBytes() => SnappyHelper.Compress(Consts.RawBytes);
+    public void SystemIoCompressionSharpZipLibDeflateToBytes() => Zaabee.SystemIoCompression.DeflateHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void XzToBytes() => XzHelper.Compress(Consts.RawBytes);
+    public void SystemIoCompressionSharpZipLibGzipToBytes() => Zaabee.SystemIoCompression.GzipHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void ZstdToBytes() => ZstdHelper.Compress(Consts.RawBytes);
+    public void Lz4ToBytes() => Zaabee.LZ4.Lz4Helper.Compress(Consts.RawBytes);
+
+    [Benchmark]
+    public void LzmaToBytes() => Zaabee.LZMA.LzmaHelper.Compress(Consts.RawBytes);
+
+    [Benchmark]
+    public void SnappyToBytes() => Zaabee.Snappy.SnappyHelper.Compress(Consts.RawBytes);
+
+    [Benchmark]
+    public void XzToBytes() => Zaabee.XZ.XzHelper.Compress(Consts.RawBytes);
+
+    [Benchmark]
+    public void ZstdToBytes() => Zaabee.Zstd.ZstdHelper.Compress(Consts.RawBytes);
 }

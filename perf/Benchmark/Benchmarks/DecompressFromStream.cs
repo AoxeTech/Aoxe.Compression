@@ -5,40 +5,52 @@
 [MinColumn, MaxColumn, MeanColumn, MedianColumn]
 public class DecompressFromStream
 {
-    private static readonly MemoryStream BrotliCompressStream = BrotliHelper.Compress(
-        Consts.RawStream
-    );
-    private static readonly MemoryStream BzipCompressStream = Bzip2Helper.Compress(
-        Consts.RawStream
-    );
-    private static readonly MemoryStream GzipCompressStream = GzipHelper.Compress(Consts.RawStream);
-    private static readonly MemoryStream Lz4CompressStream = Lz4Helper.Compress(Consts.RawStream);
-    private static readonly MemoryStream LzmaCompressStream = LzmaHelper.Compress(Consts.RawStream);
-    private static readonly MemoryStream XzCompressStream = XzHelper.Compress(Consts.RawStream);
-    private static readonly MemoryStream ZstdCompressStream = ZstdHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream BrotliCompressStream = Zaabee.Brotli.BrotliHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream SharpZipLibBzip2CompressStream = Zaabee.SharpZipLib.Bzip2Helper.Compress(Consts.RawStream);
+    private static readonly MemoryStream SharpZipLibDeflateCompressStream = Zaabee.SharpZipLib.DeflateHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream SharpZipLibGzipCompressStream = Zaabee.SharpZipLib.GzipHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream SystemIoCompressionBrotliCompressStream = Zaabee.SystemIoCompression.BrotliHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream SystemIoCompressionDeflateCompressStream = Zaabee.SystemIoCompression.DeflateHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream SystemIoCompressionGzipCompressStream = Zaabee.SystemIoCompression.GzipHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream Lz4CompressStream = Zaabee.LZ4.Lz4Helper.Compress(Consts.RawStream);
+    private static readonly MemoryStream LzmaCompressStream = Zaabee.LZMA.LzmaHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream SnappyCompressStream = Zaabee.Snappy.SnappyHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream XzCompressStream = Zaabee.XZ.XzHelper.Compress(Consts.RawStream);
+    private static readonly MemoryStream ZstdCompressStream = Zaabee.Zstd.ZstdHelper.Compress(Consts.RawStream);
 
     [Benchmark]
-    public void BrotliFromStream() =>
-        BrotliHelper.Decompress(BrotliCompressStream, new MemoryStream());
+    public void BrotliFromStream() => Zaabee.Brotli.BrotliHelper.Decompress(BrotliCompressStream, new MemoryStream());
 
     [Benchmark]
-    public void Bzip2FromStream() => Bzip2Helper.Decompress(BzipCompressStream, new MemoryStream());
+    public void SharpZipLibBzip2FromStream() => Zaabee.SharpZipLib.Bzip2Helper.Decompress(SharpZipLibBzip2CompressStream, new MemoryStream());
 
     [Benchmark]
-    public void GzipFromStream() => GzipHelper.Decompress(GzipCompressStream, new MemoryStream());
+    public void SharpZipLibDeflateFromStream() => Zaabee.SharpZipLib.DeflateHelper.Decompress(SharpZipLibDeflateCompressStream, new MemoryStream());
 
     [Benchmark]
-    public void Lz4FromStream() => Lz4Helper.Decompress(Lz4CompressStream, new MemoryStream());
+    public void SharpZipLibGzipFromStream() => Zaabee.SharpZipLib.GzipHelper.Decompress(SharpZipLibGzipCompressStream, new MemoryStream());
 
     [Benchmark]
-    public void LzmaFromStream() => LzmaHelper.Decompress(LzmaCompressStream, new MemoryStream());
+    public void SystemIoCompressionBzip2FromStream() => Zaabee.SystemIoCompression.BrotliHelper.Decompress(SystemIoCompressionBrotliCompressStream, new MemoryStream());
 
     [Benchmark]
-    public void SnappyFromStream() => SnappyHelper.Decompress(XzCompressStream, new MemoryStream());
+    public void SystemIoCompressionDeflateFromStream() => Zaabee.SystemIoCompression.DeflateHelper.Decompress(SystemIoCompressionDeflateCompressStream, new MemoryStream());
 
     [Benchmark]
-    public void XzFromStream() => XzHelper.Decompress(XzCompressStream, new MemoryStream());
+    public void SystemIoCompressionGzipFromStream() => Zaabee.SystemIoCompression.GzipHelper.Decompress(SystemIoCompressionGzipCompressStream, new MemoryStream());
 
     [Benchmark]
-    public void ZstdFromStream() => ZstdHelper.Decompress(ZstdCompressStream, new MemoryStream());
+    public void Lz4FromStream() => Zaabee.LZ4.Lz4Helper.Decompress(Lz4CompressStream, new MemoryStream());
+
+    [Benchmark]
+    public void LzmaFromStream() => Zaabee.LZMA.LzmaHelper.Decompress(LzmaCompressStream, new MemoryStream());
+
+    [Benchmark]
+    public void SnappyFromStream() => Zaabee.Snappy.SnappyHelper.Decompress(SnappyCompressStream, new MemoryStream());
+
+    [Benchmark]
+    public void XzFromStream() => Zaabee.XZ.XzHelper.Decompress(XzCompressStream, new MemoryStream());
+
+    [Benchmark]
+    public void ZstdFromStream() => Zaabee.Zstd.ZstdHelper.Decompress(ZstdCompressStream, new MemoryStream());
 }
