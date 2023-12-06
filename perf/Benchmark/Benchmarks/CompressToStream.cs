@@ -24,7 +24,7 @@ public class CompressToStream
     public void SystemIoCompressionDeflateToStream() => Zaabee.SystemIoCompression.DeflateHelper.Compress(Consts.RawStream, new MemoryStream());
 
     [Benchmark]
-    public void SystemIoCompressionToStream() => Zaabee.SystemIoCompression.GzipHelper.Compress(Consts.RawStream, new MemoryStream());
+    public void SystemIoCompressionGzipToStream() => Zaabee.SystemIoCompression.GzipHelper.Compress(Consts.RawStream, new MemoryStream());
 
     [Benchmark]
     public void Lz4ToStream() => Zaabee.LZ4.Lz4Helper.Compress(Consts.RawStream, new MemoryStream());

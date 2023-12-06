@@ -21,10 +21,10 @@ public class CompressToBytes
     public void SystemIoCompressionBrotliToBytes() => Zaabee.SystemIoCompression.BrotliHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void SystemIoCompressionSharpZipLibDeflateToBytes() => Zaabee.SystemIoCompression.DeflateHelper.Compress(Consts.RawBytes);
+    public void SystemIoCompressionDeflateToBytes() => Zaabee.SystemIoCompression.DeflateHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void SystemIoCompressionSharpZipLibGzipToBytes() => Zaabee.SystemIoCompression.GzipHelper.Compress(Consts.RawBytes);
+    public void SystemIoCompressionGzipToBytes() => Zaabee.SystemIoCompression.GzipHelper.Compress(Consts.RawBytes);
 
     [Benchmark]
     public void Lz4ToBytes() => Zaabee.LZ4.Lz4Helper.Compress(Consts.RawBytes);
