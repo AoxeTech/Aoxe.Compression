@@ -5,11 +5,12 @@ public static partial class BrotliHelper
 {
     public static async ValueTask<MemoryStream> CompressAsync(
         Stream inputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal,
         CancellationToken cancellationToken = default
     )
     {
         var outputStream = new MemoryStream();
-        await CompressAsync(inputStream, outputStream, cancellationToken);
+        await CompressAsync(inputStream, outputStream, compressionLevel, cancellationToken);
         return outputStream;
     }
 
@@ -26,15 +27,16 @@ public static partial class BrotliHelper
     public static async ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal,
         CancellationToken cancellationToken = default
     )
     {
 #if NETSTANDARD2_0
-        using (var brotliOutputStream = new BrotliStream(outputStream, CompressionMode.Compress, true))
+        using (var brotliOutputStream = new BrotliStream(outputStream, compressionLevel, true))
         {
             await inputStream.CopyToAsync(brotliOutputStream);
 #else
-        await using (var brotliOutputStream = new BrotliStream(outputStream, CompressionMode.Compress, true))
+        await using (var brotliOutputStream = new BrotliStream(outputStream, compressionLevel, true))
         {
             await inputStream.CopyToAsync(brotliOutputStream, cancellationToken);
 #endif

@@ -6,8 +6,9 @@ public static partial class BrotliExtensions
     public static ValueTask ToBrotliAsync(
         this Stream rawStream,
         Stream outputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal,
         CancellationToken cancellationToken = default
-    ) => BrotliHelper.CompressAsync(rawStream, outputStream, cancellationToken);
+    ) => BrotliHelper.CompressAsync(rawStream, outputStream, compressionLevel, cancellationToken);
 
     public static ValueTask UnBrotliAsync(
         this Stream compressedStream,
@@ -17,8 +18,9 @@ public static partial class BrotliExtensions
 
     public static ValueTask<MemoryStream> ToBrotliAsync(
         this Stream rawStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal,
         CancellationToken cancellationToken = default
-    ) => BrotliHelper.CompressAsync(rawStream, cancellationToken);
+    ) => BrotliHelper.CompressAsync(rawStream, compressionLevel, cancellationToken);
 
     public static ValueTask<MemoryStream> UnBrotliAsync(
         this Stream compressedStream,
