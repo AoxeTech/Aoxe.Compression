@@ -5,5 +5,6 @@ global using System.Text;
 global using System.Threading.Tasks;
 global using ICSharpCode.SharpZipLib.BZip2;
 global using ICSharpCode.SharpZipLib.GZip;
+global using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 global using Zaabee.Compressor.Abstractions;
 global using Zaabee.Extensions;
