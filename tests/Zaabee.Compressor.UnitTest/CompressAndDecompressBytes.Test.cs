@@ -1,6 +1,6 @@
 ﻿namespace Zaabee.Compressor.UnitTest;
 
-public class BytesTest
+public partial class CompressorTest
 {
     [Fact]
     public void NullCompressToBytesAndDecompressToBytesTest() =>
@@ -8,7 +8,7 @@ public class BytesTest
 
     [Fact]
     public void BrotliCompressToBytesAndDecompressToBytesTest() =>
-        CompressToBytesAndDecompressToBytesTest(new BrotliCompressor());
+        CompressToBytesAndDecompressToBytesTest(new Brotli.BrotliCompressor());
 
     [Fact]
     public void LzmaCompressToBytesAndDecompressToBytesTest() =>
@@ -19,12 +19,16 @@ public class BytesTest
         CompressToBytesAndDecompressToBytesTest(new Lz4Compressor());
 
     [Fact]
-    public void Bzip2CompressToBytesAndDecompressToBytesTest() =>
+    public void SharpZipLibBzip2CompressToBytesAndDecompressToBytesTest() =>
         CompressToBytesAndDecompressToBytesTest(new Bzip2Compressor());
 
     [Fact]
-    public void GzipCompressToBytesAndDecompressToBytesTest() =>
-        CompressToBytesAndDecompressToBytesTest(new GzipCompressor());
+    public void SharpZipLibDeflateCompressToBytesAndDecompressToBytesTest() =>
+        CompressToBytesAndDecompressToBytesTest(new SharpZipLib.DeflateCompressor());
+
+    [Fact]
+    public void SharpZipLibGzipCompressToBytesAndDecompressToBytesTest() =>
+        CompressToBytesAndDecompressToBytesTest(new SharpZipLib.GzipCompressor());
 
     [Fact]
     public void ZstdCompressToBytesAndDecompressToBytesTest() =>
@@ -37,6 +41,20 @@ public class BytesTest
     [Fact]
     public void SnappyCompressToBytesAndDecompressToBytesTest() =>
         CompressToBytesAndDecompressToBytesTest(new SnappyCompressor());
+
+#if !NET48
+    [Fact]
+    public void SystemIoCompressionBrotliCompressToBytesAndDecompressToBytesTest() =>
+        CompressToBytesAndDecompressToBytesTest(new SystemIoCompression.BrotliCompressor());
+#endif
+
+    [Fact]
+    public void SystemIoCompressionDeflateCompressToBytesAndDecompressToBytesTest() =>
+        CompressToBytesAndDecompressToBytesTest(new SystemIoCompression.DeflateCompressor());
+
+    [Fact]
+    public void SystemIoCompressionGzipCompressToBytesAndDecompressToBytesTest() =>
+        CompressToBytesAndDecompressToBytesTest(new SystemIoCompression.GzipCompressor());
 
     private void CompressToBytesAndDecompressToBytesTest(ICompressor compressor)
     {

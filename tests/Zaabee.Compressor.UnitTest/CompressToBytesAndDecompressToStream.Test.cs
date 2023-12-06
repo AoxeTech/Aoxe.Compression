@@ -1,6 +1,6 @@
 ﻿namespace Zaabee.Compressor.UnitTest;
 
-public class StreamTest
+public partial class CompressorTest
 {
     [Fact]
     public void NullCompressToBytesAndDecompressToStreamTest() =>
@@ -8,7 +8,7 @@ public class StreamTest
 
     [Fact]
     public void BrotliCompressToBytesAndDecompressToStreamTest() =>
-        CompressToBytesAndDecompressToStreamTest(new BrotliCompressor());
+        CompressToBytesAndDecompressToStreamTest(new Brotli.BrotliCompressor());
 
     [Fact]
     public void LzmaCompressToBytesAndDecompressToStreamTest() =>
@@ -19,12 +19,30 @@ public class StreamTest
         CompressToBytesAndDecompressToStreamTest(new Lz4Compressor());
 
     [Fact]
-    public void Bzip2CompressToBytesAndDecompressToStreamTest() =>
+    public void SharpZipLibBzip2CompressToBytesAndDecompressToStreamTest() =>
         CompressToBytesAndDecompressToStreamTest(new Bzip2Compressor());
 
     [Fact]
-    public void GzipCompressToBytesAndDecompressToStreamTest() =>
-        CompressToBytesAndDecompressToStreamTest(new GzipCompressor());
+    public void SharpZipLibDeflateCompressToBytesAndDecompressToStreamTest() =>
+        CompressToBytesAndDecompressToStreamTest(new SharpZipLib.DeflateCompressor());
+
+    [Fact]
+    public void SharpZipLibGzipCompressToBytesAndDecompressToStreamTest() =>
+        CompressToBytesAndDecompressToStreamTest(new SharpZipLib.GzipCompressor());
+
+#if !NET48
+    [Fact]
+    public void SystemIoCompressionBrotliCompressToBytesAndDecompressToStreamTest() =>
+        CompressToBytesAndDecompressToStreamTest(new SystemIoCompression.BrotliCompressor());
+#endif
+
+    [Fact]
+    public void SystemIoCompressionDeflateCompressToBytesAndDecompressToStreamTest() =>
+        CompressToBytesAndDecompressToStreamTest(new SystemIoCompression.DeflateCompressor());
+
+    [Fact]
+    public void SystemIoCompressionGzipCompressToBytesAndDecompressToStreamTest() =>
+        CompressToBytesAndDecompressToStreamTest(new SystemIoCompression.GzipCompressor());
 
     [Fact]
     public void ZstdCompressToBytesAndDecompressToStreamTest() =>

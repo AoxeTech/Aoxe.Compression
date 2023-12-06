@@ -1,6 +1,6 @@
 ﻿namespace Zaabee.Compressor.UnitTest;
 
-public class StringTest
+public partial class CompressorTest
 {
     [Fact]
     public void NullCompressAndDecompressString() =>
@@ -8,7 +8,7 @@ public class StringTest
 
     [Fact]
     public void BrotliCompressAndDecompressString() =>
-        CompressAndDecompressString(new BrotliCompressor());
+        CompressAndDecompressString(new Brotli.BrotliCompressor());
 
     [Fact]
     public void LzmaCompressAndDecompressString() =>
@@ -19,12 +19,30 @@ public class StringTest
         CompressAndDecompressString(new Lz4Compressor());
 
     [Fact]
-    public void Bzip2CompressAndDecompressString() =>
+    public void SharpZipLibBzip2CompressAndDecompressString() =>
         CompressAndDecompressString(new Bzip2Compressor());
 
     [Fact]
-    public void GzipCompressAndDecompressString() =>
-        CompressAndDecompressString(new GzipCompressor());
+    public void SharpZipLibDeflateCompressAndDecompressString() =>
+        CompressAndDecompressString(new SharpZipLib.DeflateCompressor());
+
+    [Fact]
+    public void SharpZipLibGzipCompressAndDecompressString() =>
+        CompressAndDecompressString(new SharpZipLib.GzipCompressor());
+
+#if !NET48
+    [Fact]
+    public void SystemIoCompressionBrotliCompressAndDecompressString() =>
+        CompressAndDecompressString(new SystemIoCompression.BrotliCompressor());
+#endif
+
+    [Fact]
+    public void SystemIoCompressionDeflateCompressAndDecompressString() =>
+        CompressAndDecompressString(new SystemIoCompression.DeflateCompressor());
+
+    [Fact]
+    public void SystemIoCompressionGzipCompressAndDecompressString() =>
+        CompressAndDecompressString(new SystemIoCompression.GzipCompressor());
 
     [Fact]
     public void ZstdCompressAndDecompressString() =>
@@ -36,6 +54,10 @@ public class StringTest
     [Fact]
     public void SnappyCompressAndDecompressString() =>
         CompressAndDecompressString(new SnappyCompressor());
+    
+    [Fact]
+    public void SystemIoCompressionGZipCompressAndDecompressString() =>
+        CompressAndDecompressString(new SystemIoCompression.GzipCompressor());
 
     private void CompressAndDecompressString(ICompressor compressor)
     {

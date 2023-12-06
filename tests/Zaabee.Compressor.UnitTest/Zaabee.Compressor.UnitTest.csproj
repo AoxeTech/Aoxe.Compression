@@ -27,6 +27,7 @@
       <ProjectReference Include="..\..\src\Zaabee.LZMA\Zaabee.LZMA.csproj" />
       <ProjectReference Include="..\..\src\Zaabee.SharpZipLib\Zaabee.SharpZipLib.csproj" />
       <ProjectReference Include="..\..\src\Zaabee.Snappy\Zaabee.Snappy.csproj" />
+      <ProjectReference Include="..\..\src\Zaabee.SystemIoCompression\Zaabee.SystemIoCompression.csproj" />
       <ProjectReference Include="..\..\src\Zaabee.XZ\Zaabee.XZ.csproj" />
       <ProjectReference Include="..\..\src\Zaabee.Zstd\Zaabee.Zstd.csproj" />
       <ProjectReference Include="..\TestModel\TestModel.csproj" />
