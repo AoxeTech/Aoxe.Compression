@@ -5,8 +5,9 @@ public static partial class DeflateExtensions
     public static ValueTask ToDeflateAsync(
         this Stream rawStream,
         Stream outputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal,
         CancellationToken cancellationToken = default
-    ) => DeflateHelper.CompressAsync(rawStream, outputStream, cancellationToken);
+    ) => DeflateHelper.CompressAsync(rawStream, outputStream, compressionLevel, cancellationToken);
 
     public static ValueTask UnDeflateAsync(
         this Stream compressedStream,
@@ -16,8 +17,9 @@ public static partial class DeflateExtensions
 
     public static ValueTask<MemoryStream> ToDeflateAsync(
         this Stream rawStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal,
         CancellationToken cancellationToken = default
-    ) => DeflateHelper.CompressAsync(rawStream, cancellationToken);
+    ) => DeflateHelper.CompressAsync(rawStream, compressionLevel, cancellationToken);
 
     public static ValueTask<MemoryStream> UnDeflateAsync(
         this Stream compressedStream,
