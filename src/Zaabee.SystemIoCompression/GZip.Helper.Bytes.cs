@@ -2,10 +2,10 @@
 
 public static partial class GzipHelper
 {
-    public static byte[] Compress(byte[] rawBytes)
+    public static byte[] Compress(byte[] rawBytes, CompressionLevel compressionLevel = CompressionLevel.Optimal)
     {
         var outputStream = new MemoryStream();
-        using (var gzipOutputStream = new GZipStream(outputStream, CompressionMode.Compress, true))
+        using (var gzipOutputStream = new GZipStream(outputStream, compressionLevel, true))
             rawBytes.WriteTo(gzipOutputStream);
         return outputStream.ToArray();
     }

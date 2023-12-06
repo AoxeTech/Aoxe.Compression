@@ -4,11 +4,12 @@ public static partial class GzipHelper
 {
     public static async ValueTask<MemoryStream> CompressAsync(
         Stream inputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal,
         CancellationToken cancellationToken = default
     )
     {
         var outputStream = new MemoryStream();
-        await CompressAsync(inputStream, outputStream, cancellationToken);
+        await CompressAsync(inputStream, outputStream, compressionLevel, cancellationToken);
         return outputStream;
     }
 
@@ -25,15 +26,16 @@ public static partial class GzipHelper
     public static async ValueTask CompressAsync(
         Stream inputStream,
         Stream outputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal,
         CancellationToken cancellationToken = default
     )
     {
 #if NETSTANDARD2_0
-        using (var gzipOutputStream = new GZipStream(outputStream, CompressionMode.Compress, true))
+        using (var gzipOutputStream = new GZipStream(outputStream, compressionLevel, true))
         {
             await inputStream.CopyToAsync(gzipOutputStream);
 #else
-        await using (var gzipOutputStream = new GZipStream(outputStream, CompressionMode.Compress, true))
+        await using (var gzipOutputStream = new GZipStream(outputStream, compressionLevel, true))
         {
             await inputStream.CopyToAsync(gzipOutputStream, cancellationToken);
 #endif

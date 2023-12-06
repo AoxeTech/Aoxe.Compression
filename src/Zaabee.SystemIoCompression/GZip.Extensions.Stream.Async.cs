@@ -5,8 +5,9 @@ public static partial class GzipExtensions
     public static ValueTask ToGZipAsync(
         this Stream rawStream,
         Stream outputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal,
         CancellationToken cancellationToken = default
-    ) => GzipHelper.CompressAsync(rawStream, outputStream, cancellationToken);
+    ) => GzipHelper.CompressAsync(rawStream, outputStream, compressionLevel, cancellationToken);
 
     public static ValueTask UnGZipAsync(
         this Stream compressedStream,
@@ -16,8 +17,9 @@ public static partial class GzipExtensions
 
     public static ValueTask<MemoryStream> ToGZipAsync(
         this Stream rawStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal,
         CancellationToken cancellationToken = default
-    ) => GzipHelper.CompressAsync(rawStream, cancellationToken);
+    ) => GzipHelper.CompressAsync(rawStream, compressionLevel, cancellationToken);
 
     public static ValueTask<MemoryStream> UnGZipAsync(
         this Stream compressedStream,

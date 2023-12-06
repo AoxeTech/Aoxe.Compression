@@ -2,10 +2,17 @@
 
 public sealed class GzipCompressor : ICompressor
 {
+    private readonly CompressionLevel _compressionLevel;
+
+    public GzipCompressor(CompressionLevel compressionLevel = CompressionLevel.Optimal)
+    {
+        _compressionLevel = compressionLevel;
+    }
+
     public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,
         CancellationToken cancellationToken = default
-    ) => rawStream.ToGZipAsync(cancellationToken);
+    ) => rawStream.ToGZipAsync(_compressionLevel, cancellationToken);
 
     public ValueTask<MemoryStream> DecompressAsync(
         Stream compressedStream,
@@ -16,7 +23,7 @@ public sealed class GzipCompressor : ICompressor
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default
-    ) => inputStream.ToGZipAsync(outputStream, cancellationToken);
+    ) => inputStream.ToGZipAsync(outputStream, _compressionLevel, cancellationToken);
 
     public ValueTask DecompressAsync(
         Stream inputStream,
@@ -24,16 +31,16 @@ public sealed class GzipCompressor : ICompressor
         CancellationToken cancellationToken = default
     ) => inputStream.UnGZipAsync(outputStream, cancellationToken);
 
-    public byte[] Compress(byte[] rawBytes) => rawBytes.ToGZip();
+    public byte[] Compress(byte[] rawBytes) => rawBytes.ToGZip(_compressionLevel);
 
     public byte[] Decompress(byte[] compressedBytes) => compressedBytes.UnGZip();
 
-    public MemoryStream Compress(Stream rawStream) => rawStream.ToGZip();
+    public MemoryStream Compress(Stream rawStream) => rawStream.ToGZip(_compressionLevel);
 
     public MemoryStream Decompress(Stream compressedStream) => compressedStream.UnGZip();
 
     public void Compress(Stream inputStream, Stream outputStream) =>
-        inputStream.ToGZip(outputStream);
+        inputStream.ToGZip(outputStream, _compressionLevel);
 
     public void Decompress(Stream inputStream, Stream outputStream) =>
         inputStream.UnGZip(outputStream);
