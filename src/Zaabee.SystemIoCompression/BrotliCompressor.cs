@@ -1,19 +1,12 @@
 ﻿#if !NETSTANDARD2_0
 namespace Zaabee.SystemIoCompression;
 
-public sealed class BrotliCompressor : ICompressor
+public sealed class BrotliCompressor(CompressionLevel compressionLevel = CompressionLevel.Optimal) : ICompressor
 {
-    private readonly CompressionLevel _compressionLevel;
-
-    public BrotliCompressor(CompressionLevel compressionLevel = CompressionLevel.Optimal)
-    {
-        _compressionLevel = compressionLevel;
-    }
-
     public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,
         CancellationToken cancellationToken = default
-    ) => rawStream.ToBrotliAsync(_compressionLevel, cancellationToken);
+    ) => rawStream.ToBrotliAsync(compressionLevel, cancellationToken);
 
     public ValueTask<MemoryStream> DecompressAsync(
         Stream compressedStream,
@@ -24,7 +17,7 @@ public sealed class BrotliCompressor : ICompressor
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default
-    ) => inputStream.ToBrotliAsync(outputStream, _compressionLevel, cancellationToken);
+    ) => inputStream.ToBrotliAsync(outputStream, compressionLevel, cancellationToken);
 
     public ValueTask DecompressAsync(
         Stream inputStream,
@@ -32,16 +25,16 @@ public sealed class BrotliCompressor : ICompressor
         CancellationToken cancellationToken = default
     ) => inputStream.UnBrotliAsync(outputStream, cancellationToken);
 
-    public byte[] Compress(byte[] rawBytes) => rawBytes.ToBrotli(_compressionLevel);
+    public byte[] Compress(byte[] rawBytes) => rawBytes.ToBrotli(compressionLevel);
 
     public byte[] Decompress(byte[] compressedBytes) => compressedBytes.UnBrotli();
 
-    public MemoryStream Compress(Stream rawStream) => rawStream.ToBrotli(_compressionLevel);
+    public MemoryStream Compress(Stream rawStream) => rawStream.ToBrotli(compressionLevel);
 
     public MemoryStream Decompress(Stream compressedStream) => compressedStream.UnBrotli();
 
     public void Compress(Stream inputStream, Stream outputStream) =>
-        inputStream.ToBrotli(outputStream, _compressionLevel);
+        inputStream.ToBrotli(outputStream, compressionLevel);
 
     public void Decompress(Stream inputStream, Stream outputStream) =>
         inputStream.UnBrotli(outputStream);

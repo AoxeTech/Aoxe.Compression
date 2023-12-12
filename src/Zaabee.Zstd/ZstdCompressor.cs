@@ -1,18 +1,11 @@
 ﻿namespace Zaabee.Zstd;
 
-public sealed class ZstdCompressor : ICompressor
+public sealed class ZstdCompressor(int level = ZstdHelper.Level) : ICompressor
 {
-    private readonly int _level;
-
-    public ZstdCompressor(int level = ZstdHelper.Level)
-    {
-        _level = level;
-    }
-
     public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,
         CancellationToken cancellationToken = default
-    ) => rawStream.ToZstdAsync(_level, cancellationToken);
+    ) => rawStream.ToZstdAsync(level, cancellationToken);
 
     public ValueTask<MemoryStream> DecompressAsync(
         Stream compressedStream,
@@ -23,7 +16,7 @@ public sealed class ZstdCompressor : ICompressor
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default
-    ) => inputStream.ToZstdAsync(outputStream, _level, cancellationToken);
+    ) => inputStream.ToZstdAsync(outputStream, level, cancellationToken);
 
     public ValueTask DecompressAsync(
         Stream inputStream,
@@ -31,16 +24,16 @@ public sealed class ZstdCompressor : ICompressor
         CancellationToken cancellationToken = default
     ) => inputStream.UnZstdAsync(outputStream, cancellationToken);
 
-    public byte[] Compress(byte[] rawBytes) => rawBytes.ToZstd(_level);
+    public byte[] Compress(byte[] rawBytes) => rawBytes.ToZstd(level);
 
     public byte[] Decompress(byte[] compressedBytes) => compressedBytes.UnZstd();
 
-    public MemoryStream Compress(Stream rawStream) => rawStream.ToZstd(_level);
+    public MemoryStream Compress(Stream rawStream) => rawStream.ToZstd(level);
 
     public MemoryStream Decompress(Stream compressedStream) => compressedStream.UnZstd();
 
     public void Compress(Stream inputStream, Stream outputStream) =>
-        inputStream.ToZstd(outputStream, _level);
+        inputStream.ToZstd(outputStream, level);
 
     public void Decompress(Stream inputStream, Stream outputStream) =>
         inputStream.UnZstd(outputStream);

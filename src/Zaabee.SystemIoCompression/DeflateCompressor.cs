@@ -1,18 +1,11 @@
 ﻿namespace Zaabee.SystemIoCompression;
 
-public sealed class DeflateCompressor : ICompressor
+public sealed class DeflateCompressor(CompressionLevel compressionLevel = CompressionLevel.Optimal) : ICompressor
 {
-    private readonly CompressionLevel _compressionLevel;
-
-    public DeflateCompressor(CompressionLevel compressionLevel = CompressionLevel.Optimal)
-    {
-        _compressionLevel = compressionLevel;
-    }
-
     public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,
         CancellationToken cancellationToken = default
-    ) => rawStream.ToDeflateAsync(_compressionLevel, cancellationToken);
+    ) => rawStream.ToDeflateAsync(compressionLevel, cancellationToken);
 
     public ValueTask<MemoryStream> DecompressAsync(
         Stream compressedStream,
@@ -23,7 +16,7 @@ public sealed class DeflateCompressor : ICompressor
         Stream inputStream,
         Stream outputStream,
         CancellationToken cancellationToken = default
-    ) => inputStream.ToDeflateAsync(outputStream, _compressionLevel, cancellationToken);
+    ) => inputStream.ToDeflateAsync(outputStream, compressionLevel, cancellationToken);
 
     public ValueTask DecompressAsync(
         Stream inputStream,
@@ -31,16 +24,16 @@ public sealed class DeflateCompressor : ICompressor
         CancellationToken cancellationToken = default
     ) => inputStream.UnDeflateAsync(outputStream, cancellationToken);
 
-    public byte[] Compress(byte[] rawBytes) => rawBytes.ToDeflate(_compressionLevel);
+    public byte[] Compress(byte[] rawBytes) => rawBytes.ToDeflate(compressionLevel);
 
     public byte[] Decompress(byte[] compressedBytes) => compressedBytes.UnDeflate();
 
-    public MemoryStream Compress(Stream rawStream) => rawStream.ToDeflate(_compressionLevel);
+    public MemoryStream Compress(Stream rawStream) => rawStream.ToDeflate(compressionLevel);
 
     public MemoryStream Decompress(Stream compressedStream) => compressedStream.UnDeflate();
 
     public void Compress(Stream inputStream, Stream outputStream) =>
-        inputStream.ToDeflate(outputStream, _compressionLevel);
+        inputStream.ToDeflate(outputStream, compressionLevel);
 
     public void Decompress(Stream inputStream, Stream outputStream) =>
         inputStream.UnDeflate(outputStream);
