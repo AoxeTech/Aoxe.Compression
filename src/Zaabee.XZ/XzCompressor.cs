@@ -1,8 +1,6 @@
 ﻿namespace Zaabee.XZ;
 
-public sealed class XzCompressor(
-    int threads = XzHelper.Threads,
-    uint preset = XzHelper.Preset)
+public sealed class XzCompressor(int threads = XzHelper.Threads, uint preset = XzHelper.Preset)
     : ICompressor
 {
     public ValueTask<MemoryStream> CompressAsync(

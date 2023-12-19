@@ -36,7 +36,9 @@ public static partial class BrotliHelper
         {
             await inputStream.CopyToAsync(brotliOutputStream);
 #else
-        await using (var brotliOutputStream = new BrotliStream(outputStream, compressionLevel, true))
+        await using (
+            var brotliOutputStream = new BrotliStream(outputStream, compressionLevel, true)
+        )
         {
             await inputStream.CopyToAsync(brotliOutputStream, cancellationToken);
 #endif
@@ -56,7 +58,9 @@ public static partial class BrotliHelper
         {
             await brotliInputStream.CopyToAsync(outputStream);
 #else
-        await using (var brotliInputStream = new BrotliStream(inputStream, CompressionMode.Decompress, true))
+        await using (
+            var brotliInputStream = new BrotliStream(inputStream, CompressionMode.Decompress, true)
+        )
         {
             await brotliInputStream.CopyToAsync(outputStream, cancellationToken);
 #endif

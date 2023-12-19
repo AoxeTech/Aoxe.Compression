@@ -2,8 +2,8 @@
 
 public sealed class BrotliCompressor(
     uint quality = BrotliHelper.Quality,
-    uint window = BrotliHelper.Window)
-    : ICompressor
+    uint window = BrotliHelper.Window
+) : ICompressor
 {
     public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,

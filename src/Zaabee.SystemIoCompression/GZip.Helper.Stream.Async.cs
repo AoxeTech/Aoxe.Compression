@@ -55,7 +55,9 @@ public static partial class GzipHelper
         {
             await gzipInputStream.CopyToAsync(outputStream);
 #else
-        await using (var gzipInputStream = new GZipStream(inputStream, CompressionMode.Decompress, true))
+        await using (
+            var gzipInputStream = new GZipStream(inputStream, CompressionMode.Decompress, true)
+        )
         {
             await gzipInputStream.CopyToAsync(outputStream, cancellationToken);
 #endif

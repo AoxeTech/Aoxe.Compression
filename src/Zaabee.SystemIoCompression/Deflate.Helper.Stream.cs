@@ -2,7 +2,10 @@
 
 public static partial class DeflateHelper
 {
-    public static MemoryStream Compress(Stream inputStream, CompressionLevel compressionLevel = CompressionLevel.Optimal)
+    public static MemoryStream Compress(
+        Stream inputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal
+    )
     {
         var outputStream = new MemoryStream();
         Compress(inputStream, outputStream, compressionLevel);
@@ -16,7 +19,11 @@ public static partial class DeflateHelper
         return outputStream;
     }
 
-    public static void Compress(Stream inputStream, Stream outputStream, CompressionLevel compressionLevel = CompressionLevel.Optimal)
+    public static void Compress(
+        Stream inputStream,
+        Stream outputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal
+    )
     {
         using (var deflateOutputStream = new DeflateStream(outputStream, compressionLevel, true))
         {
@@ -28,7 +35,13 @@ public static partial class DeflateHelper
 
     public static void Decompress(Stream inputStream, Stream outputStream)
     {
-        using (var deflateInputStream = new DeflateStream(inputStream, CompressionMode.Decompress, true))
+        using (
+            var deflateInputStream = new DeflateStream(
+                inputStream,
+                CompressionMode.Decompress,
+                true
+            )
+        )
         {
             deflateInputStream.CopyTo(outputStream);
         }

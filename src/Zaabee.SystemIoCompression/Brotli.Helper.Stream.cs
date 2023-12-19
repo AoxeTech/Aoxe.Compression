@@ -3,7 +3,10 @@ namespace Zaabee.SystemIoCompression;
 
 public static partial class BrotliHelper
 {
-    public static MemoryStream Compress(Stream inputStream, CompressionLevel compressionLevel = CompressionLevel.Optimal)
+    public static MemoryStream Compress(
+        Stream inputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal
+    )
     {
         var outputStream = new MemoryStream();
         Compress(inputStream, outputStream, compressionLevel);
@@ -17,7 +20,11 @@ public static partial class BrotliHelper
         return outputStream;
     }
 
-    public static void Compress(Stream inputStream, Stream outputStream, CompressionLevel compressionLevel = CompressionLevel.Optimal)
+    public static void Compress(
+        Stream inputStream,
+        Stream outputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal
+    )
     {
         using (var brotliOutputStream = new BrotliStream(outputStream, compressionLevel, true))
         {
@@ -29,7 +36,9 @@ public static partial class BrotliHelper
 
     public static void Decompress(Stream inputStream, Stream outputStream)
     {
-        using (var brotliInputStream = new BrotliStream(inputStream, CompressionMode.Decompress, true))
+        using (
+            var brotliInputStream = new BrotliStream(inputStream, CompressionMode.Decompress, true)
+        )
         {
             brotliInputStream.CopyTo(outputStream);
         }

@@ -4,8 +4,8 @@ public sealed class Lz4Compressor(
     LZ4Level level = Lz4Helper.Level,
     int extraMemory = Lz4Helper.ExtraMemory,
     bool interactive = Lz4Helper.Interactive,
-    LZ4DecoderSettings? settings = Lz4Helper.Settings)
-    : ICompressor
+    LZ4DecoderSettings? settings = Lz4Helper.Settings
+) : ICompressor
 {
     public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,

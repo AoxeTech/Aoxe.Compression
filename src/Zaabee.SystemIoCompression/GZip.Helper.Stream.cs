@@ -2,7 +2,10 @@
 
 public static partial class GzipHelper
 {
-    public static MemoryStream Compress(Stream inputStream, CompressionLevel compressionLevel = CompressionLevel.Optimal)
+    public static MemoryStream Compress(
+        Stream inputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal
+    )
     {
         var outputStream = new MemoryStream();
         Compress(inputStream, outputStream, compressionLevel);
@@ -16,7 +19,11 @@ public static partial class GzipHelper
         return outputStream;
     }
 
-    public static void Compress(Stream inputStream, Stream outputStream, CompressionLevel compressionLevel = CompressionLevel.Optimal)
+    public static void Compress(
+        Stream inputStream,
+        Stream outputStream,
+        CompressionLevel compressionLevel = CompressionLevel.Optimal
+    )
     {
         using (var gzipOutputStream = new GZipStream(outputStream, compressionLevel, true))
         {

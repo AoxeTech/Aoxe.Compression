@@ -1,7 +1,8 @@
 ﻿#if !NETSTANDARD2_0
 namespace Zaabee.SystemIoCompression;
 
-public sealed class BrotliCompressor(CompressionLevel compressionLevel = CompressionLevel.Optimal) : ICompressor
+public sealed class BrotliCompressor(CompressionLevel compressionLevel = CompressionLevel.Optimal)
+    : ICompressor
 {
     public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,

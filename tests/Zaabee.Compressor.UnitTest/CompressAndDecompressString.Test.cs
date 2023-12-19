@@ -54,7 +54,7 @@ public partial class CompressorTest
     [Fact]
     public void SnappyCompressAndDecompressString() =>
         CompressAndDecompressString(new SnappyCompressor());
-    
+
     [Fact]
     public void SystemIoCompressionGZipCompressAndDecompressString() =>
         CompressAndDecompressString(new SystemIoCompression.GzipCompressor());

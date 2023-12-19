@@ -33,16 +33,22 @@ public partial class CompressorTest
 #if !NET48
     [Fact]
     public async Task SystemIoCompressionBrotliCompressToStreamAndDecompressToStreamAsyncTest1() =>
-        await CompressToStreamAndDecompressToStreamAsyncTest1(new SystemIoCompression.BrotliCompressor());
+        await CompressToStreamAndDecompressToStreamAsyncTest1(
+            new SystemIoCompression.BrotliCompressor()
+        );
 #endif
 
     [Fact]
     public async Task SystemIoCompressionDeflateCompressToStreamAndDecompressToStreamAsyncTest1() =>
-        await CompressToStreamAndDecompressToStreamAsyncTest1(new SystemIoCompression.DeflateCompressor());
+        await CompressToStreamAndDecompressToStreamAsyncTest1(
+            new SystemIoCompression.DeflateCompressor()
+        );
 
     [Fact]
     public async Task SystemIoCompressionGzipCompressToStreamAndDecompressToStreamAsyncTest1() =>
-        await CompressToStreamAndDecompressToStreamAsyncTest1(new SystemIoCompression.GzipCompressor());
+        await CompressToStreamAndDecompressToStreamAsyncTest1(
+            new SystemIoCompression.GzipCompressor()
+        );
 
     [Fact]
     public async Task ZstdCompressToStreamAndDecompressToStreamAsyncTest1() =>
@@ -87,16 +93,22 @@ public partial class CompressorTest
 #if !NET48
     [Fact]
     public async Task SystemIoCompressionBrotliCompressToStreamAndDecompressToStreamAsyncTest2() =>
-        await CompressToStreamAndDecompressToStreamAsyncTest2(new SystemIoCompression.BrotliCompressor());
+        await CompressToStreamAndDecompressToStreamAsyncTest2(
+            new SystemIoCompression.BrotliCompressor()
+        );
 #endif
 
     [Fact]
     public async Task SystemIoCompressionDeflateCompressToStreamAndDecompressToStreamAsyncTest2() =>
-        await CompressToStreamAndDecompressToStreamAsyncTest2(new SystemIoCompression.DeflateCompressor());
+        await CompressToStreamAndDecompressToStreamAsyncTest2(
+            new SystemIoCompression.DeflateCompressor()
+        );
 
     [Fact]
     public async Task SystemIoCompressionGzipCompressToStreamAndDecompressToStreamAsyncTest2() =>
-        await CompressToStreamAndDecompressToStreamAsyncTest2(new SystemIoCompression.GzipCompressor());
+        await CompressToStreamAndDecompressToStreamAsyncTest2(
+            new SystemIoCompression.GzipCompressor()
+        );
 
     [Fact]
     public async Task ZstdCompressToStreamAndDecompressToStreamAsyncTest2() =>

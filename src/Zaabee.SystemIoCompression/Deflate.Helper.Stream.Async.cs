@@ -35,7 +35,9 @@ public static partial class DeflateHelper
         {
             await inputStream.CopyToAsync(deflateOutputStream);
 #else
-        await using (var deflateOutputStream = new DeflateStream(outputStream, compressionLevel, true))
+        await using (
+            var deflateOutputStream = new DeflateStream(outputStream, compressionLevel, true)
+        )
         {
             await inputStream.CopyToAsync(deflateOutputStream, cancellationToken);
 #endif
@@ -51,11 +53,23 @@ public static partial class DeflateHelper
     )
     {
 #if NETSTANDARD2_0
-        using (var deflateInputStream = new DeflateStream(inputStream, CompressionMode.Decompress, true))
+        using (
+            var deflateInputStream = new DeflateStream(
+                inputStream,
+                CompressionMode.Decompress,
+                true
+            )
+        )
         {
             await deflateInputStream.CopyToAsync(outputStream);
 #else
-        await using (var deflateInputStream = new DeflateStream(inputStream, CompressionMode.Decompress, true))
+        await using (
+            var deflateInputStream = new DeflateStream(
+                inputStream,
+                CompressionMode.Decompress,
+                true
+            )
+        )
         {
             await deflateInputStream.CopyToAsync(outputStream, cancellationToken);
 #endif

@@ -1,6 +1,7 @@
 ﻿namespace Zaabee.SystemIoCompression;
 
-public sealed class DeflateCompressor(CompressionLevel compressionLevel = CompressionLevel.Optimal) : ICompressor
+public sealed class DeflateCompressor(CompressionLevel compressionLevel = CompressionLevel.Optimal)
+    : ICompressor
 {
     public ValueTask<MemoryStream> CompressAsync(
         Stream rawStream,
