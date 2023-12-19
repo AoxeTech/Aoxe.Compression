@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.SystemIoCompression"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.SystemIoCompression.UnitTest", "tests\Zaabee.SystemIoCompression.UnitTest\Zaabee.SystemIoCompression.UnitTest.csproj", "{70D3599E-7CAA-4DE8-826F-DDA211E3FE75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaabee.Compressor.Abstractions.UnitTest", "tests\Zaabee.Compressor.Abstractions.UnitTest\Zaabee.Compressor.Abstractions.UnitTest.csproj", "{81529D2A-F446-4046-8792-318D4808503F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,7 @@ Global
 		{73E05D79-6F20-4281-B6D2-41049402CBC5} = {5BE4F706-456E-4DF8-A606-69F992835B47}
 		{41831AEE-A2EE-4248-B231-007AA198C5F1} = {158FA242-DD0C-4482-BD54-4E7EDA9C44CA}
 		{70D3599E-7CAA-4DE8-826F-DDA211E3FE75} = {5BE4F706-456E-4DF8-A606-69F992835B47}
+		{81529D2A-F446-4046-8792-318D4808503F} = {5BE4F706-456E-4DF8-A606-69F992835B47}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F9369C2B-0732-46F2-B95A-8F109BFE59A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -154,5 +157,9 @@ Global
 		{70D3599E-7CAA-4DE8-826F-DDA211E3FE75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70D3599E-7CAA-4DE8-826F-DDA211E3FE75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70D3599E-7CAA-4DE8-826F-DDA211E3FE75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81529D2A-F446-4046-8792-318D4808503F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81529D2A-F446-4046-8792-318D4808503F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81529D2A-F446-4046-8792-318D4808503F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81529D2A-F446-4046-8792-318D4808503F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
