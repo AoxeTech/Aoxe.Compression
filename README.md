@@ -1,36 +1,36 @@
-# Zaabee.Compression
+# Aoxe.Compression
 
 ---
 
-Provide an easy way to use compressions. These packages support the wraps and extensions for compressors. It is also the compressor provider for all Zaabee technology stacks like configuration, cache, queue, rpc, etc.
+Provide an easy way to use compressions. These packages support the wraps and extensions for compressors. It is also the compressor provider for all Aoxe technology stacks like configuration, cache, queue, rpc, etc.
 
-## Why use Zaabee.Compression?
+## Why use Aoxe.Compression?
 
-There are many compressors in the .NET ecosystem, but they are not easy to use. Zaabee.Compression provides a unified interface / helper / extensions for all compressors, and it is also the compressor provider for all Zaabee technology stacks.
+There are many compressors in the .NET ecosystem, but they are not easy to use. Aoxe.Compression provides a unified interface / helper / extensions for all compressors, and it is also the compressor provider for all Aoxe technology stacks.
 
-The compressors that Zaabee.Compression supports are as follows:
+The compressors that Aoxe.Compression supports are as follows:
 
 | Compressor |      Package       |      Reference       |
 | :--------: | :----------------: | :------------------: |
-|   Brotli   |   Zaabee.Brotli    |      Brotli.NET      |
-|    BZip    | Zaabee.SharpZipLib |     SharpZipLib      |
-|    GZip    | Zaabee.SharpZipLib |     SharpZipLib      |
-|    LZ4     |     Zaabee.LZ4     | K4os.Compression.LZ4 |
-|    LZMA    |    Zaabee.LZMA     |       LZMA-SDK       |
-|     XZ     |     Zaabee.XZ      |  XZ.NET-netstandard  |
-|    Zstd    |    Zaabee.Zstd     |       ZstdNet        |
+|   Brotli   |   Aoxe.Brotli    |      Brotli.NET      |
+|    BZip    | Aoxe.SharpZipLib |     SharpZipLib      |
+|    GZip    | Aoxe.SharpZipLib |     SharpZipLib      |
+|    LZ4     |     Aoxe.LZ4     | K4os.Compression.LZ4 |
+|    LZMA    |    Aoxe.LZMA     |       LZMA-SDK       |
+|     XZ     |     Aoxe.XZ      |  XZ.NET-netstandard  |
+|    Zstd    |    Aoxe.Zstd     |       ZstdNet        |
 
-## How to use Zaabee.Compression?
+## How to use Aoxe.Compression?
 
 ### Install
 
 ```shell
-dotnet add package Zaabee.Brotli
-dotnet add package Zaabee.SharpZipLib
-dotnet add package Zaabee.LZ4
-dotnet add package Zaabee.LZMA
-dotnet add package Zaabee.XZ
-dotnet add package Zaabee.Zstd
+dotnet add package Aoxe.Brotli
+dotnet add package Aoxe.SharpZipLib
+dotnet add package Aoxe.LZ4
+dotnet add package Aoxe.LZMA
+dotnet add package Aoxe.XZ
+dotnet add package Aoxe.Zstd
 ```
 
 ### Compress
@@ -87,7 +87,7 @@ var zstdDecompressStream = zstdStream.UnZstd();
 
 ### IComepressor
 
-Also you can use the interface `IComepressor` to compress and decompress. All Zaabee compressors implement this interface.
+Also you can use the interface `IComepressor` to compress and decompress. All Aoxe compressors implement this interface.
 
 ```csharp
 // Inject (ICompressor compressor)

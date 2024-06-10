@@ -5,94 +5,77 @@
 [MinColumn, MaxColumn, MeanColumn, MedianColumn]
 public class DecompressFromBytes
 {
-    private static readonly byte[] BrotliCompressBytes = Zaabee
-        .Brotli
+    private static readonly byte[] BrotliCompressBytes = Aoxe.Brotli
         .BrotliHelper
         .Compress(Consts.RawBytes);
-    private static readonly byte[] SharpZipLibBzip2CompressBytes = Zaabee
-        .SharpZipLib
+    private static readonly byte[] SharpZipLibBzip2CompressBytes = Aoxe.SharpZipLib
         .Bzip2Helper
         .Compress(Consts.RawBytes);
-    private static readonly byte[] SharpZipLibDeflateCompressBytes = Zaabee
-        .SharpZipLib
+    private static readonly byte[] SharpZipLibDeflateCompressBytes = Aoxe.SharpZipLib
         .DeflateHelper
         .Compress(Consts.RawBytes);
-    private static readonly byte[] SharpZipLibGzipCompressBytes = Zaabee
-        .SharpZipLib
+    private static readonly byte[] SharpZipLibGzipCompressBytes = Aoxe.SharpZipLib
         .GzipHelper
         .Compress(Consts.RawBytes);
-    private static readonly byte[] SystemIoCompressionBrotliCompressBytes = Zaabee
-        .SystemIoCompression
+    private static readonly byte[] SystemIoCompressionBrotliCompressBytes = Aoxe.SystemIoCompression
         .BrotliHelper
         .Compress(Consts.RawBytes);
-    private static readonly byte[] SystemIoCompressionDeflateCompressBytes = Zaabee
-        .SystemIoCompression
-        .DeflateHelper
-        .Compress(Consts.RawBytes);
-    private static readonly byte[] SystemIoCompressionGzipCompressBytes = Zaabee
-        .SystemIoCompression
+    private static readonly byte[] SystemIoCompressionDeflateCompressBytes =
+        Aoxe.SystemIoCompression.DeflateHelper.Compress(Consts.RawBytes);
+    private static readonly byte[] SystemIoCompressionGzipCompressBytes = Aoxe.SystemIoCompression
         .GzipHelper
         .Compress(Consts.RawBytes);
-    private static readonly byte[] Lz4CompressBytes = Zaabee
-        .LZ4
-        .Lz4Helper
-        .Compress(Consts.RawBytes);
-    private static readonly byte[] LzmaCompressBytes = Zaabee
-        .LZMA
+    private static readonly byte[] Lz4CompressBytes = Aoxe.LZ4.Lz4Helper.Compress(Consts.RawBytes);
+    private static readonly byte[] LzmaCompressBytes = Aoxe.LZMA
         .LzmaHelper
         .Compress(Consts.RawBytes);
-    private static readonly byte[] SnappyCompressBytes = Zaabee
-        .Snappy
+    private static readonly byte[] SnappyCompressBytes = Aoxe.Snappy
         .SnappyHelper
         .Compress(Consts.RawBytes);
-    private static readonly byte[] XzCompressBytes = Zaabee.XZ.XzHelper.Compress(Consts.RawBytes);
-    private static readonly byte[] ZstdCompressBytes = Zaabee
-        .Zstd
+    private static readonly byte[] XzCompressBytes = Aoxe.XZ.XzHelper.Compress(Consts.RawBytes);
+    private static readonly byte[] ZstdCompressBytes = Aoxe.Zstd
         .ZstdHelper
         .Compress(Consts.RawBytes);
 
     [Benchmark]
-    public void BrotliFromBytes() => Zaabee.Brotli.BrotliHelper.Decompress(BrotliCompressBytes);
+    public void BrotliFromBytes() => Aoxe.Brotli.BrotliHelper.Decompress(BrotliCompressBytes);
 
     [Benchmark]
     public void SharpZipLibBzip2FromBytes() =>
-        Zaabee.SharpZipLib.Bzip2Helper.Decompress(SharpZipLibBzip2CompressBytes);
+        Aoxe.SharpZipLib.Bzip2Helper.Decompress(SharpZipLibBzip2CompressBytes);
 
     [Benchmark]
     public void SharpZipLibDeflateFromBytes() =>
-        Zaabee.SharpZipLib.DeflateHelper.Decompress(SharpZipLibDeflateCompressBytes);
+        Aoxe.SharpZipLib.DeflateHelper.Decompress(SharpZipLibDeflateCompressBytes);
 
     [Benchmark]
     public void SharpZipLibGzipFromBytes() =>
-        Zaabee.SharpZipLib.GzipHelper.Decompress(SharpZipLibGzipCompressBytes);
+        Aoxe.SharpZipLib.GzipHelper.Decompress(SharpZipLibGzipCompressBytes);
 
     [Benchmark]
     public void SystemIoCompressionBrotliFromBytes() =>
-        Zaabee.SystemIoCompression.BrotliHelper.Decompress(SystemIoCompressionBrotliCompressBytes);
+        Aoxe.SystemIoCompression.BrotliHelper.Decompress(SystemIoCompressionBrotliCompressBytes);
 
     [Benchmark]
     public void SystemIoCompressionDeflateFromBytes() =>
-        Zaabee
-            .SystemIoCompression
-            .DeflateHelper
-            .Decompress(SystemIoCompressionDeflateCompressBytes);
+        Aoxe.SystemIoCompression.DeflateHelper.Decompress(SystemIoCompressionDeflateCompressBytes);
 
     [Benchmark]
     public void SystemIoCompressionGzipFromBytes() =>
-        Zaabee.SystemIoCompression.GzipHelper.Decompress(SystemIoCompressionGzipCompressBytes);
+        Aoxe.SystemIoCompression.GzipHelper.Decompress(SystemIoCompressionGzipCompressBytes);
 
     [Benchmark]
-    public void Lz4FromBytes() => Zaabee.LZ4.Lz4Helper.Decompress(Lz4CompressBytes);
+    public void Lz4FromBytes() => Aoxe.LZ4.Lz4Helper.Decompress(Lz4CompressBytes);
 
     [Benchmark]
-    public void LzmaFromBytes() => Zaabee.LZMA.LzmaHelper.Decompress(LzmaCompressBytes);
+    public void LzmaFromBytes() => Aoxe.LZMA.LzmaHelper.Decompress(LzmaCompressBytes);
 
     [Benchmark]
-    public void SnappyFromBytes() => Zaabee.Snappy.SnappyHelper.Decompress(SnappyCompressBytes);
+    public void SnappyFromBytes() => Aoxe.Snappy.SnappyHelper.Decompress(SnappyCompressBytes);
 
     [Benchmark]
-    public void XzFromBytes() => Zaabee.XZ.XzHelper.Decompress(XzCompressBytes);
+    public void XzFromBytes() => Aoxe.XZ.XzHelper.Decompress(XzCompressBytes);
 
     [Benchmark]
-    public void ZstdFromBytes() => Zaabee.Zstd.ZstdHelper.Decompress(ZstdCompressBytes);
+    public void ZstdFromBytes() => Aoxe.Zstd.ZstdHelper.Decompress(ZstdCompressBytes);
 }
