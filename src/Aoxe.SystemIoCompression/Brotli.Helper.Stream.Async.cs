@@ -31,18 +31,10 @@ public static partial class BrotliHelper
         CancellationToken cancellationToken = default
     )
     {
-#if NETSTANDARD2_0
-        using (var brotliOutputStream = new BrotliStream(outputStream, compressionLevel, true))
-        {
-            await inputStream.CopyToAsync(brotliOutputStream);
-#else
         await using (
             var brotliOutputStream = new BrotliStream(outputStream, compressionLevel, true)
         )
-        {
             await inputStream.CopyToAsync(brotliOutputStream, cancellationToken);
-#endif
-        }
         inputStream.TrySeek(0, SeekOrigin.Begin);
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
@@ -53,18 +45,10 @@ public static partial class BrotliHelper
         CancellationToken cancellationToken = default
     )
     {
-#if NETSTANDARD2_0
-        using (var brotliInputStream = new BrotliStream(inputStream, CompressionMode.Decompress, true))
-        {
-            await brotliInputStream.CopyToAsync(outputStream);
-#else
         await using (
             var brotliInputStream = new BrotliStream(inputStream, CompressionMode.Decompress, true)
         )
-        {
             await brotliInputStream.CopyToAsync(outputStream, cancellationToken);
-#endif
-        }
         inputStream.TrySeek(0, SeekOrigin.Begin);
         outputStream.TrySeek(0, SeekOrigin.Begin);
     }
