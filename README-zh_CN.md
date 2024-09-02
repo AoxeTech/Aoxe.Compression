@@ -170,3 +170,7 @@ AMD Ryzen 7 6800H with Radeon Graphics, 1 CPU, 16 logical and 8 physical cores
 |   LzmaFromStream | 204.926 μs |  3.9194 μs |  3.0600 μs | 203.938 μs | 201.239 μs | 210.138 μs | 500.0000 | 494.6289 | 494.1406 | 4140.54 KB |
 |     XzFromStream |  40.992 μs |  0.8186 μs |  0.8406 μs |  41.137 μs |  39.477 μs |  42.377 μs |   1.7090 |   0.0610 |        - |    14.3 KB |
 |   ZstdFromStream |   3.007 μs |  0.0582 μs |  0.0924 μs |   3.002 μs |   2.845 μs |   3.198 μs |   2.4719 |   0.0877 |        - |   20.23 KB |
+
+Thank`s for [JetBrains](https://www.jetbrains.com/) for the great support in providing assistance and user-friendly environment for my open source projects.
+
+[![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg?_gl=1*f25lxa*_ga*MzI3ODk2MjY0LjE2NzA0NjY4MDQ.*_ga_9J976DJZ68*MTY4OTY4NzY5OS4zNC4xLjE2ODk2ODgwMDAuNTMuMC4w)](https://www.jetbrains.com/community/opensource/#support)
