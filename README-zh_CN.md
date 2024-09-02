@@ -1,16 +1,16 @@
 # Aoxe.Compression
 
-English | [简体中文](README-zh_CN.md)
+[English](README.md) | 简体中文
 
 ---
 
-Provide an easy way to use compressions. These packages support the wraps and extensions for compressors. It is also the compressor provider for all Aoxe technology stacks like configuration, cache, queue, rpc, etc.
+提供一种使用压缩功能的简易方式. 这些软件包支持压缩器的封装和扩展.它也是所有 Aoxe 技术栈（如配置、缓存、队列、rpc 等）的压缩器提供者.
 
-## 1. Why use Aoxe.Compression?
+## 1. 为什么要使用 Aoxe.Compression?
 
-There are many compressors in the .NET ecosystem, but they are not easy to use. Aoxe.Compression provides a unified interface / helper / extensions for all compressors, and it is also the compressor provider for all Aoxe technology stacks.
+在 .NET 的生态用有很多压缩器, 但并没有一种简易的方式来使用它们. Aoxe.Compression 为所有压缩器提供了统一的 interface / helper / extensions, 同时也为所有 Aoxe 技术栈提供了压缩功能.
 
-The compressors that Aoxe.Compression supports are as follows:
+Aoxe.Compression 提供了以下实现:
 
 | Compressor |      Package       |      Reference       |
 | :--------: | :----------------: | :------------------: |
@@ -22,11 +22,11 @@ The compressors that Aoxe.Compression supports are as follows:
 |     XZ     |     Aoxe.XZ      |  XZ.NET-netstandard  |
 |    Zstd    |    Aoxe.Zstd     |       ZstdNet        |
 
-## 2. How to use Aoxe.Compression?
+## 2. 如何使用 Aoxe.Compression?
 
-### 2.1. Install
+### 2.1. 安装
 
-You can install the package which you want on nuget
+通过 nuget 安装对应的 package.
 
 ```shell
 dotnet add package Aoxe.Brotli
@@ -37,7 +37,7 @@ dotnet add package Aoxe.XZ
 dotnet add package Aoxe.Zstd
 ```
 
-### 2.2. Compress (use extension method)
+### 2.2. 压缩 (使用扩展方法)
 
 ```csharp
 var bytes = Encoding.UTF8.GetBytes("Hello World");
@@ -51,7 +51,7 @@ var xzBytes = bytes.ToXz();
 var zstdBytes = bytes.ToZstd();
 ```
 
-### 2.3. Decompress (use extension method)
+### 2.3. 解压 (使用扩展方法)
 
 ```csharp
 var brotliDecompressBytes = brotliBytes.UnBrotli();
@@ -63,7 +63,7 @@ var xzDecompressBytes = xzBytes.UnXz();
 var zstdDecompressBytes = zstdBytes.UnZstd();
 ```
 
-### 2.4. Compress with stream
+### 2.4. 基于流的压缩
 
 ```csharp
 var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes("Hello World"));
@@ -77,7 +77,7 @@ var xzStream = memoryStream.ToXz();
 var zstdStream = memoryStream.ToZstd();
 ```
 
-### 2.5. Decompress with stream
+### 2.5. 基于流的解压
 
 ```csharp
 var brotliDecompressStream = brotliStream.UnBrotli();
@@ -91,26 +91,26 @@ var zstdDecompressStream = zstdStream.UnZstd();
 
 ### 2.6. IComepressor
 
-Also you can use the interface `IComepressor` to compress and decompress. All Aoxe compressors implement this interface.
+您还可以使用接口 `IComepressor` 进行压缩或者解压. 所有 Aoxe 压缩器均实现了此接口.
 
 ```csharp
-// Inject (ICompressor compressor)
+// 注入 ICompressor, 基于 bytes 进行压缩或者解压
 var bytes = Encoding.UTF8.GetBytes("Hello World");
 var compressedBytes = compressor.Compress(bytes);
 var decompressedBytes = compressor.Decompress(compressedBytes);
 
-// Or use with stream
+// 可以基于 stream 进行压缩或者解压
 var memoryStream = new MemoryStream(bytes);
 var compressedStream = compressor.Compress(memoryStream);
 var decompressedStream = compressor.Decompress(compressedStream);
 
-// You can use stream out of the box
+// 也可以使用另一种方式
 var compressedStream = new MemoryStream();
 compressor.Compress(memoryStream, compressedStream);
 var decompressedStream = new MemoryStream();
 compressor.Decompress(compressedStream, decompressedStream);
 
-// Also the stream functions support async mode
+// 另外所有基于 stream 的方法均有 async 版本
 ```
 
 ## 3. Benchmark
