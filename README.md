@@ -12,18 +12,16 @@ There are many compressors in the .NET ecosystem, but they are not easy to use. 
 
 The compressors that Aoxe.Compression supports are as follows:
 
-| Compressor |                   Package                   |              Reference              |
-|:----------:|:-------------------------------------------:|:-----------------------------------:|
-|   Brotli   |   Aoxe.Brotli / Aoxe.SystemIoCompression    | Brotli.NET / System.IO.Compression  |
-|    LZ4     |                  Aoxe.LZ4                   |        K4os.Compression.LZ4         |
-|    LZMA    |                  Aoxe.LZMA                  |              LZMA-SDK               |
-|   BZip2    |              Aoxe.SharpZipLib               |             SharpZipLib             |
-|  Deflate   | Aoxe.SharpZipLib / Aoxe.SystemIoCompression | SharpZipLib / System.IO.Compression |
-|    GZip    | Aoxe.SharpZipLib / Aoxe.SystemIoCompression | SharpZipLib / System.IO.Compression |
-|   Snappy   |                 Aoxe.Snappy                 |             IronSnappy              |
-|    ZLib    |          Aoxe.SystemIoCompression           |        System.IO.Compression        |
-|     XZ     |                   Aoxe.XZ                   |         XZ.NET-netstandard          |
-|    Zstd    |                  Aoxe.Zstd                  |               ZstdNet               |
+|         Package          |            Compressor             |       Reference       |
+|:------------------------:|:---------------------------------:|:---------------------:|
+|       Aoxe.Brotli        |              Brotli               |      Brotli.NET       |
+|         Aoxe.LZ4         |                LZ4                | K4os.Compression.LZ4  |
+|        Aoxe.LZMA         |               LZMA                |       LZMA-SDK        |
+|     Aoxe.SharpZipLib     |      BZip2 / Deflate / GZip       |      SharpZipLib      |
+|       Aoxe.Snappy        |              Snappy               |      IronSnappy       |
+| Aoxe.SystemIoCompression |  Brotli / Deflate / GZip / ZLib   | System.IO.Compression |
+|         Aoxe.XZ          |                XZ                 |  XZ.NET-netstandard   |
+|        Aoxe.Zstd         |               Zstd                |        ZstdNet        |
 
 ## 2. How to use Aoxe.Compression?
 
