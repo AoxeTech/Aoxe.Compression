@@ -56,6 +56,12 @@ public partial class CompressorTest
     public void SystemIoCompressionGzipCompressToBytesAndDecompressToBytesTest() =>
         CompressToBytesAndDecompressToBytesTest(new SystemIoCompression.GzipCompressor());
 
+#if NET6_0_OR_GREATER
+    [Fact]
+    public void SystemIoCompressionZlibCompressToBytesAndDecompressToBytesTest() =>
+        CompressToBytesAndDecompressToBytesTest(new SystemIoCompression.ZLibCompressor());
+#endif
+
     private void CompressToBytesAndDecompressToBytesTest(ICompressor compressor)
     {
         var compressedBytes = compressor.Compress(TestConsts.Data);

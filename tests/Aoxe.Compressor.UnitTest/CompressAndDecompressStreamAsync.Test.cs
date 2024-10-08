@@ -50,6 +50,14 @@ public partial class CompressorTest
             new SystemIoCompression.GzipCompressor()
         );
 
+#if NET6_0_OR_GREATER
+    [Fact]
+    public async Task SystemIoCompressionZLibCompressToStreamAndDecompressToStreamAsyncTest1() =>
+        await CompressToStreamAndDecompressToStreamAsyncTest1(
+            new SystemIoCompression.ZLibCompressor()
+        );
+#endif
+
     [Fact]
     public async Task ZstdCompressToStreamAndDecompressToStreamAsyncTest1() =>
         await CompressToStreamAndDecompressToStreamAsyncTest1(new ZstdCompressor());
@@ -109,6 +117,14 @@ public partial class CompressorTest
         await CompressToStreamAndDecompressToStreamAsyncTest2(
             new SystemIoCompression.GzipCompressor()
         );
+
+#if NET6_0_OR_GREATER
+    [Fact]
+    public async Task SystemIoCompressionZLibCompressToStreamAndDecompressToStreamAsyncTest2() =>
+        await CompressToStreamAndDecompressToStreamAsyncTest2(
+            new SystemIoCompression.ZLibCompressor()
+        );
+#endif
 
     [Fact]
     public async Task ZstdCompressToStreamAndDecompressToStreamAsyncTest2() =>

@@ -12,15 +12,18 @@
 
 Aoxe.Compression 提供了以下实现:
 
-| Compressor |      Package       |      Reference       |
-| :--------: | :----------------: | :------------------: |
-|   Brotli   |   Aoxe.Brotli    |      Brotli.NET      |
-|    BZip    | Aoxe.SharpZipLib |     SharpZipLib      |
-|    GZip    | Aoxe.SharpZipLib |     SharpZipLib      |
-|    LZ4     |     Aoxe.LZ4     | K4os.Compression.LZ4 |
-|    LZMA    |    Aoxe.LZMA     |       LZMA-SDK       |
-|     XZ     |     Aoxe.XZ      |  XZ.NET-netstandard  |
-|    Zstd    |    Aoxe.Zstd     |       ZstdNet        |
+| Compressor |                   Package                   |              Reference              |
+|:----------:|:-------------------------------------------:|:-----------------------------------:|
+|   Brotli   |   Aoxe.Brotli / Aoxe.SystemIoCompression    | Brotli.NET / System.IO.Compression  |
+|    LZ4     |                  Aoxe.LZ4                   |        K4os.Compression.LZ4         |
+|    LZMA    |                  Aoxe.LZMA                  |                LZMA-SDK             |
+|   BZip2    |              Aoxe.SharpZipLib               |             SharpZipLib             |
+|  Deflate   | Aoxe.SharpZipLib / Aoxe.SystemIoCompression | SharpZipLib / System.IO.Compression |
+|    GZip    | Aoxe.SharpZipLib / Aoxe.SystemIoCompression | SharpZipLib / System.IO.Compression |
+|   Snappy   |                 Aoxe.Snappy                 |             IronSnappy              |
+|    ZLib    |          Aoxe.SystemIoCompression           |        System.IO.Compression        |
+|     XZ     |                   Aoxe.XZ                   |         XZ.NET-netstandard          |
+|    Zstd    |                  Aoxe.Zstd                  |               ZstdNet               |
 
 ## 2. 如何使用 Aoxe.Compression?
 
@@ -30,9 +33,11 @@ Aoxe.Compression 提供了以下实现:
 
 ```shell
 dotnet add package Aoxe.Brotli
-dotnet add package Aoxe.SharpZipLib
 dotnet add package Aoxe.LZ4
 dotnet add package Aoxe.LZMA
+dotnet add package Aoxe.SharpZipLib
+dotnet add package Aoxe.Snappy
+dotnet add package Aoxe.SystemIoCompression
 dotnet add package Aoxe.XZ
 dotnet add package Aoxe.Zstd
 ```

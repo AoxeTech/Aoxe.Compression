@@ -44,6 +44,12 @@ public partial class CompressorTest
     public void SystemIoCompressionGzipCompressToStreamAndDecompressToStreamTest1() =>
         CompressToStreamAndDecompressToStreamTest1(new SystemIoCompression.GzipCompressor());
 
+#if NET6_0_OR_GREATER
+    [Fact]
+    public void SystemIoCompressionZLibCompressToStreamAndDecompressToStreamTest1() =>
+        CompressToStreamAndDecompressToStreamTest1(new SystemIoCompression.ZLibCompressor());
+#endif
+
     [Fact]
     public void ZstdCompressToStreamAndDecompressToStreamTest1() =>
         CompressToStreamAndDecompressToStreamTest1(new ZstdCompressor());
@@ -97,6 +103,12 @@ public partial class CompressorTest
     [Fact]
     public void SystemIoCompressionGzipCompressToStreamAndDecompressToStreamTest2() =>
         CompressToStreamAndDecompressToStreamTest2(new SystemIoCompression.GzipCompressor());
+
+#if NET6_0_OR_GREATER
+    [Fact]
+    public void SystemIoCompressionZLibCompressToStreamAndDecompressToStreamTest2() =>
+        CompressToStreamAndDecompressToStreamTest2(new SystemIoCompression.ZLibCompressor());
+#endif
 
     [Fact]
     public void ZstdCompressToStreamAndDecompressToStreamTest2() =>

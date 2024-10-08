@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;net6;net8</TargetFrameworks>
-        <PackageVersion>2024.2.3</PackageVersion>
-        <Version>2024.2.3</Version>
+        <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
+        <PackageVersion>2024.4.0</PackageVersion>
+        <Version>2024.4.0</Version>
         <Description>Helper and Extensions for System.IO.Compression.</Description>
         <PackageTags>Aoxe;System.IO.Compression;Brotli;Deflate;GZip;Compression</PackageTags>
         <PackageProjectUrl>https://github.com/AoxeTech</PackageProjectUrl>
@@ -28,7 +28,7 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Aoxe.Compressor.Abstractions" Version="2024.2.6" />
+        <PackageReference Include="Aoxe.Compressor.Abstractions" Version="2024.4.2" />
     </ItemGroup>
 
     <ItemGroup>

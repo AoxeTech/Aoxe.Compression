@@ -12,15 +12,18 @@ There are many compressors in the .NET ecosystem, but they are not easy to use. 
 
 The compressors that Aoxe.Compression supports are as follows:
 
-| Compressor |      Package       |      Reference       |
-| :--------: | :----------------: | :------------------: |
-|   Brotli   |   Aoxe.Brotli    |      Brotli.NET      |
-|    BZip    | Aoxe.SharpZipLib |     SharpZipLib      |
-|    GZip    | Aoxe.SharpZipLib |     SharpZipLib      |
-|    LZ4     |     Aoxe.LZ4     | K4os.Compression.LZ4 |
-|    LZMA    |    Aoxe.LZMA     |       LZMA-SDK       |
-|     XZ     |     Aoxe.XZ      |  XZ.NET-netstandard  |
-|    Zstd    |    Aoxe.Zstd     |       ZstdNet        |
+| Compressor |                   Package                   |              Reference              |
+|:----------:|:-------------------------------------------:|:-----------------------------------:|
+|   Brotli   |   Aoxe.Brotli / Aoxe.SystemIoCompression    | Brotli.NET / System.IO.Compression  |
+|    LZ4     |                  Aoxe.LZ4                   |        K4os.Compression.LZ4         |
+|    LZMA    |                  Aoxe.LZMA                  |              LZMA-SDK               |
+|   BZip2    |              Aoxe.SharpZipLib               |             SharpZipLib             |
+|  Deflate   | Aoxe.SharpZipLib / Aoxe.SystemIoCompression | SharpZipLib / System.IO.Compression |
+|    GZip    | Aoxe.SharpZipLib / Aoxe.SystemIoCompression | SharpZipLib / System.IO.Compression |
+|   Snappy   |                 Aoxe.Snappy                 |             IronSnappy              |
+|    ZLib    |          Aoxe.SystemIoCompression           |        System.IO.Compression        |
+|     XZ     |                   Aoxe.XZ                   |         XZ.NET-netstandard          |
+|    Zstd    |                  Aoxe.Zstd                  |               ZstdNet               |
 
 ## 2. How to use Aoxe.Compression?
 
@@ -30,9 +33,11 @@ You can install the package which you want on nuget
 
 ```shell
 dotnet add package Aoxe.Brotli
-dotnet add package Aoxe.SharpZipLib
 dotnet add package Aoxe.LZ4
 dotnet add package Aoxe.LZMA
+dotnet add package Aoxe.SharpZipLib
+dotnet add package Aoxe.Snappy
+dotnet add package Aoxe.SystemIoCompression
 dotnet add package Aoxe.XZ
 dotnet add package Aoxe.Zstd
 ```

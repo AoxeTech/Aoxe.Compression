@@ -44,6 +44,12 @@ public partial class CompressorTest
     public void SystemIoCompressionGzipCompressToStreamAndDecompressToBytesTest() =>
         CompressToStreamAndDecompressToBytesTest(new SystemIoCompression.GzipCompressor());
 
+#if NET6_0_OR_GREATER
+    [Fact]
+    public void SystemIoCompressionZLibCompressToStreamAndDecompressToBytesTest() =>
+        CompressToStreamAndDecompressToBytesTest(new SystemIoCompression.ZLibCompressor());
+#endif
+
     [Fact]
     public void ZstdCompressToStreamAndDecompressToBytesTest() =>
         CompressToStreamAndDecompressToBytesTest(new ZstdCompressor());
