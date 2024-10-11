@@ -1,0 +1,29 @@
+﻿<Solution>
+  <Folder Name="/perf/">
+    <Project Path="perf\Benchmark\Benchmark.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src\Aoxe.Brotli\Aoxe.Brotli.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.Compressor.Abstractions\Aoxe.Compressor.Abstractions.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.LZ4\Aoxe.LZ4.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.LZMA\Aoxe.LZMA.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.SharpZipLib\Aoxe.SharpZipLib.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.Snappy\Aoxe.Snappy.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.SystemIoCompression\Aoxe.SystemIoCompression.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.XZ\Aoxe.XZ.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.Zstd\Aoxe.Zstd.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests\Aoxe.BrotliNET.UnitTest\Aoxe.BrotliNET.UnitTest.csproj" Type="Classic C#" />
+    <Project Path="tests\Aoxe.Compressor.Abstractions.UnitTest\Aoxe.Compressor.Abstractions.UnitTest.csproj" Type="Classic C#" />
+    <Project Path="tests\Aoxe.Compressor.UnitTest\Aoxe.Compressor.UnitTest.csproj" Type="Classic C#" />
+    <Project Path="tests\Aoxe.LZ4.UnitTest\Aoxe.LZ4.UnitTest.csproj" Type="Classic C#" />
+    <Project Path="tests\Aoxe.LZMA.UnitTest\Aoxe.LZMA.UnitTest.csproj" Type="Classic C#" />
+    <Project Path="tests\Aoxe.SharpZipLib.UnitTest\Aoxe.SharpZipLib.UnitTest.csproj" Type="Classic C#" />
+    <Project Path="tests\Aoxe.Snappy.UnitTest\Aoxe.Snappy.UnitTest.csproj" Type="Classic C#" />
+    <Project Path="tests\Aoxe.SystemIoCompression.UnitTest\Aoxe.SystemIoCompression.UnitTest.csproj" Type="Classic C#" />
+    <Project Path="tests\Aoxe.XZ.UnitTest\Aoxe.XZ.UnitTest.csproj" Type="Classic C#" />
+    <Project Path="tests\Aoxe.Zstd.UnitTest\Aoxe.Zstd.UnitTest.csproj" Type="Classic C#" />
+    <Project Path="tests\TestModel\TestModel.csproj" Type="Classic C#" />
+  </Folder>
+</Solution>
