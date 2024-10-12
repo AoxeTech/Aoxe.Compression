@@ -22,14 +22,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Aoxe.Brotli\Aoxe.Brotli.csproj" />
-      <ProjectReference Include="..\..\src\Aoxe.LZ4\Aoxe.LZ4.csproj" />
-      <ProjectReference Include="..\..\src\Aoxe.LZMA\Aoxe.LZMA.csproj" />
-      <ProjectReference Include="..\..\src\Aoxe.SharpZipLib\Aoxe.SharpZipLib.csproj" />
-      <ProjectReference Include="..\..\src\Aoxe.Snappy\Aoxe.Snappy.csproj" />
-      <ProjectReference Include="..\..\src\Aoxe.SystemIoCompression\Aoxe.SystemIoCompression.csproj" />
-      <ProjectReference Include="..\..\src\Aoxe.XZ\Aoxe.XZ.csproj" />
-      <ProjectReference Include="..\..\src\Aoxe.Zstd\Aoxe.Zstd.csproj" />
+      <ProjectReference Include="..\..\src\Aoxe.Compressors\Aoxe.Brotli\Aoxe.Brotli.csproj" />
+      <ProjectReference Include="..\..\src\Aoxe.Compressors\Aoxe.LZ4\Aoxe.LZ4.csproj" />
+      <ProjectReference Include="..\..\src\Aoxe.Compressors\Aoxe.LZMA\Aoxe.LZMA.csproj" />
+      <ProjectReference Include="..\..\src\Aoxe.Compressors\Aoxe.SharpZipLib\Aoxe.SharpZipLib.csproj" />
+      <ProjectReference Include="..\..\src\Aoxe.Compressors\Aoxe.Snappy\Aoxe.Snappy.csproj" />
+      <ProjectReference Include="..\..\src\Aoxe.Compressors\Aoxe.SystemIoCompression\Aoxe.SystemIoCompression.csproj" />
+      <ProjectReference Include="..\..\src\Aoxe.Compressors\Aoxe.XZ\Aoxe.XZ.csproj" />
+      <ProjectReference Include="..\..\src\Aoxe.Compressors\Aoxe.Zstd\Aoxe.Zstd.csproj" />
       <ProjectReference Include="..\TestModel\TestModel.csproj" />
     </ItemGroup>
 

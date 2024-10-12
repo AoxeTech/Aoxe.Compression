@@ -3,15 +3,17 @@
     <Project Path="perf\Benchmark\Benchmark.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src\Aoxe.Brotli\Aoxe.Brotli.csproj" Type="Classic C#" />
     <Project Path="src\Aoxe.Compressor.Abstractions\Aoxe.Compressor.Abstractions.csproj" Type="Classic C#" />
-    <Project Path="src\Aoxe.LZ4\Aoxe.LZ4.csproj" Type="Classic C#" />
-    <Project Path="src\Aoxe.LZMA\Aoxe.LZMA.csproj" Type="Classic C#" />
-    <Project Path="src\Aoxe.SharpZipLib\Aoxe.SharpZipLib.csproj" Type="Classic C#" />
-    <Project Path="src\Aoxe.Snappy\Aoxe.Snappy.csproj" Type="Classic C#" />
-    <Project Path="src\Aoxe.SystemIoCompression\Aoxe.SystemIoCompression.csproj" Type="Classic C#" />
-    <Project Path="src\Aoxe.XZ\Aoxe.XZ.csproj" Type="Classic C#" />
-    <Project Path="src\Aoxe.Zstd\Aoxe.Zstd.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/Aoxe.Compressors/">
+    <Project Path="src\Aoxe.Compressors\Aoxe.Brotli\Aoxe.Brotli.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.Compressors\Aoxe.LZ4\Aoxe.LZ4.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.Compressors\Aoxe.LZMA\Aoxe.LZMA.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.Compressors\Aoxe.SharpZipLib\Aoxe.SharpZipLib.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.Compressors\Aoxe.Snappy\Aoxe.Snappy.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.Compressors\Aoxe.SystemIoCompression\Aoxe.SystemIoCompression.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.Compressors\Aoxe.XZ\Aoxe.XZ.csproj" Type="Classic C#" />
+    <Project Path="src\Aoxe.Compressors\Aoxe.Zstd\Aoxe.Zstd.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests\Aoxe.BrotliNET.UnitTest\Aoxe.BrotliNET.UnitTest.csproj" Type="Classic C#" />

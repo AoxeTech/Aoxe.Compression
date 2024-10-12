@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Aoxe.Zstd\Aoxe.Zstd.csproj" />
+      <ProjectReference Include="..\..\src\Aoxe.Compressors\Aoxe.Zstd\Aoxe.Zstd.csproj" />
       <ProjectReference Include="..\TestModel\TestModel.csproj" />
     </ItemGroup>
 
